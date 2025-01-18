@@ -4,16 +4,19 @@ import com.phanta.waladom.idPhoto.WaladomIdPhoto;
 import com.phanta.waladom.idPhoto.WaladomPhotoDTO;
 import com.phanta.waladom.idProof.IdProofPhoto;
 import com.phanta.waladom.idProof.IdProofPhotoDTO;
+import com.phanta.waladom.registration.RegistrationRequest;
 import com.phanta.waladom.role.Role;
 import com.phanta.waladom.role.RoleDTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.phanta.waladom.utiles.UtilesMethods.getUserFromRegistrationRequest;
+
 public class UserResponseDTO {
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -49,6 +52,14 @@ public class UserResponseDTO {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
@@ -265,6 +276,7 @@ public class UserResponseDTO {
 
     public static UserResponseDTO mapToUserResponseDTO(User user) {
         UserResponseDTO responseDTO = new UserResponseDTO();
+        responseDTO.setId(user.getId());
         responseDTO.setFirstName(user.getFirstName());
         responseDTO.setLastName(user.getLastName());
         responseDTO.setEmail(user.getEmail());
@@ -329,6 +341,21 @@ public class UserResponseDTO {
             roleDTO.setUpdatedAt(role.getUpdatedAt());
             responseDTO.setRole(roleDTO);
         }
+
+        return responseDTO;
+    }
+
+    public static UserResponseDTO mapToRegistrationRequestResponseDTO(RegistrationRequest registrationRequest) {
+        // Reuse the mapToUserResponseDTO method since it's almost identical
+        UserResponseDTO responseDTO = UserResponseDTO.mapToUserResponseDTO(getUserFromRegistrationRequest(registrationRequest));
+
+        // Set validated to false for RegistrationRequest
+        //responseDTO.setValidated(false);  // Since it's a registration request, we set validated to false
+
+        // Additional mapping specific to RegistrationRequest, if any
+        // For example, if there are specific fields related to registration requests, you can map them here
+        responseDTO.setCreatedAt(registrationRequest.getCreatedAt());
+        responseDTO.setUpdatedAt(registrationRequest.getUpdatedAt());
 
         return responseDTO;
     }

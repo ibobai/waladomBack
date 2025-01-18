@@ -11,6 +11,8 @@ import com.phanta.waladom.oauthToken.JwtTokenUtil;
 import com.phanta.waladom.role.Role;
 import com.phanta.waladom.role.RoleDTO;
 import com.phanta.waladom.role.RoleRepository;
+import com.phanta.waladom.shared.user.UserAndRegistrationService;
+import com.phanta.waladom.shared.user.UserManagementService;
 import com.phanta.waladom.utiles.UtilesMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,25 +37,24 @@ public class UserService {
     private final WaladomPhotoRepository waladomPhotoRepository;
     @Autowired
     private final RoleRepository roleRepository;
+    @Autowired
+    private final UserManagementService userManagementService;
+    @Autowired
+    private final UserAndRegistrationService userAndRegistrationService;
 
 
     @Autowired
-    public UserService(UserRepository userRepository, ObjectMapper objectMapper, JwtTokenUtil jwtTokenUtil, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, ObjectMapper objectMapper, JwtTokenUtil jwtTokenUtil, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, UserManagementService userManagementService, UserAndRegistrationService userAndRegistrationService) {
         this.userRepository = userRepository;
         this.objectMapper = objectMapper;
         this.jwtTokenUtil = jwtTokenUtil;
         this.idPhotoProofRepository = idPhotoProofRepository;
         this.waladomPhotoRepository = waladomPhotoRepository;
         this.roleRepository = roleRepository;
+        this.userManagementService = userManagementService;
+        this.userAndRegistrationService = userAndRegistrationService;
     }
 
-    public List<User> getAllUsers2() {
-        return userRepository.findAll();
-    }
-
-    public Optional<User> getUserById2(String id) {
-        return userRepository.findById(id);
-    }
 
     public ResponseEntity<?> createUser(User user) {
         // Check if the email already exists
@@ -240,7 +241,7 @@ public class UserService {
 
 
             // Map the personal info from the DTO to the User object
-            return ResponseEntity.ok(UserResponseDTO.mapToUserResponseDTO(mapAndSaveUserWithAllDetails(userRequest)));
+            return ResponseEntity.ok(UserResponseDTO.mapToUserResponseDTO((User) userAndRegistrationService.mapAndSaveUserWithAllDetails(userRequest, true)));
 
 
         } catch (Exception ex) {
@@ -394,7 +395,9 @@ public class UserService {
         }
 
         // Save and return the updated user
-        User savedUser = userRepository.save(existingUser);
+       // User savedUser = userRepository.save(existingUser);
+        User savedUser = userManagementService.save(existingUser, userRepository);
+
         return UserResponseDTO.mapToUserResponseDTO(savedUser);
     }
 
@@ -579,7 +582,8 @@ public class UserService {
             newUser.setRole(role);
         }
 
-        return userRepository.save(newUser);
+       // return userRepository.save(newUser);
+        return userManagementService.save(newUser, userRepository);
     }
 
     private void saveWaladomIdPhoto(User user, String photoUrl) {
