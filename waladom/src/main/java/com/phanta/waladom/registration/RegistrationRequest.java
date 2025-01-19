@@ -48,11 +48,11 @@ public class RegistrationRequest extends BaseUser {
         this.reqWaladomPhoto = reqWaladomPhoto;
     }
 
-    public List<ReqIdProof> getIdProofPhotos() {
+    public List<ReqIdProof> getReqIdProofPhotos() {
         return idProofPhotos;
     }
 
-    public void setIdProofPhotos(List<ReqIdProof> idProofPhotos) {
+    public void setReqIdProofPhotos(List<ReqIdProof> idProofPhotos) {
         this.idProofPhotos = idProofPhotos;
     }
 

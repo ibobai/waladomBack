@@ -15,7 +15,7 @@ public class ReqIdProof extends BasePhoto {
     private String photoType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "registration_request_id", nullable = false, unique = true)
+    @JoinColumn(name = "registration_request_id", nullable = false)
     private RegistrationRequest registrationRequest;
 
 
@@ -34,4 +34,6 @@ public class ReqIdProof extends BasePhoto {
     public void setRegistrationRequest(RegistrationRequest registrationRequest) {
         this.registrationRequest = registrationRequest;
     }
+
+
 }

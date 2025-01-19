@@ -1,9 +1,11 @@
 package com.phanta.waladom.shared.user;
 
 import com.phanta.waladom.idPhoto.WaladomIdPhoto;
+import com.phanta.waladom.idPhoto.WaladomPhotoDTO;
 import com.phanta.waladom.idPhoto.WaladomPhotoRepository;
 import com.phanta.waladom.idProof.IdPhotoProofRepository;
 import com.phanta.waladom.idProof.IdProofPhoto;
+import com.phanta.waladom.idProof.IdProofPhotoDTO;
 import com.phanta.waladom.registration.RegistrationRequest;
 import com.phanta.waladom.registration.RegistrationRequestRepository;
 import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhoto;
@@ -11,6 +13,7 @@ import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhotoReposito
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProofRepository;
 import com.phanta.waladom.role.Role;
+import com.phanta.waladom.role.RoleDTO;
 import com.phanta.waladom.role.RoleRepository;
 import com.phanta.waladom.shared.photo.PhotoManagementService;
 import com.phanta.waladom.shared.photo.PhotosService;
@@ -30,12 +33,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserAndRegistrationService {
 
     private final UserManagementService userManagementService;
     private final UserRepository userRepository;
+
+    @Autowired
     private final RegistrationRequestRepository registrationRequestRepository;
 
     @Autowired
@@ -77,9 +83,6 @@ public class UserAndRegistrationService {
         return userManagementService.findAll(userRepository);
     }
 
-    public List<RegistrationRequest> getAllRegistrationRequests() {
-        return userManagementService.findAll(registrationRequestRepository);
-    }
 
     public void deleteUser(String userId) {
         userManagementService.delete(userId, userRepository);
@@ -88,6 +91,162 @@ public class UserAndRegistrationService {
     public void deleteRegistrationRequest(String requestId) {
         userManagementService.delete(requestId, registrationRequestRepository);
     }
+
+    @Transactional
+    public List<UserResponseDTO> getAllRegistrationRequests() {
+        return userManagementService.findAll(registrationRequestRepository)
+                .stream()
+                .map(user -> {
+                    UserResponseDTO dto = new UserResponseDTO();
+
+                    // Map basic user details
+                    dto.setId(user.getId());
+                    dto.setFirstName(user.getFirstName());
+                    dto.setLastName(user.getLastName());
+                    dto.setEmail(user.getEmail());
+                    dto.setPhone(user.getPhone());
+                    dto.setActive(user.getActive());
+                    dto.setStatus(user.getStatus());
+                    dto.setTribe(user.getTribe());
+                    dto.setCurrentCountry(user.getCurrentCountry());
+                    dto.setCurrentCity(user.getCurrentCity());
+                    dto.setCurrentVillage(user.getCurrentVillage());
+                    dto.setBirthDate(user.getBirthDate());
+                    dto.setBirthCountry(user.getBirthCountry());
+                    dto.setBirthCity(user.getBirthCity());
+                    dto.setBirthVillage(user.getBirthVillage());
+                    dto.setMaritalStatus(user.getMaritalStatus());
+                    dto.setNumberOfKids(user.getNumberOfKids());
+                    dto.setOccupation(user.getOccupation());
+                    dto.setSex(user.getSex());
+                    dto.setMothersFirstName(user.getMothersFirstName());
+                    dto.setMothersLastName(user.getMothersLastName());
+                    dto.setNationalities(user.getNationalities());
+                    dto.setComments(user.getComments());
+                    dto.setValidated(user.getValidated());
+                    dto.setCreatedAt(user.getCreatedAt());
+                    dto.setUpdatedAt(user.getUpdatedAt());
+                    // Map WaladomCardPhoto
+                    ReqWaladomPhoto waladomCard = user.getReqWaladomPhoto();
+                    if (waladomCard != null) {
+                        WaladomPhotoDTO waladomCardPhotoDTO = new WaladomPhotoDTO();
+                        waladomCardPhotoDTO.setId(waladomCard.getId());
+                        waladomCardPhotoDTO.setPhotoUrl(waladomCard.getPhotoUrl());
+                        waladomCardPhotoDTO.setCreatedAt(waladomCard.getCreatedAt());
+                        waladomCardPhotoDTO.setUpdatedAt(waladomCard.getUpdatedAt());
+                        dto.setWaladomCardPhoto(waladomCardPhotoDTO);
+                    }
+
+                    // Map IdProofPhotos
+                    List<IdProofPhotoDTO> idProofPhotoDTOs = user.getReqIdProofPhotos().stream()
+                            .map(idProof -> {
+                                IdProofPhotoDTO proofDTO = new IdProofPhotoDTO();
+                                proofDTO.setId(idProof.getId());
+                                proofDTO.setPhotoUrl(idProof.getPhotoUrl());
+                                proofDTO.setPhotoType(idProof.getPhotoType());
+                                proofDTO.setCreatedAt(idProof.getCreatedAt());
+                                proofDTO.setUpdatedAt(idProof.getUpdatedAt());
+                                return proofDTO;
+                            }).collect(Collectors.toList());
+                    dto.setIdProofPhotos(idProofPhotoDTOs);
+
+                    // Map Role
+                    Role role = user.getRole();
+                    if (role != null) {
+                        RoleDTO roleDTO = new RoleDTO();
+                        roleDTO.setId(role.getId());
+                        roleDTO.setName(role.getName());
+                        roleDTO.setDescription(role.getDescription());
+                        roleDTO.setColor(role.getColor());
+                        roleDTO.setCreatedAt(role.getCreatedAt());
+                        roleDTO.setUpdatedAt(role.getUpdatedAt());
+                        dto.setRole(roleDTO);
+                    }
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
+    @Transactional
+    public Optional<UserResponseDTO> getRegistrationById(String id) {
+        return registrationRequestRepository.findById(id)
+                .map(user -> {
+                    UserResponseDTO dto = new UserResponseDTO();
+
+                    // Map basic user details
+                    dto.setId(user.getId());
+                    dto.setFirstName(user.getFirstName());
+                    dto.setLastName(user.getLastName());
+                    dto.setEmail(user.getEmail());
+                    dto.setPhone(user.getPhone());
+                    dto.setActive(user.getActive());
+                    dto.setStatus(user.getStatus());
+                    dto.setTribe(user.getTribe());
+                    dto.setCurrentCountry(user.getCurrentCountry());
+                    dto.setCurrentCity(user.getCurrentCity());
+                    dto.setCurrentVillage(user.getCurrentVillage());
+                    dto.setBirthDate(user.getBirthDate());
+                    dto.setBirthCountry(user.getBirthCountry());
+                    dto.setBirthCity(user.getBirthCity());
+                    dto.setBirthVillage(user.getBirthVillage());
+                    dto.setMaritalStatus(user.getMaritalStatus());
+                    dto.setNumberOfKids(user.getNumberOfKids());
+                    dto.setOccupation(user.getOccupation());
+                    dto.setSex(user.getSex());
+                    dto.setMothersFirstName(user.getMothersFirstName());
+                    dto.setMothersLastName(user.getMothersLastName());
+                    dto.setNationalities(user.getNationalities());
+                    dto.setComments(user.getComments());
+                    dto.setValidated(user.getValidated());
+                    dto.setCreatedAt(user.getCreatedAt());
+                    dto.setUpdatedAt(user.getUpdatedAt());
+
+                    // Map WaladomCardPhoto
+                    ReqWaladomPhoto waladomCard = user.getReqWaladomPhoto();
+                    if (waladomCard != null) {
+                        WaladomPhotoDTO waladomCardPhotoDTO = new WaladomPhotoDTO();
+                        waladomCardPhotoDTO.setId(waladomCard.getId());
+                        waladomCardPhotoDTO.setPhotoUrl(waladomCard.getPhotoUrl());
+                        waladomCardPhotoDTO.setCreatedAt(waladomCard.getCreatedAt());
+                        waladomCardPhotoDTO.setUpdatedAt(waladomCard.getUpdatedAt());
+                        dto.setWaladomCardPhoto(waladomCardPhotoDTO);
+                    }
+
+                    // Map IdProofPhotos
+                    List<IdProofPhotoDTO> idProofPhotoDTOs = user.getReqIdProofPhotos().stream()
+                            .map(idProof -> {
+                                IdProofPhotoDTO proofDTO = new IdProofPhotoDTO();
+                                proofDTO.setId(idProof.getId());
+                                proofDTO.setPhotoUrl(idProof.getPhotoUrl());
+                                proofDTO.setPhotoType(idProof.getPhotoType());
+                                proofDTO.setCreatedAt(idProof.getCreatedAt());
+                                proofDTO.setUpdatedAt(idProof.getUpdatedAt());
+                                return proofDTO;
+                            }).collect(Collectors.toList());
+                    dto.setIdProofPhotos(idProofPhotoDTOs);
+
+                    // Map Role
+                    Role role = user.getRole(); // Assuming the user has a "role" field
+                    if (role != null) {
+                        RoleDTO roleDTO = new RoleDTO();
+                        roleDTO.setId(role.getId());
+                        roleDTO.setName(role.getName());
+                        roleDTO.setDescription(role.getDescription());
+                        roleDTO.setColor(role.getColor());
+                        roleDTO.setCreatedAt(role.getCreatedAt());
+                        roleDTO.setUpdatedAt(role.getUpdatedAt());
+                        dto.setRole(roleDTO);
+                    }
+
+                    return dto;
+                });
+    }
+
+
+
 
     public Object mapAndSaveUserWithAllDetails(UserRequestDTO userRequest, boolean isUser) {
         if (isUser) {
@@ -130,7 +289,7 @@ public class UserAndRegistrationService {
             if (userRequest.getIdProofPhotoBack() != null && !userRequest.getIdProofPhotoBack().isBlank()) {
                 idProofPhotos.add(saveIdProofPhotoForRegistration(savedRegistrationRequest, userRequest.getIdProofPhotoBack(), "back"));
             }
-            savedRegistrationRequest.setIdProofPhotos(idProofPhotos);
+            savedRegistrationRequest.setReqIdProofPhotos(idProofPhotos);
 
             // Return the saved RegistrationRequest entity
             return savedRegistrationRequest;
@@ -256,12 +415,27 @@ public class UserAndRegistrationService {
 
 
 
+    //@Transactional(rollbackFor = YourCustomException.class)
     @Transactional
     public ResponseEntity<?> createUserOrRegReq(UserRequestDTO userRequest, boolean isUser) {
         try {
             // Check if the email already exists for User creation
             if (isUser) {
                 Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
+                if (existingUser.isPresent()) {
+                    // Return a bad request response with the existing user's ID
+                    return ResponseEntity.badRequest().body(
+                            Map.of(
+                                    "timestamp", LocalDateTime.now(),
+                                    "status", HttpStatus.BAD_REQUEST.value(),
+                                    "error", "User already exists",
+                                    "message", "User already exists with ID: " + existingUser.get().getId(),
+                                    "path", "/api/user/createDTO"
+                            )
+                    );
+                }
+            }else {
+                Optional<RegistrationRequest> existingUser = registrationRequestRepository.findByEmail(userRequest.getEmail());
                 if (existingUser.isPresent()) {
                     // Return a bad request response with the existing user's ID
                     return ResponseEntity.badRequest().body(

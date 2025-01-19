@@ -1,5 +1,6 @@
 package com.phanta.waladom.user;
 
+import com.phanta.waladom.shared.user.UserAndRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,13 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    private final UserAndRegistrationService userAndRegistrationService;
+
+
+    @Autowired
+    public UserController(UserService userService, UserAndRegistrationService userAndRegistrationService) {
         this.userService = userService;
+        this.userAndRegistrationService = userAndRegistrationService;
     }
 
     @GetMapping("/get/all")
@@ -56,7 +62,8 @@ public class UserController {
             // Return bad request with validation error
             return validationResponse;
         }
-        return userService.createUserDTO(userRequest);
+        return userAndRegistrationService.createUserOrRegReq(userRequest, true);
+       // return userService.createUserDTO(userRequest);
     }
     /**
      * Handles the PUT request to update a user.

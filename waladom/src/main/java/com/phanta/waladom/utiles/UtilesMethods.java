@@ -5,6 +5,7 @@ import com.phanta.waladom.idProof.IdProofPhoto;
 import com.phanta.waladom.registration.RegistrationRequest;
 import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhoto;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
+import com.phanta.waladom.role.Role;
 import com.phanta.waladom.user.User;
 
 import java.util.Arrays;
@@ -43,7 +44,7 @@ public class UtilesMethods {
         User user = new User();
 
         // Set the fields from the RegistrationRequest to the User
-        //user.setId(registrationRequest.getUserId());
+        user.setId(registrationRequest.getId());
         user.setFirstName(registrationRequest.getFirstName());
         user.setLastName(registrationRequest.getLastName());
         user.setEmail(registrationRequest.getEmail());
@@ -70,22 +71,38 @@ public class UtilesMethods {
         // Assuming photos are available in RegistrationRequest
         if (registrationRequest.getReqWaladomPhoto() != null) {
             WaladomIdPhoto waladomPhoto = new WaladomIdPhoto();
-            //waladomPhoto.setId(registrationRequest.getWaladomPhoto().getId());
+            waladomPhoto.setId(registrationRequest.getReqWaladomPhoto().getId());
             waladomPhoto.setPhotoUrl(registrationRequest.getReqWaladomPhoto().getPhotoUrl());
+            waladomPhoto.setCreatedAt(registrationRequest.getCreatedAt());
+            waladomPhoto.setUpdatedAt(registrationRequest.getUpdatedAt());
             user.setWaladomIdPhoto(waladomPhoto);
+
         }
 
-        if (registrationRequest.getIdProofPhotos() != null) {
-            List<IdProofPhoto> idProofPhotos = registrationRequest.getIdProofPhotos().stream()
+        if (registrationRequest.getReqIdProofPhotos() != null) {
+            List<IdProofPhoto> idProofPhotos = registrationRequest.getReqIdProofPhotos().stream()
                     .map(photoDTO -> {
                         IdProofPhoto photo = new IdProofPhoto();
                         photo.setId(photoDTO.getId());
                         photo.setPhotoUrl(photoDTO.getPhotoUrl());
                         photo.setPhotoType(photoDTO.getPhotoType());
+                        photo.setUpdatedAt(photoDTO.getUpdatedAt());
+                        photo.setCreatedAt(photoDTO.getCreatedAt());
                         return photo;
                     })
                     .collect(Collectors.toList());
             user.setIdProofPhotos(idProofPhotos);
+        }
+
+        if(registrationRequest.getRole() != null ){
+            Role role = new Role();
+            role.setId(registrationRequest.getRole().getId());
+            role.setName(registrationRequest.getRole().getName());
+            role.setDescription(registrationRequest.getRole().getDescription());
+            role.setColor(registrationRequest.getRole().getColor());
+            role.setCreatedAt(registrationRequest.getRole().getCreatedAt());
+            role.setUpdatedAt(registrationRequest.getRole().getUpdatedAt());
+            user.setRole(role);
         }
 
         return user;
@@ -139,7 +156,7 @@ public class UtilesMethods {
                         return reqIdProof;
                     })
                     .collect(Collectors.toList());
-            registrationRequest.setIdProofPhotos(idProofPhotoDTOs);
+            registrationRequest.setReqIdProofPhotos(idProofPhotoDTOs);
         }
 
         return registrationRequest;

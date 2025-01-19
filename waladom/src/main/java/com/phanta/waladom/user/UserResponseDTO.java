@@ -41,6 +41,7 @@ public class UserResponseDTO {
     private String comments;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
+    private Boolean validated;
 
     // Photo details
     private WaladomPhotoDTO waladomCardPhoto;
@@ -50,12 +51,21 @@ public class UserResponseDTO {
     // Add constructor, getters, and setters
 
 
+
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public String getId() {
         return id;
+    }
+
+    public Boolean getValidated() {
+        return validated;
+    }
+
+    public void setValidated(Boolean validated) {
+        this.validated = validated;
     }
 
     public void setId(String id) {
@@ -276,6 +286,7 @@ public class UserResponseDTO {
 
     public static UserResponseDTO mapToUserResponseDTO(User user) {
         UserResponseDTO responseDTO = new UserResponseDTO();
+
         responseDTO.setId(user.getId());
         responseDTO.setFirstName(user.getFirstName());
         responseDTO.setLastName(user.getLastName());
@@ -350,7 +361,7 @@ public class UserResponseDTO {
         UserResponseDTO responseDTO = UserResponseDTO.mapToUserResponseDTO(getUserFromRegistrationRequest(registrationRequest));
 
         // Set validated to false for RegistrationRequest
-        //responseDTO.setValidated(false);  // Since it's a registration request, we set validated to false
+         responseDTO.setValidated(false);  // Since it's a registration request, we set validated to false
 
         // Additional mapping specific to RegistrationRequest, if any
         // For example, if there are specific fields related to registration requests, you can map them here
