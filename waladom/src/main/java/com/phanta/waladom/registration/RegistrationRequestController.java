@@ -1,13 +1,15 @@
 package com.phanta.waladom.registration;
 
+import com.phanta.waladom.config.ErrorResponse;
 import com.phanta.waladom.shared.user.UserAndRegistrationService;
 import com.phanta.waladom.user.UserRequestDTO;
 import com.phanta.waladom.user.UserRequestValidator;
 import com.phanta.waladom.user.UserResponseDTO;
+import com.phanta.waladom.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/api/user/register")
 public class RegistrationRequestController {
 
@@ -23,8 +25,12 @@ public class RegistrationRequestController {
     private final UserAndRegistrationService userAndRegistrationService;
 
     @Autowired
-    public RegistrationRequestController(UserAndRegistrationService userAndRegistrationService) {
+    private final UserService userService;
+
+    @Autowired
+    public RegistrationRequestController(UserAndRegistrationService userAndRegistrationService, UserService userService) {
         this.userAndRegistrationService = userAndRegistrationService;
+        this.userService = userService;
     }
 
     @PostMapping("/create")
@@ -39,8 +45,41 @@ public class RegistrationRequestController {
     }
 
     @GetMapping("/get/all")
-    public List<UserResponseDTO> getAllUsers() {
+    public List<UserResponseDTO> getAllRegRequest() {
         return userAndRegistrationService.getAllRegistrationRequests();
+    }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?>  updateRegistrationRequest(@PathVariable String id, @RequestBody UserRequestDTO userRequestDTO) {
+        if (userRequestDTO == null || (userService.isEmpty(userRequestDTO) && userAndRegistrationService.isVaildatedEmpty(userRequestDTO))) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(
+                    "Bad Request",
+                    "No fields to update or all fields are empty",
+                    HttpStatus.BAD_REQUEST.value(),
+                    LocalDateTime.now(),
+                    "/api/user/registration/update/" + id
+            ));
+        }
+
+        try {
+            return userAndRegistrationService.updateRegistrationRequest(id, userRequestDTO);
+
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Unique constraint violation - Duplicate entry detected");
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        try {
+            userAndRegistrationService.deleteRegistrationRequest(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/get/{id}")

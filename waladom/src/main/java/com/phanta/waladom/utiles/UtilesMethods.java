@@ -1,12 +1,18 @@
 package com.phanta.waladom.utiles;
 
 import com.phanta.waladom.idPhoto.WaladomIdPhoto;
+import com.phanta.waladom.idPhoto.WaladomPhotoRepository;
+import com.phanta.waladom.idProof.IdPhotoProofRepository;
 import com.phanta.waladom.idProof.IdProofPhoto;
 import com.phanta.waladom.registration.RegistrationRequest;
-import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhoto;
+import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomIdPhoto;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
 import com.phanta.waladom.role.Role;
+import com.phanta.waladom.shared.user.UserAndRegistrationService;
+import com.phanta.waladom.shared.user.UserManagementService;
 import com.phanta.waladom.user.User;
+import com.phanta.waladom.user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +27,30 @@ public class UtilesMethods {
             "ROLE_MEMBERSHIP_REVIEWER",
             "ROLE_USER"
     );
+
+    @Autowired
+    private final UserAndRegistrationService userAndRegistrationService;
+
+    @Autowired
+    private final UserManagementService userManagementService;
+    @Autowired
+    private final UserRepository userRepository;
+
+
+    @Autowired
+    private final WaladomPhotoRepository waladomPhotoRepository;
+    @Autowired
+    private final IdPhotoProofRepository idPhotoProofRepository;
+
+    public static final List<Boolean> BOOLEANS = Arrays.asList(true, false);
+
+    public UtilesMethods(UserAndRegistrationService userAndRegistrationService, UserManagementService userManagementService, UserRepository userRepository, WaladomPhotoRepository waladomPhotoRepository, IdPhotoProofRepository idPhotoProofRepository) {
+        this.userAndRegistrationService = userAndRegistrationService;
+        this.userManagementService = userManagementService;
+        this.userRepository = userRepository;
+        this.waladomPhotoRepository = waladomPhotoRepository;
+        this.idPhotoProofRepository = idPhotoProofRepository;
+    }
 
     /**
      * Checks if the given roleId exists in the predefined roles (case-insensitive).
@@ -44,7 +74,6 @@ public class UtilesMethods {
         User user = new User();
 
         // Set the fields from the RegistrationRequest to the User
-        user.setId(registrationRequest.getId());
         user.setFirstName(registrationRequest.getFirstName());
         user.setLastName(registrationRequest.getLastName());
         user.setEmail(registrationRequest.getEmail());
@@ -59,6 +88,7 @@ public class UtilesMethods {
         user.setBirthCountry(registrationRequest.getBirthCountry());
         user.setBirthCity(registrationRequest.getBirthCity());
         user.setBirthVillage(registrationRequest.getBirthVillage());
+        user.setPassword(registrationRequest.getPassword());
         user.setMaritalStatus(registrationRequest.getMaritalStatus());
         user.setNumberOfKids(registrationRequest.getNumberOfKids());
         user.setOccupation(registrationRequest.getOccupation());
@@ -67,17 +97,7 @@ public class UtilesMethods {
         user.setMothersLastName(registrationRequest.getMothersLastName());
         user.setNationalities(registrationRequest.getNationalities());
         user.setComments(registrationRequest.getComments());
-
-        // Assuming photos are available in RegistrationRequest
-        if (registrationRequest.getReqWaladomPhoto() != null) {
-            WaladomIdPhoto waladomPhoto = new WaladomIdPhoto();
-            waladomPhoto.setId(registrationRequest.getReqWaladomPhoto().getId());
-            waladomPhoto.setPhotoUrl(registrationRequest.getReqWaladomPhoto().getPhotoUrl());
-            waladomPhoto.setCreatedAt(registrationRequest.getCreatedAt());
-            waladomPhoto.setUpdatedAt(registrationRequest.getUpdatedAt());
-            user.setWaladomIdPhoto(waladomPhoto);
-
-        }
+        user.setId(registrationRequest.getId());
 
         if (registrationRequest.getReqIdProofPhotos() != null) {
             List<IdProofPhoto> idProofPhotos = registrationRequest.getReqIdProofPhotos().stream()
@@ -94,6 +114,17 @@ public class UtilesMethods {
             user.setIdProofPhotos(idProofPhotos);
         }
 
+        if (registrationRequest.getReqWaladomPhoto() != null) {
+            WaladomIdPhoto waladomPhoto = new WaladomIdPhoto();
+
+            waladomPhoto.setPhotoUrl(registrationRequest.getReqWaladomPhoto().getPhotoUrl());
+            waladomPhoto.setCreatedAt(registrationRequest.getCreatedAt());
+            waladomPhoto.setUpdatedAt(registrationRequest.getUpdatedAt());
+            waladomPhoto.setId(registrationRequest.getReqWaladomPhoto().getId());
+            user.setWaladomIdPhoto(waladomPhoto);
+
+        }
+
         if(registrationRequest.getRole() != null ){
             Role role = new Role();
             role.setId(registrationRequest.getRole().getId());
@@ -107,6 +138,8 @@ public class UtilesMethods {
 
         return user;
     }
+
+
 
 
     public RegistrationRequest getRegistrationRequestFromUser(User user) {
@@ -140,7 +173,7 @@ public class UtilesMethods {
 
         // Assuming photos are available in User
         if (user.getWaladomIdPhoto() != null) {
-            ReqWaladomPhoto waladomPhoto = new ReqWaladomPhoto();
+            ReqWaladomIdPhoto waladomPhoto = new ReqWaladomIdPhoto();
             waladomPhoto.setId(user.getWaladomIdPhoto().getId());
             waladomPhoto.setPhotoUrl(user.getWaladomIdPhoto().getPhotoUrl());
             registrationRequest.setReqWaladomPhoto(waladomPhoto);
@@ -161,6 +194,5 @@ public class UtilesMethods {
 
         return registrationRequest;
     }
-
 
 }

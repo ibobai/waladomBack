@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, String> {
             "LEFT JOIN FETCH u.role " +
             "WHERE u.id = :id")
     Optional<User> findByIdWithDetails(@Param("id") String id);
+
+  //  @Query("SELECT rr FROM RegistrationRequest rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
+  //  List<User> findAllWithAssociations();
 }

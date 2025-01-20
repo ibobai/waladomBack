@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "req_waladom_id_photos")
-public class ReqWaladomPhoto extends BasePhoto {
+public class ReqWaladomIdPhoto extends BasePhoto {
     @Override
     protected String generatePrefix() {
         return "REQWLDP_";

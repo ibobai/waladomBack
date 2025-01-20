@@ -32,7 +32,7 @@ public class UserRequestDTO {
     private String waladomCardPhoto;
     private String comments;
     private String role;
-    private String validated;
+    private Boolean validated;
 
     public UserRequestDTO() {
     }
@@ -214,11 +214,11 @@ public class UserRequestDTO {
         return isActive;
     }
 
-    public String getValidated() {
+    public Boolean getValidated() {
         return validated;
     }
 
-    public void setValidated(String validated) {
+    public void setValidated(Boolean validated) {
         this.validated = validated;
     }
 

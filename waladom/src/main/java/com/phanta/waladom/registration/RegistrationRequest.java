@@ -1,7 +1,7 @@
 package com.phanta.waladom.registration;
 
 import com.phanta.waladom.base.BaseUser;
-import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhoto;
+import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomIdPhoto;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
 import com.phanta.waladom.role.Role;
 import jakarta.persistence.*;
@@ -17,10 +17,10 @@ public class RegistrationRequest extends BaseUser {
 
     //Relations
     @OneToOne(mappedBy = "registrationRequest", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private ReqWaladomPhoto reqWaladomPhoto;
+    private ReqWaladomIdPhoto reqWaladomIdPhoto;
 
     @OneToMany(mappedBy = "registrationRequest", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReqIdProof> idProofPhotos;
+    private List<ReqIdProof> reqIdProofPhotos;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_ID", nullable = false)
@@ -40,20 +40,20 @@ public class RegistrationRequest extends BaseUser {
         this.validated = validated;
     }
 
-    public ReqWaladomPhoto getReqWaladomPhoto() {
-        return reqWaladomPhoto;
+    public ReqWaladomIdPhoto getReqWaladomPhoto() {
+        return reqWaladomIdPhoto;
     }
 
-    public void setReqWaladomPhoto(ReqWaladomPhoto reqWaladomPhoto) {
-        this.reqWaladomPhoto = reqWaladomPhoto;
+    public void setReqWaladomPhoto(ReqWaladomIdPhoto reqWaladomIdPhoto) {
+        this.reqWaladomIdPhoto = reqWaladomIdPhoto;
     }
 
     public List<ReqIdProof> getReqIdProofPhotos() {
-        return idProofPhotos;
+        return reqIdProofPhotos;
     }
 
     public void setReqIdProofPhotos(List<ReqIdProof> idProofPhotos) {
-        this.idProofPhotos = idProofPhotos;
+        this.reqIdProofPhotos = idProofPhotos;
     }
 
     public Role getRole() {

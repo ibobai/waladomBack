@@ -53,6 +53,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 throw new AuthenticationServiceException("Authentication failed: " + e.getMessage());
             }
         }
+        System.out.println("Processing request: " + request.getRequestURI());
+
 
         chain.doFilter(request, response);  // Continue filter chain
     }

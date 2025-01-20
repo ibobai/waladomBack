@@ -36,12 +36,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             responseBody.put("status", HttpServletResponse.SC_UNAUTHORIZED);
             responseBody.put("error", "Unauthorized");
             responseBody.put("message", "Access Denied: Invalid or Missing Token");
-        } else {
-            // Fallback for other errors (e.g., URL not found)
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404 Not Found
-            responseBody.put("status", HttpServletResponse.SC_NOT_FOUND);
-            responseBody.put("error", "Not Found");
-            responseBody.put("message", "The requested URL was not found on the server.");
         }
 
         // Set response type to JSON

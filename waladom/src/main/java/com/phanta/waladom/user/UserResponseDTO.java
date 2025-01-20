@@ -361,7 +361,7 @@ public class UserResponseDTO {
         UserResponseDTO responseDTO = UserResponseDTO.mapToUserResponseDTO(getUserFromRegistrationRequest(registrationRequest));
 
         // Set validated to false for RegistrationRequest
-         responseDTO.setValidated(false);  // Since it's a registration request, we set validated to false
+         responseDTO.setValidated(registrationRequest.getValidated());  // Since it's a registration request, we set validated to false
 
         // Additional mapping specific to RegistrationRequest, if any
         // For example, if there are specific fields related to registration requests, you can map them here

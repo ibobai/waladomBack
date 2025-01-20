@@ -8,7 +8,7 @@ import com.phanta.waladom.idProof.IdProofPhoto;
 import com.phanta.waladom.idProof.IdProofPhotoDTO;
 import com.phanta.waladom.registration.RegistrationRequest;
 import com.phanta.waladom.registration.RegistrationRequestRepository;
-import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhoto;
+import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomIdPhoto;
 import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomPhotoRepository;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProofRepository;
@@ -35,6 +35,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.phanta.waladom.utiles.UtilesMethods.BOOLEANS;
+
 @Service
 public class UserAndRegistrationService {
 
@@ -59,7 +61,7 @@ public class UserAndRegistrationService {
     private final ReqIdProofRepository reqIdProofRepository;
 
     @Autowired
-    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService, ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository) {
+    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService,  ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository) {
         this.userManagementService = userManagementService;
         this.userRepository = userRepository;
         this.registrationRequestRepository = registrationRequestRepository;
@@ -92,9 +94,186 @@ public class UserAndRegistrationService {
         userManagementService.delete(requestId, registrationRequestRepository);
     }
 
+    public boolean isVaildatedEmpty(UserRequestDTO userRequestDTO  ){
+        return userRequestDTO.getValidated() == null || !BOOLEANS.contains( userRequestDTO.getValidated());
+    }
+
+
+
+    public ResponseEntity<?> updateRegistrationRequest(String id, UserRequestDTO registrationRequestDTO) {
+        // Find existing RegistrationRequest by ID
+        Optional<RegistrationRequest> existingRequestOpt = registrationRequestRepository.findById(id);
+
+        if (existingRequestOpt.isEmpty()) {
+            throw new RuntimeException("Registration request not found with ID: " + id);
+        }
+
+        RegistrationRequest existingRequest = existingRequestOpt.get();
+
+        // Track if the validated field was changed
+        boolean wasValidatedBefore = existingRequest.getValidated() != null && existingRequest.getValidated();
+        boolean isValidatedNow = registrationRequestDTO.getValidated() != null && registrationRequestDTO.getValidated();
+
+
+        // Update fields based on the values in the DTO if they are not null or blank
+        if (registrationRequestDTO.getFirstName() != null && !registrationRequestDTO.getFirstName().isBlank()) {
+            existingRequest.setFirstName(registrationRequestDTO.getFirstName());
+        }
+        if (registrationRequestDTO.getLastName() != null && !registrationRequestDTO.getLastName().isBlank()) {
+            existingRequest.setLastName(registrationRequestDTO.getLastName());
+        }
+        if (registrationRequestDTO.getPassword() != null && !registrationRequestDTO.getPassword().isBlank()) {
+            existingRequest.setPassword(registrationRequestDTO.getPassword());
+        }
+        if (registrationRequestDTO.getEmail() != null && !registrationRequestDTO.getEmail().isBlank()
+                && !registrationRequestDTO.getEmail().equals(existingRequest.getEmail())) {
+            existingRequest.setEmail(registrationRequestDTO.getEmail());
+        }
+
+        if (registrationRequestDTO.getPhone() != null && !registrationRequestDTO.getPhone().isBlank()) {
+            existingRequest.setPhone(registrationRequestDTO.getPhone());
+        }
+        if (registrationRequestDTO.getStatus() != null && !registrationRequestDTO.getStatus().isBlank()) {
+            existingRequest.setStatus(registrationRequestDTO.getStatus());
+        }
+        if (registrationRequestDTO.getCurrentCountry() != null && !registrationRequestDTO.getCurrentCountry().isBlank()) {
+            existingRequest.setCurrentCountry(registrationRequestDTO.getCurrentCountry());
+        }
+        if (registrationRequestDTO.getCurrentCity() != null && !registrationRequestDTO.getCurrentCity().isBlank()) {
+            existingRequest.setCurrentCity(registrationRequestDTO.getCurrentCity());
+        }
+        if (registrationRequestDTO.getCurrentVillage() != null && !registrationRequestDTO.getCurrentVillage().isBlank()) {
+            existingRequest.setCurrentVillage(registrationRequestDTO.getCurrentVillage());
+        }
+        if (registrationRequestDTO.getBirthDate() != null) {
+            existingRequest.setBirthDate(registrationRequestDTO.getBirthDate());
+        }
+        if (registrationRequestDTO.getBirthCountry() != null && !registrationRequestDTO.getBirthCountry().isBlank()) {
+            existingRequest.setBirthCountry(registrationRequestDTO.getBirthCountry());
+        }
+        if (registrationRequestDTO.getBirthCity() != null && !registrationRequestDTO.getBirthCity().isBlank()) {
+            existingRequest.setBirthCity(registrationRequestDTO.getBirthCity());
+        }
+        if (registrationRequestDTO.getBirthVillage() != null && !registrationRequestDTO.getBirthVillage().isBlank()) {
+            existingRequest.setBirthVillage(registrationRequestDTO.getBirthVillage());
+        }
+        if (registrationRequestDTO.getMaritalStatus() != null && !registrationRequestDTO.getMaritalStatus().isBlank()) {
+            existingRequest.setMaritalStatus(registrationRequestDTO.getMaritalStatus());
+        }
+        if (registrationRequestDTO.getNumberOfKids() != null) {
+            existingRequest.setNumberOfKids(registrationRequestDTO.getNumberOfKids());
+        }
+        if (registrationRequestDTO.getOccupation() != null && !registrationRequestDTO.getOccupation().isBlank()) {
+            existingRequest.setOccupation(registrationRequestDTO.getOccupation());
+        }
+        if (registrationRequestDTO.getSex() != null && !registrationRequestDTO.getSex().isBlank()) {
+            existingRequest.setSex(registrationRequestDTO.getSex());
+        }
+        if (registrationRequestDTO.getActive() != null && BOOLEANS.contains(registrationRequestDTO.getActive())) {
+            existingRequest.setActive(registrationRequestDTO.getActive());
+        }
+
+
+        if (registrationRequestDTO.getRole() != null && !registrationRequestDTO.getRole().isBlank() && UtilesMethods.isRoleIdValid(registrationRequestDTO.getRole())) {
+
+            // Fetch role by ID
+            Optional<Role> optionalRole = roleRepository.findById(registrationRequestDTO.getRole());
+
+            // Handle the Optional
+            Role role = optionalRole.orElseThrow(() ->
+                    new IllegalArgumentException("Role with ID " + registrationRequestDTO.getRole() + " not found"));
+
+            existingRequest.setRole(role);
+        }
+
+        // Handle additional field 'isValidated'
+        if (registrationRequestDTO.getValidated() != null && BOOLEANS.contains(registrationRequestDTO.getValidated()) ) {
+            existingRequest.setValidated(registrationRequestDTO.getValidated());
+        }
+
+        // Handle mother's name fields
+        if (registrationRequestDTO.getMothersFirstName() != null && !registrationRequestDTO.getMothersFirstName().isBlank()) {
+            existingRequest.setMothersFirstName(registrationRequestDTO.getMothersFirstName());
+        }
+        if (registrationRequestDTO.getMothersLastName() != null && !registrationRequestDTO.getMothersLastName().isBlank()) {
+            existingRequest.setMothersLastName(registrationRequestDTO.getMothersLastName());
+        }
+
+        // Handle nationalities
+        if (registrationRequestDTO.getNationalities() != null && !registrationRequestDTO.getNationalities().isEmpty()) {
+            existingRequest.setNationalities(registrationRequestDTO.getNationalities());
+        }
+
+        // Handle comments
+        if (registrationRequestDTO.getComments() != null && !registrationRequestDTO.getComments().isBlank()) {
+            existingRequest.setComments(registrationRequestDTO.getComments());
+        }
+
+
+        // Handle photos
+
+        if (registrationRequestDTO.getIdProofPhotoFront() != null && !registrationRequestDTO.getIdProofPhotoFront().isBlank()) {
+            ReqIdProof idPhotoFront = reqIdProofRepository.findByRegistrationRequestAndPhotoType(existingRequest, "front")
+                    .orElse(new ReqIdProof());
+            idPhotoFront.setRegistrationRequest(existingRequest);
+            idPhotoFront.setPhotoUrl(registrationRequestDTO.getIdProofPhotoFront());
+            idPhotoFront.setPhotoType("front");
+            idPhotoFront.setUpdatedAt(LocalDateTime.now());
+            reqIdProofRepository.save(idPhotoFront);
+            existingRequest.getReqIdProofPhotos().add(idPhotoFront); // Add directly to the existing collection
+        }
+        if (registrationRequestDTO.getIdProofPhotoBack() != null && !registrationRequestDTO.getIdProofPhotoBack().isBlank()) {
+            ReqIdProof idPhotoBack = reqIdProofRepository.findByRegistrationRequestAndPhotoType(existingRequest, "back")
+                    .orElse(new ReqIdProof());
+            idPhotoBack.setRegistrationRequest(existingRequest);
+            idPhotoBack.setPhotoUrl(registrationRequestDTO.getIdProofPhotoBack());
+            idPhotoBack.setPhotoType("back");
+            idPhotoBack.setUpdatedAt(LocalDateTime.now());
+            reqIdProofRepository.save(idPhotoBack);
+            existingRequest.getReqIdProofPhotos().add(idPhotoBack); // Add directly to the existing collection
+        }
+
+
+        if (registrationRequestDTO.getWaladomCardPhoto() != null && !registrationRequestDTO.getWaladomCardPhoto().isBlank()) {
+            ReqWaladomIdPhoto waladomCardPhoto = reqWaladomPhotoRepository.findByRegistrationRequest(existingRequest)
+                    .orElse(new ReqWaladomIdPhoto());
+            waladomCardPhoto.setRegistrationRequest(existingRequest);
+            waladomCardPhoto.setPhotoUrl(registrationRequestDTO.getWaladomCardPhoto());
+            waladomCardPhoto.setUpdatedAt(LocalDateTime.now());
+            reqWaladomPhotoRepository.save(waladomCardPhoto);
+            existingRequest.setReqWaladomPhoto(waladomCardPhoto);
+
+
+        }
+
+        // Save and return the updated registration request
+        RegistrationRequest savedRequest = userManagementService.save(existingRequest, registrationRequestRepository);
+
+
+        // If the registration was not validated before but is now validated, create the user
+        if (!wasValidatedBefore && isValidatedNow) {
+            User newUser = saveUserFromRegisterationRequest(savedRequest);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(Map.of(
+                            "message", "User successfully created",
+                            "userId", newUser.getId()
+                    ));
+        }
+
+        return ResponseEntity.ok(UserResponseDTO.mapToRegistrationRequestResponseDTO(savedRequest));
+
+
+        //return UserResponseDTO.mapToRegistrationRequestResponseDTO(savedRequest);
+    }
+
+
+
+
+
     @Transactional
     public List<UserResponseDTO> getAllRegistrationRequests() {
-        return userManagementService.findAll(registrationRequestRepository)
+        return registrationRequestRepository.findAllWithAssociations()
                 .stream()
                 .map(user -> {
                     UserResponseDTO dto = new UserResponseDTO();
@@ -127,7 +306,7 @@ public class UserAndRegistrationService {
                     dto.setCreatedAt(user.getCreatedAt());
                     dto.setUpdatedAt(user.getUpdatedAt());
                     // Map WaladomCardPhoto
-                    ReqWaladomPhoto waladomCard = user.getReqWaladomPhoto();
+                    ReqWaladomIdPhoto waladomCard = user.getReqWaladomPhoto();
                     if (waladomCard != null) {
                         WaladomPhotoDTO waladomCardPhotoDTO = new WaladomPhotoDTO();
                         waladomCardPhotoDTO.setId(waladomCard.getId());
@@ -205,7 +384,7 @@ public class UserAndRegistrationService {
                     dto.setUpdatedAt(user.getUpdatedAt());
 
                     // Map WaladomCardPhoto
-                    ReqWaladomPhoto waladomCard = user.getReqWaladomPhoto();
+                    ReqWaladomIdPhoto waladomCard = user.getReqWaladomPhoto();
                     if (waladomCard != null) {
                         WaladomPhotoDTO waladomCardPhotoDTO = new WaladomPhotoDTO();
                         waladomCardPhotoDTO.setId(waladomCard.getId());
@@ -382,7 +561,7 @@ public class UserAndRegistrationService {
     }
 
     private void saveWaladomIdPhotoForRegistration(RegistrationRequest registrationRequest, String photoUrl) {
-        ReqWaladomPhoto reqWaladomIdPhoto = new ReqWaladomPhoto();
+        ReqWaladomIdPhoto reqWaladomIdPhoto = new ReqWaladomIdPhoto();
         reqWaladomIdPhoto.setRegistrationRequest(registrationRequest);
         reqWaladomIdPhoto.setPhotoUrl(photoUrl);
         reqWaladomIdPhoto.setCreatedAt(LocalDateTime.now());
@@ -473,6 +652,100 @@ public class UserAndRegistrationService {
             );
         }
     }
+
+
+
+    public User saveUserFromRegisterationRequest(RegistrationRequest registrationRequest) {
+        // Create a new User object
+        User user = new User();
+
+        // Set the fields from the RegistrationRequest to the User
+        user.setFirstName(registrationRequest.getFirstName());
+        user.setLastName(registrationRequest.getLastName());
+        user.setEmail(registrationRequest.getEmail());
+        user.setPhone(registrationRequest.getPhone());
+        user.setActive(registrationRequest.getActive());
+        user.setStatus(registrationRequest.getStatus());
+        user.setTribe(registrationRequest.getTribe());
+        user.setCurrentCountry(registrationRequest.getCurrentCountry());
+        user.setCurrentCity(registrationRequest.getCurrentCity());
+        user.setCurrentVillage(registrationRequest.getCurrentVillage());
+        user.setBirthDate(registrationRequest.getBirthDate());
+        user.setBirthCountry(registrationRequest.getBirthCountry());
+        user.setBirthCity(registrationRequest.getBirthCity());
+        user.setBirthVillage(registrationRequest.getBirthVillage());
+        user.setPassword(registrationRequest.getPassword());
+        user.setMaritalStatus(registrationRequest.getMaritalStatus());
+        user.setNumberOfKids(registrationRequest.getNumberOfKids());
+        user.setOccupation(registrationRequest.getOccupation());
+        user.setSex(registrationRequest.getSex());
+        user.setMothersFirstName(registrationRequest.getMothersFirstName());
+        user.setMothersLastName(registrationRequest.getMothersLastName());
+        user.setNationalities(registrationRequest.getNationalities());
+        user.setComments(registrationRequest.getComments());
+
+        if (registrationRequest.getRole() != null && !registrationRequest.getRole().getId().isBlank() && UtilesMethods.isRoleIdValid(registrationRequest.getRole().getId())) {
+
+            // Fetch role by ID
+            Optional<Role> optionalRole = roleRepository.findById(registrationRequest.getRole().getId());
+
+            // Handle the Optional
+            Role role = optionalRole.orElseThrow(() ->
+                    new IllegalArgumentException("Role with ID " + registrationRequest.getRole().getId() + " not found"));
+
+            user.setRole(role);
+        }
+        userManagementService.save(user, userRepository);
+
+        if (registrationRequest.getReqWaladomPhoto() != null) {
+
+            WaladomIdPhoto waladomIdPhoto = new WaladomIdPhoto();
+            waladomIdPhoto.setUser(user);
+            waladomIdPhoto.setPhotoUrl(registrationRequest.getReqWaladomPhoto().getPhotoUrl());
+            waladomIdPhoto.setCreatedAt(LocalDateTime.now());
+            waladomIdPhoto.setUpdatedAt(LocalDateTime.now());
+            waladomPhotoRepository.save(waladomIdPhoto);
+            user.setWaladomIdPhoto(waladomIdPhoto);
+        }
+
+        if (registrationRequest.getReqIdProofPhotos() != null) {
+
+            ArrayList<IdProofPhoto> idProofPhotos = new ArrayList<>();
+
+            for (ReqIdProof photo : registrationRequest.getReqIdProofPhotos()) {
+
+                if ("front".equals(photo.getPhotoType())) {
+
+                    IdProofPhoto idProofPhoto = new IdProofPhoto();
+                    idProofPhoto.setUser(user);
+                    idProofPhoto.setPhotoUrl(photo.getPhotoUrl());
+                    idProofPhoto.setPhotoType(photo.getPhotoType());
+                    idProofPhoto.setCreatedAt(LocalDateTime.now());
+                    idProofPhoto.setUpdatedAt(LocalDateTime.now());
+                    idPhotoProofRepository.save(idProofPhoto);
+                    idProofPhotos.add(idProofPhoto);
+
+                } else if ("back".equals(photo.getPhotoType())) {
+                    IdProofPhoto idProofPhoto = new IdProofPhoto();
+                    idProofPhoto.setUser(user);
+                    idProofPhoto.setPhotoUrl(photo.getPhotoUrl());
+                    idProofPhoto.setPhotoType(photo.getPhotoType());
+                    idProofPhoto.setCreatedAt(LocalDateTime.now());
+                    idProofPhoto.setUpdatedAt(LocalDateTime.now());
+                    idPhotoProofRepository.save(idProofPhoto);
+
+                    idProofPhotos.add(idProofPhoto);
+                }
+
+            }
+            user.setIdProofPhotos(idProofPhotos);
+
+        }
+
+        return user;
+
+    }
+
 
 
 }

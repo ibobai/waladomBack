@@ -154,6 +154,7 @@ public class UserService {
                     UserResponseDTO dto = new UserResponseDTO();
 
                     // Map basic user details
+                    dto.setId(user.getId());
                     dto.setFirstName(user.getFirstName());
                     dto.setLastName(user.getLastName());
                     dto.setEmail(user.getEmail());
@@ -176,6 +177,8 @@ public class UserService {
                     dto.setMothersLastName(user.getMothersLastName());
                     dto.setNationalities(user.getNationalities());
                     dto.setComments(user.getComments());
+                    dto.setCreatedAt(user.getCreatedAt());
+                    dto.setUpdatedAt(user.getUpdatedAt());
 
                     // Map WaladomCardPhoto
                     WaladomIdPhoto waladomCard = user.getWaladomIdPhoto();
@@ -284,9 +287,11 @@ public class UserService {
         if (userRequestDTO.getLastName() != null && !userRequestDTO.getLastName().isBlank()) {
             existingUser.setLastName(userRequestDTO.getLastName());
         }
-        if (userRequestDTO.getEmail() != null && !userRequestDTO.getEmail().isBlank()) {
+        if (userRequestDTO.getEmail() != null && !userRequestDTO.getEmail().isBlank()
+                && !userRequestDTO.getEmail().equalsIgnoreCase(existingUser.getEmail())) {
             existingUser.setEmail(userRequestDTO.getEmail());
         }
+
         if (userRequestDTO.getPassword() != null && !userRequestDTO.getPassword().isBlank()) {
             existingUser.setPassword(userRequestDTO.getPassword());
         }
@@ -395,7 +400,7 @@ public class UserService {
         }
 
         // Save and return the updated user
-       // User savedUser = userRepository.save(existingUser);
+        //User savedUser = userRepository.save(existingUser);
         User savedUser = userManagementService.save(existingUser, userRepository);
 
         return UserResponseDTO.mapToUserResponseDTO(savedUser);
@@ -570,6 +575,7 @@ public class UserService {
         newUser.setMothersLastName(userRequest.getMothersLastName());
         newUser.setNationalities(userRequest.getNationalities());
         newUser.setComments(userRequest.getComments());
+
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
 
             // Fetch role by ID
@@ -607,5 +613,6 @@ public class UserService {
         idPhotoProofRepository.save(idProofPhoto);
         return idProofPhoto;
     }
+
 
 }

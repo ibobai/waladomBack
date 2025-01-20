@@ -1,6 +1,11 @@
 package com.phanta.waladom.registration.photos.reqIdPhoto;
 
+import com.phanta.waladom.registration.RegistrationRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReqWaladomPhotoRepository extends JpaRepository<ReqWaladomPhoto, String> {
+import java.util.Optional;
+
+public interface ReqWaladomPhotoRepository extends JpaRepository<ReqWaladomIdPhoto, String> {
+    Optional<ReqWaladomIdPhoto> findByRegistrationRequest(RegistrationRequest registrationRequest);
+
 }

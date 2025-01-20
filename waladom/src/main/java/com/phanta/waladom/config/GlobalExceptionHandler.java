@@ -1,19 +1,24 @@
 package com.phanta.waladom.config;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.naming.AuthenticationException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -36,7 +41,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(NoHandlerFoundException ex) {
-        String path = ex.getRequestURL(); // Extract the requested URL
+        String path = ex.getRequestURL();// Extract the requested URL
+        System.out.println(ex);
         Map<String, Object> errorResponse = buildErrorResponse(
                 HttpStatus.NOT_FOUND.value(),
                 "Not Found",
@@ -45,14 +51,24 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex, HttpServletRequest request) {
         String path = request.getRequestURI(); // Get the URL causing the error
         Map<String, Object> errorResponse = new HashMap<>();
 
-        // Check if it's a database-related exception
-        if (ex instanceof DataIntegrityViolationException || ex instanceof InvalidDataAccessApiUsageException) {
+        // Check if the exception is caused by trying to update a non-existent user or element
+        if (ex instanceof JpaObjectRetrievalFailureException || ex instanceof DataIntegrityViolationException) {
+            // These exceptions often occur when trying to update an entity that doesn't exist in the database
+            errorResponse.put("status", HttpStatus.NOT_FOUND.value());
+            errorResponse.put("error", "Not Found");
+            errorResponse.put("message", "The entity you are trying to update does not exist.");
+            errorResponse.put("timestamp", LocalDateTime.now());
+            errorResponse.put("path", path);
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+
+        // Check for database-related exceptions like InvalidDataAccessApiUsageException
+        if (ex instanceof InvalidDataAccessApiUsageException) {
             // Log the error to the console (or to a logger) for debugging purposes
             ex.printStackTrace();  // You can also use a logging framework like SLF4J instead of printStackTrace
 
@@ -61,7 +77,7 @@ public class GlobalExceptionHandler {
             errorResponse.put("error", "Internal Server Error");
             errorResponse.put("message", "An error occurred while performing actions in the Database.");
         } else {
-            // Handle other exceptions normally
+            // Handle other exceptions normally (unexpected errors)
             errorResponse = buildErrorResponse(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     "Internal Server Error",
@@ -76,9 +92,8 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    /**
-     * Handler for unauthorized or forbidden access (403).
-     */
+
+    // You can create a method to build error response in a more structured way  /**
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Map<String, Object>> handleAuthenticationException(AuthenticationException ex, HttpServletRequest request) {
         String path = request.getRequestURI(); // Get the URL causing the error
@@ -106,5 +121,55 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(errorResponse);
     }
+
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+        // Log the exception for debugging purposes
+        ex.printStackTrace();
+
+        // Extract column name from the exception message (e.g., "email" or "phone")
+        String fieldName = extractFieldNameFromMessage(ex.getMessage());
+
+        // Create a dynamic message based on the violated column
+        String userMessage = String.format("The %s is already registered. Please use a different one.", fieldName);
+
+        // Get the current timestamp
+        LocalDateTime timestamp = LocalDateTime.now();
+
+        // Get the request path
+        String path = request.getDescription(false).replace("uri=", "");
+
+        // Create and return the error response with timestamp and path
+        ErrorResponse errorResponse = new ErrorResponse(
+                "BAD_REQUEST",
+                userMessage,
+                HttpStatus.BAD_REQUEST.value(),
+                timestamp,
+                path
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    private String extractFieldNameFromMessage(String message) {
+        // Updated regular expression to match column names more reliably
+        String pattern = "Key \\((.*?)\\)=";
+
+        // Extract field name from the message if it matches the pattern
+        String fieldName = "Unknown";  // Default value
+        if (message != null && message.contains("Key (")) {
+            // Try extracting the field name using the regular expression
+            Matcher matcher = Pattern.compile(pattern).matcher(message);
+            if (matcher.find()) {
+                fieldName = matcher.group(1);  // Capture the field name inside parentheses
+            }
+        }
+
+        return fieldName;
+    }
+
+
 
 }
