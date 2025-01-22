@@ -16,12 +16,22 @@ public class ReportEvidenceDTO {
     private String fileUrl;
     private String description;
     private LocalDateTime uploadedAt;
+    private String reportId;
 
     public ReportEvidenceDTO(){
 
     }
 
-    public ReportEvidenceDTO(String id, String evidenceType, String fileUrl, String description) {
+
+    public ReportEvidenceDTO(String id, String evidenceType, String fileUrl, LocalDateTime uploadedAt, String description) {
+    }
+
+    public String getReportId() {
+        return reportId;
+    }
+
+    public void setReportId(String reportId) {
+        this.reportId = reportId;
     }
 
     public LocalDateTime getUploadedAt() {
