@@ -24,9 +24,28 @@ public class ReportRequestDTO {
     private String victim;
     private String googleMapLink;
     private String status;
+    private String verifierComment;
+    private Boolean verified;
+
     private List<ReportEvidenceDTO> evidenceList;
 
     public ReportRequestDTO() {
+    }
+
+    public String getVerifierComment() {
+        return verifierComment;
+    }
+
+    public void setVerifierComment(String verifierComment) {
+        this.verifierComment = verifierComment;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public String getUserId() {

@@ -10,7 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "report_evidence")
+@Table(name = "report_evidences")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,10 +32,11 @@ public class ReportEvidence {
 
     @CreationTimestamp
     @Column(name = "uploaded_at", updatable = false)
-    private LocalDateTime uploadedAt;
+    private LocalDateTime uploadedAt = LocalDateTime.now();;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
+
 
     public String getId() {
         return id;

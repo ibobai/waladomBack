@@ -58,6 +58,12 @@ public class Report {
     @Column(name = "status", length = 20)
     private String status = "not verified";
 
+    @Column(name = "verifier_comment", columnDefinition = "TEXT")
+    private String verifierComment;
+
+    @Column(name = "verified", nullable = false)
+    private Boolean verified = false;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt= LocalDateTime.now();
@@ -72,6 +78,11 @@ public class Report {
 
     @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ReportEvidence> evidenceList;
+
+    @PreUpdate
+    public void updateTimestamp() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
     public String getId() {
         return id;
@@ -97,7 +108,21 @@ public class Report {
         this.user = user;
     }
 
+    public String getVerifierComment() {
+        return verifierComment;
+    }
 
+    public void setVerifierComment(String verifierComment) {
+        this.verifierComment = verifierComment;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
 
     public String getDescription() {
         return description;

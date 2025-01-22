@@ -27,9 +27,11 @@ public class ReportResponseDTO {
     private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String verifierComment;
+    private Boolean verified;
     private List<ReportEvidenceDTO> reportEvidences;
 
-    public ReportResponseDTO(String id, String userId, String type, String description, String country, String city, String actor, String actorName, String actorDesc, String actorAccount, String victim, String googleMapLink, String status, LocalDateTime createdAt, LocalDateTime updatedAt, List<ReportEvidenceDTO> reportEvidences) {
+    public ReportResponseDTO(String id, String userId, String type, String description, String country, String city, String actor, String actorName, String actorDesc, String actorAccount, String victim, String googleMapLink, String status, LocalDateTime createdAt, LocalDateTime updatedAt, List<ReportEvidenceDTO> reportEvidences, String verifierComment, Boolean verified) {
         this.id = id;
         this.userId = userId;
         this.type = type;
@@ -45,6 +47,8 @@ public class ReportResponseDTO {
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.verified = verified;
+        this.verifierComment = verifierComment;
         this.reportEvidences = reportEvidences;
     }
     public ReportResponseDTO (){
@@ -57,6 +61,23 @@ public class ReportResponseDTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+
+    public String getVerifierComment() {
+        return verifierComment;
+    }
+
+    public void setVerifierComment(String verifierComment) {
+        this.verifierComment = verifierComment;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public String getUserId() {
