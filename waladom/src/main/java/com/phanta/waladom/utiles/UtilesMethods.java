@@ -7,6 +7,7 @@ import com.phanta.waladom.idProof.IdProofPhoto;
 import com.phanta.waladom.registration.RegistrationRequest;
 import com.phanta.waladom.registration.photos.reqIdPhoto.ReqWaladomIdPhoto;
 import com.phanta.waladom.registration.photos.reqIdProof.ReqIdProof;
+import com.phanta.waladom.report.ReportRequestDTO;
 import com.phanta.waladom.role.Role;
 import com.phanta.waladom.shared.user.UserAndRegistrationService;
 import com.phanta.waladom.shared.user.UserManagementService;
@@ -140,6 +141,32 @@ public class UtilesMethods {
     }
 
 
+
+    public static boolean isReportRequestEmpty(ReportRequestDTO request) {
+        return request == null ||
+                (request.getUserId() == null || request.getUserId().trim().isEmpty()) &&
+                        (request.getType() == null || request.getType().trim().isEmpty()) &&
+                        (request.getDescription() == null || request.getDescription().trim().isEmpty()) &&
+                        (request.getCountry() == null || request.getCountry().trim().isEmpty()) &&
+                        (request.getCity() == null || request.getCity().trim().isEmpty()) &&
+                        (request.getActor() == null || request.getActor().trim().isEmpty()) &&
+                        (request.getActorName() == null || request.getActorName().trim().isEmpty()) &&
+                        (request.getActorDesc() == null || request.getActorDesc().trim().isEmpty()) &&
+                        (request.getActorAccount() == null || request.getActorAccount().trim().isEmpty()) &&
+                        (request.getVictim() == null || request.getVictim().trim().isEmpty()) &&
+                        (request.getGoogleMapLink() == null || request.getGoogleMapLink().trim().isEmpty()) &&
+                        (request.getStatus() == null || request.getStatus().trim().isEmpty()) &&
+                        (request.getEvidenceList() == null || request.getEvidenceList().isEmpty());
+    }
+
+    public static boolean isReportRequestInvalid(ReportRequestDTO request) {
+        return request.getType() == null || request.getType().isEmpty() ||
+                request.getDescription() == null || request.getDescription().isEmpty() ||
+                request.getCountry() == null || request.getCountry().isEmpty() ||
+                request.getCity() == null || request.getCity().isEmpty() ||
+                request.getVictim() == null || request.getVictim().isEmpty() ||
+                request.getUserId() == null || request.getUserId().isEmpty();
+    }
 
 
     public RegistrationRequest getRegistrationRequestFromUser(User user) {

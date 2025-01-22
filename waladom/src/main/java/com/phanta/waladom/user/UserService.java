@@ -81,6 +81,7 @@ public class UserService {
                     UserResponseDTO dto = new UserResponseDTO();
 
                     // Map basic user details
+                    dto.setId(user.getId());
                     dto.setFirstName(user.getFirstName());
                     dto.setLastName(user.getLastName());
                     dto.setEmail(user.getEmail());
