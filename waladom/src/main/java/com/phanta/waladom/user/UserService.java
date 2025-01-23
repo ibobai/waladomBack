@@ -511,41 +511,71 @@ public class UserService {
     /**
      * Authenticates the user and returns the access token and refresh token.
      *
-     * @param email    The email of the user extracted from Basic Auth
+     * @param identifier    The identifier of the user extracted from Basic Auth
      * @param password The password of the user extracted from Basic Auth
      * @return ResponseEntity containing the validation result and tokens
      */
-    public ResponseEntity<Map<String, Object>> login(String email, String password) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
+    public ResponseEntity<Map<String, Object>> login(String identifier, String password, String connectionMethod) {
+        Optional<User> userOptional;
+
+        if ("email".equalsIgnoreCase(connectionMethod)) {
+            userOptional = userRepository.findByEmail(identifier);
+        } else if ("phone".equalsIgnoreCase(connectionMethod)) {
+            userOptional = userRepository.findByPhone(identifier);
+        } else {
+            Map<String, Object> response = new HashMap<>();
+            response.put("valid", false);
+            response.put("message", "Invalid connection method");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
         Map<String, Object> response = new HashMap<>();
 
-        // If the user is found
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Check if the password matches (hashing is recommended in production)
-            if (password.equals(user.getPassword())) {
-
-                // Generate the access token and refresh token
-                String accessToken = jwtTokenUtil.generateAccessToken(email, user.getRole().getName());
-                String refreshToken = jwtTokenUtil.generateRefreshToken(email);
-
-                // Prepare the response with the tokens
-                response.put("valid", true);
-                response.put("accessToken", accessToken);
-                response.put("refreshToken", refreshToken);
-
-                return ResponseEntity.ok(response); // Return 200 OK with tokens
-            } else {
+            // Check if the user meets the required conditions
+            if (!password.equals(user.getPassword())) {
                 response.put("valid", false);
                 response.put("message", "Invalid email or password");
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response); // Return 401 Unauthorized
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             }
+
+            if (!connectionMethod.equalsIgnoreCase(user.getConnectionMethod())) {
+                response.put("valid", false);
+                response.put("message", "Invalid connection method for this user");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+                // Additional checks for login
+                if (!"active".equalsIgnoreCase(user.getStatus())) {
+                    response.put("valid", false);
+                    response.put("message", "User account is not active");
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+                }
+
+                if (!user.getActive()) {
+                    response.put("valid", false);
+                    response.put("message", "User is not active");
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+                }
+
+
+
+
+
+            // Generate tokens upon successful login
+            String accessToken = jwtTokenUtil.generateAccessToken(user.getEmail(), user.getRole().getName());
+            String refreshToken = jwtTokenUtil.generateRefreshToken(user.getEmail());
+
+            response.put("valid", true);
+            response.put("accessToken", accessToken);
+            response.put("refreshToken", refreshToken);
+
+            return ResponseEntity.ok(response);
         } else {
             response.put("valid", false);
             response.put("message", "User not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // Return 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
 

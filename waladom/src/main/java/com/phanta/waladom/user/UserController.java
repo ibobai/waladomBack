@@ -174,8 +174,4 @@ public class UserController {
 
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest) {
-        return userService.login(loginRequest.getEmail(), loginRequest.getPassword());
-    }
 }

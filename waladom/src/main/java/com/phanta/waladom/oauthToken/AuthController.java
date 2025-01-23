@@ -1,6 +1,7 @@
 package com.phanta.waladom.oauthToken;
 
 import com.phanta.waladom.user.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class  AuthController {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
@@ -26,11 +27,40 @@ public class AuthController {
     /**
      * Login endpoint to authenticate the user using Basic Auth and return tokens.
      *
-     * @param headers The HTTP headers containing the Basic Auth credentials
      * @return ResponseEntity with login status and tokens if successful
      */
     @GetMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<Map<String, Object>> login(HttpServletRequest request) {
+
+        // Retrieve headers manually to avoid automatic binding issues
+        String authorizationHeader = request.getHeader("Authorization");
+        String connectionMethod = request.getHeader("Connection-Method");
+
+        Map<String, Object> response = new HashMap<>();
+
+        // Check if 'Connection-Method' header is missing
+        if (connectionMethod == null || connectionMethod.isEmpty()) {
+            response.put("valid", false);
+            response.put("message", "Missing required header: Connection-Method");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        // Check if 'Authorization' header is missing or invalid
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Basic ")) {
+            response.put("valid", false);
+            response.put("message", "Invalid or missing Authorization header");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+
+        // Validate the connection method
+        if (!"email".equalsIgnoreCase(connectionMethod) && !"phone".equalsIgnoreCase(connectionMethod)) {
+            response.put("valid", false);
+            response.put("message", "Invalid connection method. Use 'email' or 'phone'.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+
+
         // Extract credentials from Basic Auth
         if (authorizationHeader != null && authorizationHeader.startsWith("Basic ")) {
             // Decode Base64 encoded credentials
@@ -38,17 +68,17 @@ public class AuthController {
             String credentials = new String(Base64.getDecoder().decode(base64Credentials));
             String[] values = credentials.split(":", 2);
 
-            // Ensure the format is correct (email:password)
+            // Ensure the format is correct (identifier:password)
             if (values.length == 2) {
-                String email = values[0];
+                String identifier = values[0]; // This could be email or phone
                 String password = values[1];
 
                 // Call the service to handle the authentication logic
-                return userService.login(email, password);
+                return userService.login(identifier, password, connectionMethod.toLowerCase());
             }
         }
+
         // If credentials are missing or invalid, return 401 Unauthorized
-        Map<String, Object> response = new HashMap<>();
         response.put("valid", false);
         response.put("message", "Invalid or missing Authorization header");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
