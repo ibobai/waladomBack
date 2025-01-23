@@ -47,4 +47,28 @@ public class EmailController {
         Map<String, Object> response = emailService.verifyCode(code, email);
         return ResponseEntity.ok(response);
     }
+
+
+    @PostMapping("/contact/waladom")
+    public ResponseEntity<Map<String, Object>> contactWaladom(@RequestBody Map<String, String> request) {
+        // Validate request data
+        if (!emailService.isValidRequest(request)) {
+            return ResponseEntity.badRequest().body(Map.of("send", false, "message", "Invalid request data. All fields are required."));
+        }
+
+        // Extract fields from request
+        String email = request.get("email");
+        String phoneNumber = request.get("phoneNumber");
+        String firstName = request.get("firstName");
+        String lastName = request.get("lastName");
+        String subject = request.get("subject");
+        String message = request.get("message");
+
+        // Call the service method to send an email
+        Map<String, Object> response = emailService.sendContactMessage(email, phoneNumber, firstName, lastName, subject, message);
+
+        return ResponseEntity.ok(response);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.phanta.waladom.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.phanta.waladom.shared.user.UserAndRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +22,13 @@ public class UserController {
     private final UserAndRegistrationService userAndRegistrationService;
 
 
+    private final ObjectMapper objectMapper; // Used for JSON parsing
+
     @Autowired
-    public UserController(UserService userService, UserAndRegistrationService userAndRegistrationService) {
+    public UserController(UserService userService, UserAndRegistrationService userAndRegistrationService, ObjectMapper objectMapper) {
         this.userService = userService;
         this.userAndRegistrationService = userAndRegistrationService;
+        this.objectMapper = objectMapper;
     }
 
     @GetMapping("/get/all")
@@ -114,8 +118,60 @@ public class UserController {
      * @return ResponseEntity with a JSON object containing the validation result.
      */
     @PostMapping("/email/validate")
-    public ResponseEntity<Map<String, Boolean>> validateEmail(@RequestBody Object requestBody) {
-        return ResponseEntity.ok(userService.validateEmail(requestBody));
+    public ResponseEntity<?> validateEmail(@RequestBody Object requestBody) {
+        try {
+            Map<String, Object> requestMap = objectMapper.convertValue(requestBody, Map.class);
+            String email = (String) requestMap.get("email");
+            if(email == null || email.isBlank()){
+                return ResponseEntity.badRequest().body(
+                        Map.of(
+                                "timestamp", LocalDateTime.now(),
+                                "status", HttpStatus.BAD_REQUEST.value(),
+                                "message", "Param 'email' is required",
+                                "path", "/api/user/email/validate"
+                        )
+                );
+            }
+            return ResponseEntity.ok(userService.validateEmail(email));
+
+        } catch (Exception e){
+            return ResponseEntity.internalServerError().body(
+                    Map.of("status", "500",
+                            "message", "internal error",
+                            "path","/api/user/email/validate",
+                            "error", e.getMessage()
+                    )
+            );
+        }
+    }
+
+    @PostMapping("/phone/validate")
+    public ResponseEntity<?> validatePhone(@RequestBody Object requestBody) {
+        try {
+            Map<String, Object> requestMap = objectMapper.convertValue(requestBody, Map.class);
+            String phone = (String) requestMap.get("phone");
+            if(phone == null || phone.isBlank()){
+                return ResponseEntity.badRequest().body(
+                        Map.of(
+                                "timestamp", LocalDateTime.now(),
+                                "status", HttpStatus.BAD_REQUEST.value(),
+                                "message", "Param 'phone' is required",
+                                "path", "/api/user/validate/phone"
+                        )
+                );
+            }
+            return ResponseEntity.ok(userService.validatePhone(phone));
+
+        } catch (Exception e){
+            return ResponseEntity.internalServerError().body(
+                    Map.of("status", "500",
+                            "message", "internal error",
+                            "path","/api/user/phone/validate",
+                                "error", e.getMessage()
+                    )
+            );
+        }
+
     }
 
     @PostMapping("/login")

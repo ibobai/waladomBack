@@ -305,6 +305,7 @@ public class UserAndRegistrationService {
                     dto.setValidated(user.getValidated());
                     dto.setCreatedAt(user.getCreatedAt());
                     dto.setUpdatedAt(user.getUpdatedAt());
+                    dto.setConnectionMethod(user.getConnectionMethod());
                     // Map WaladomCardPhoto
                     ReqWaladomIdPhoto waladomCard = user.getReqWaladomPhoto();
                     if (waladomCard != null) {
@@ -382,6 +383,7 @@ public class UserAndRegistrationService {
                     dto.setValidated(user.getValidated());
                     dto.setCreatedAt(user.getCreatedAt());
                     dto.setUpdatedAt(user.getUpdatedAt());
+                    dto.setConnectionMethod(user.getConnectionMethod());
 
                     // Map WaladomCardPhoto
                     ReqWaladomIdPhoto waladomCard = user.getReqWaladomPhoto();
@@ -501,6 +503,7 @@ public class UserAndRegistrationService {
         newUser.setMothersLastName(userRequest.getMothersLastName());
         newUser.setNationalities(userRequest.getNationalities());
         newUser.setComments(userRequest.getComments());
+        newUser.setConnectionMethod(userRequest.getConnectionMethod());
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
             Optional<Role> optionalRole = roleRepository.findById(userRequest.getRole());
             Role role = optionalRole.orElseThrow(() ->
@@ -537,6 +540,7 @@ public class UserAndRegistrationService {
         registrationRequest.setMothersFirstName(userRequest.getMothersFirstName());
         registrationRequest.setMothersLastName(userRequest.getMothersLastName());
         registrationRequest.setNationalities(userRequest.getNationalities());
+        registrationRequest.setConnectionMethod(userRequest.getConnectionMethod());
         registrationRequest.setComments(userRequest.getComments());
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
             Optional<Role> optionalRole = roleRepository.findById(userRequest.getRole());
@@ -683,6 +687,7 @@ public class UserAndRegistrationService {
         user.setMothersLastName(registrationRequest.getMothersLastName());
         user.setNationalities(registrationRequest.getNationalities());
         user.setComments(registrationRequest.getComments());
+        user.setConnectionMethod(registrationRequest.getConnectionMethod());
 
         if (registrationRequest.getRole() != null && !registrationRequest.getRole().getId().isBlank() && UtilesMethods.isRoleIdValid(registrationRequest.getRole().getId())) {
 

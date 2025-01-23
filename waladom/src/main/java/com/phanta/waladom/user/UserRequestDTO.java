@@ -32,6 +32,7 @@ public class UserRequestDTO {
     private String waladomCardPhoto;
     private String comments;
     private String role;
+    private String connectionMethod;
     private Boolean validated;
 
     public UserRequestDTO() {
@@ -43,6 +44,14 @@ public class UserRequestDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getConnectionMethod() {
+        return connectionMethod;
+    }
+
+    public void setConnectionMethod(String connectionMethod) {
+        this.connectionMethod = connectionMethod;
     }
 
     // Getters and Setters

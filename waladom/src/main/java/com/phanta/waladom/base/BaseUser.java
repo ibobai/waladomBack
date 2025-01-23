@@ -70,6 +70,9 @@ public abstract class BaseUser {
     @Column(name = "SEX", length = 1, nullable = false)
     private String sex;
 
+    @Column(name = "CONNECTION_METHOD", length = 6, nullable = false)
+    private String connectionMethod;
+
     @Column(name = "MOTHERS_FIRST_NAME", length = 100, nullable = false)
     private String mothersFirstName;
 
@@ -111,6 +114,14 @@ public abstract class BaseUser {
         if (this.id == null) {
             this.id = getIdPrefix() + UUID.randomUUID().toString();
         }
+    }
+
+    public String getConnectionMethod() {
+        return connectionMethod;
+    }
+
+    public void setConnectionMethod(String connectionMethod) {
+        this.connectionMethod = connectionMethod;
     }
 
     protected abstract String getIdPrefix();

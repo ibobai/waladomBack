@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
@@ -13,11 +14,16 @@ import java.util.Random;
 @Service
 public class EmailService {
 
+
+
     @Autowired
     private final EmailVerificationCodeRepository verificationCodeRepository;
 
     @Value("${resend.api.key}")
     private String apiKey;
+
+    private final String resendApiUrl = "https://api.resend.com/emails";
+    private final String contactEmail = "contact@waladom.org";
 
     @Autowired
     private final RestTemplate restTemplate;
@@ -140,4 +146,55 @@ public class EmailService {
         return Map.of("verified", false, "message", "No verification request found for this email.");
     }
 
+
+
+    public Map<String, Object> sendContactMessage(String email, String phoneNumber, String firstName, String lastName, String subject, String message) {
+        String formattedMessage = String.format(
+                "New contact request:\n\n" +
+                        "Name: %s %s\n" +
+                        "Email: %s\n" +
+                        "Phone: %s\n\n" +
+                        "Message:\n%s",
+                firstName, lastName, email, phoneNumber, message
+        );
+
+        Map<String, Object> emailPayload = Map.of(
+                "from", contactEmail,
+                "to", contactEmail,  // Sending to our own email
+                "subject", subject,
+                "text", formattedMessage
+        );
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    resendApiUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                return Map.of("send", true, "message", "Your message has been sent successfully.");
+            } else {
+                return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+            }
+        } catch (Exception e) {
+            return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+        }
+    }
+
+    public boolean isValidRequest(Map<String, String> request) {
+        return request.containsKey("email") && StringUtils.hasText(request.get("email")) &&
+                request.containsKey("phoneNumber") && StringUtils.hasText(request.get("phoneNumber")) &&
+                request.containsKey("firstName") && StringUtils.hasText(request.get("firstName")) &&
+                request.containsKey("lastName") && StringUtils.hasText(request.get("lastName")) &&
+                request.containsKey("subject") && StringUtils.hasText(request.get("subject")) &&
+                request.containsKey("message") && StringUtils.hasText(request.get("message"));
+    }
 }

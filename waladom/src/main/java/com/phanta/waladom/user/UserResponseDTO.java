@@ -41,6 +41,7 @@ public class UserResponseDTO {
     private String comments;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
+    private String connectionMethod;
     private Boolean validated;
 
     // Photo details
@@ -94,6 +95,14 @@ public class UserResponseDTO {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getConnectionMethod() {
+        return connectionMethod;
+    }
+
+    public void setConnectionMethod(String connectionMethod) {
+        this.connectionMethod = connectionMethod;
     }
 
     public void setLastName(String lastName) {
@@ -312,6 +321,8 @@ public class UserResponseDTO {
         responseDTO.setComments(user.getComments());
         responseDTO.setUpdatedAt(user.getUpdatedAt());
         responseDTO.setCreatedAt(user.getCreatedAt());
+        responseDTO.setConnectionMethod(user.getConnectionMethod());
+
 
 
         // Map Waladom photo
@@ -362,7 +373,7 @@ public class UserResponseDTO {
 
         // Set validated to false for RegistrationRequest
          responseDTO.setValidated(registrationRequest.getValidated());  // Since it's a registration request, we set validated to false
-
+        responseDTO.setConnectionMethod(registrationRequest.getConnectionMethod());
         // Additional mapping specific to RegistrationRequest, if any
         // For example, if there are specific fields related to registration requests, you can map them here
         responseDTO.setCreatedAt(registrationRequest.getCreatedAt());

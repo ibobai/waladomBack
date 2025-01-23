@@ -45,6 +45,11 @@ public class UserRequestValidator {
             return buildErrorResponse("Field 'birthDate' is required.");
         }
 
+        if (userRequest.getConnectionMethod() == null || userRequest.getConnectionMethod().isEmpty()) {
+            return buildErrorResponse("Field 'connectionMethod' is required.");
+        }
+
+
         // Validate isActive field
         if (userRequest.getIsActive() == null || !ACTIVE_CONDITIONS.contains(userRequest.getIsActive())) {
             return buildErrorResponse("Field 'isActive' is required and must be a boolean (true or false).");

@@ -104,6 +104,7 @@ public class UserService {
                     dto.setMothersLastName(user.getMothersLastName());
                     dto.setNationalities(user.getNationalities());
                     dto.setComments(user.getComments());
+                    dto.setConnectionMethod(user.getConnectionMethod());
 
                     // Map WaladomCardPhoto
                     WaladomIdPhoto waladomCard = user.getWaladomIdPhoto();
@@ -180,6 +181,7 @@ public class UserService {
                     dto.setComments(user.getComments());
                     dto.setCreatedAt(user.getCreatedAt());
                     dto.setUpdatedAt(user.getUpdatedAt());
+                    dto.setConnectionMethod(user.getConnectionMethod());
 
                     // Map WaladomCardPhoto
                     WaladomIdPhoto waladomCard = user.getWaladomIdPhoto();
@@ -353,6 +355,10 @@ public class UserService {
         if (userRequestDTO.getComments() != null && !userRequestDTO.getComments().isBlank()) {
             existingUser.setComments(userRequestDTO.getComments());
         }
+        if (userRequestDTO.getConnectionMethod() != null && !userRequestDTO.getConnectionMethod().isBlank()) {
+            existingUser.setCurrentCity(userRequestDTO.getConnectionMethod());
+        }
+
         if (userRequestDTO.getRole() != null && !userRequestDTO.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequestDTO.getRole())) {
 
             // Fetch role by ID
@@ -440,7 +446,9 @@ public class UserService {
                 && (requestBody.getIdProofPhotoBack() == null || requestBody.getIdProofPhotoBack().isBlank())
                 && (requestBody.getWaladomCardPhoto() == null || requestBody.getWaladomCardPhoto().isBlank())
                 && (requestBody.getComments() == null || requestBody.getComments().isBlank())
+                && (requestBody.getConnectionMethod() == null || requestBody.getConnectionMethod().isBlank())
                 && (requestBody.getRole() == null || requestBody.getRole().isBlank());
+
     }
 
 
@@ -453,32 +461,49 @@ public class UserService {
     /**
      * Validates an email address extracted from the request body.
      *
-     * @param requestBody The object containing email details.
+     * @param email The object containing email details.
      * @return A Map with the validation result.
      */
-    public Map<String, Boolean> validateEmail(Object requestBody) {
-        Map<String, Boolean> response = new HashMap<>();
+    public Object validateEmail(String email) {
+
+        Optional<User> existingUser = userRepository.findByEmail(email);
+        if (existingUser.isPresent()) {
+            // Return a bad request response with the existing user's ID
+            return
+                    Map.of(
+                            "timestamp", LocalDateTime.now(),
+                            "status", HttpStatus.BAD_REQUEST.value(),
+                            "error", "User already exists",
+                            "message", "The email is already taken",
+                            "path", "/api/user/email/validate",
+                            "vaild", false
+
+            );
+        }
+        Map<String, Object> response = new HashMap<>();
         try {
             // Convert the request body to a map
-            Map<String, Object> requestMap = objectMapper.convertValue(requestBody, Map.class);
-
-            // Extract the email field
-            String email = (String) requestMap.get("email");
 
             // Perform basic email validation
             if (email == null || !email.matches("^[\\w-.]+@[\\w-]+\\.[a-z]{2,}$")) {
                 response.put("valid", false); // Invalid email format
+                response.put("message", "Invalid email format");
+
                 return response;
             }
 
             // Check if the email already exists in the database
             boolean isValid = userRepository.findByEmail(email).isEmpty();
             response.put("valid", isValid);
+            response.put("message", isValid ? "Email is valid" : "Email already exists");
+
             return response;
         } catch (Exception e) {
             // Log the exception and return a validation failure
             e.printStackTrace();
             response.put("valid", false);
+            response.put("message", "Error validating email: " + e.getMessage());
+
             return response;
         }
     }
@@ -525,6 +550,44 @@ public class UserService {
     }
 
 
+    public Object validatePhone(String phone) {
+
+        Optional<User> existingUser = userRepository.findByPhone(phone);
+        if (existingUser.isPresent()) {
+            // Return a bad request response with the existing user's ID
+            return Map.of(
+                    "timestamp", LocalDateTime.now(),
+                    "status", HttpStatus.BAD_REQUEST.value(),
+                    "error", "User already exists",
+                    "message", "The phone number is already taken",
+                    "path", "/api/user/phone/validate",
+                    "valid", false
+            );
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // Extract the phone field
+            // Perform basic phone number validation (e.g., E.164 format)
+            if (phone == null || !phone.matches("^\\+?[1-9]\\d{1,14}$")) {
+                response.put("valid", false); // Invalid phone number format
+                response.put("message", "Invalid phone number format");
+                return response;
+            }
+
+            // Check if the phone already exists in the database
+            boolean isValid = userRepository.findByPhone(phone).isEmpty();
+            response.put("valid", isValid);
+            response.put("message", isValid ? "Phone number is valid" : "Phone number already exists");
+            return response;
+        } catch (Exception e) {
+            // Log the exception and return a validation failure
+            e.printStackTrace();
+            response.put("valid", false);
+            response.put("message", "Error validating phone number: " + e.getMessage());
+            return response;
+        }
+    }
 
 
     public User mapAndSaveUserWithAllDetails(UserRequestDTO userRequest) {
@@ -576,6 +639,7 @@ public class UserService {
         newUser.setMothersLastName(userRequest.getMothersLastName());
         newUser.setNationalities(userRequest.getNationalities());
         newUser.setComments(userRequest.getComments());
+        newUser.setConnectionMethod(userRequest.getConnectionMethod());
 
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
 

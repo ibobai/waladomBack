@@ -98,6 +98,7 @@ public class UtilesMethods {
         user.setMothersLastName(registrationRequest.getMothersLastName());
         user.setNationalities(registrationRequest.getNationalities());
         user.setComments(registrationRequest.getComments());
+        user.setConnectionMethod(registrationRequest.getConnectionMethod());
         user.setId(registrationRequest.getId());
 
         if (registrationRequest.getReqIdProofPhotos() != null) {
