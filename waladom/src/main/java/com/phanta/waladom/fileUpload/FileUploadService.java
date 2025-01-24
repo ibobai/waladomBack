@@ -7,16 +7,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 
 @Service
 class FileUploadService {
+
     private final String BASE_DIR = System.getProperty("user.dir") + "/src/media/";  // Absolute path
 
-    public String storeFile(MultipartFile file, String folder, String prefix) {
+    public String storeFile(MultipartFile file, String folder, String prefix, String uniqueId) {
         try {
-            String uniqueId = generateUniqueId();
             String extension = getFileExtension(file.getOriginalFilename());
             String filename = prefix + "-" + uniqueId + extension;
 
@@ -32,9 +31,8 @@ class FileUploadService {
         }
     }
 
-    public String saveToSpecificFolder(MultipartFile file, String targetFolder, String prefix) {
+    public String saveToSpecificFolder(MultipartFile file, String targetFolder, String prefix, String uniqueId) {
         try {
-            String uniqueId = generateUniqueId();
             String extension = getFileExtension(file.getOriginalFilename());
             String filename = prefix + "-" + uniqueId + extension;
 
@@ -50,17 +48,11 @@ class FileUploadService {
         }
     }
 
-    private String generateUniqueId() {
-        return UUID.randomUUID().toString().substring(0, 7) + getRandomLetters();
-    }
+
 
     private String getFileExtension(String filename) {
         return filename.substring(filename.lastIndexOf("."));
     }
 
-    private String getRandomLetters() {
-        char letter1 = (char) ('A' + Math.random() * 26);
-        char letter2 = (char) ('A' + Math.random() * 26);
-        return "" + letter1 + letter2;
-    }
+
 }
