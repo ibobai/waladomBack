@@ -130,7 +130,7 @@ public class EmailService {
                 return Map.of("verified", false, "message", "Email is already verified.");
             }
 
-            if (verificationCode.getExpiresAt().isBefore(now)) {
+            if (verificationCode.getExpiresAt().isBefore(now) && verificationCode.getVerificationCode().equals(code)) {
                 return Map.of("verified", false, "message", "Code has expired.");
             }
 

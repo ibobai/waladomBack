@@ -96,14 +96,15 @@ public class PasswordResetService {
                     "message", "No password rest request found with this identifier : " + identifier);
         }
 
+
         if (code != null) {
             Instant now = Instant.now();
 
-            if (passwordReset.get().getExpiresAt().isBefore(now)) {
-                return Map.of("verified", false, "message", "Code has expired.");
-            }
-
             if (passwordReset.get().getVerificationCode().equals(code)) {
+                if (passwordReset.get().getExpiresAt().isBefore(now)) {
+                    passwordResetRepository.delete(passwordReset.get());
+                    return Map.of("verified", false, "message", "Code has expired.");
+                }
                 passwordResetRepository.delete(passwordReset.get());
                 return Map.of("verified", true, "message", "Verification OK!.");
             }
