@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 @Service
 class FileUploadService {
 
-    private final String BASE_DIR = System.getProperty("user.dir") + "/src/media/";  // Absolute path
+    private final String BASE_DIR = System.getProperty("user.dir") + "/var/www/media/";  // Absolute path
 
     public String storeFile(MultipartFile file, String folder, String prefix, String uniqueId) {
         try {
