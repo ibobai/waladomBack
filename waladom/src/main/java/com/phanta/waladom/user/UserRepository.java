@@ -18,7 +18,10 @@ public interface UserRepository extends JpaRepository<User, String> {
             "LEFT JOIN FETCH u.role " +
             "WHERE u.id = :id")
     Optional<User> findByIdWithDetails(@Param("id") String id);
+    @Query("SELECT u FROM User u WHERE (u.email = :identifier OR u.phone = :identifier) AND u.connectionMethod = :connectionMethod")
+    Optional<User> findByEmailOrPhoneAndIdentifier(@Param("identifier") String identifier, @Param("connectionMethod") String connectionMethod);
 
-  //  @Query("SELECT rr FROM RegistrationRequest rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
+
+    //  @Query("SELECT rr FROM RegistrationRequest rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
   //  List<User> findAllWithAssociations();
 }

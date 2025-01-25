@@ -28,7 +28,7 @@ public class EmailService {
     @Autowired
     private final RestTemplate restTemplate;
 
-    private static final int CODE_EXPIRY_TIME = 5 * 60 * 1000; // 3 minutes in milliseconds
+    private static final int CODE_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
 
     @Autowired
     public EmailService(EmailVerificationCodeRepository verificationCodeRepository, RestTemplate restTemplate) {
@@ -37,7 +37,7 @@ public class EmailService {
     }
 
     // Method to generate a 6-digit random code
-    private String generateCode() {
+    public  String generateCode() {
         Random random = new Random();
         int code = 100000 + random.nextInt(900000); // Generate 6-digit number
         return String.valueOf(code);
@@ -83,7 +83,7 @@ public class EmailService {
     }
 
     // Helper method to send the email
-    private Map<String, Object> sendEmail(String toEmail, String code) {
+    public Map<String, Object> sendEmail(String toEmail, String code) {
         String subject = "Email Verification Code";
         String messageText = "Please use the following code to verify your email: " + code;
 

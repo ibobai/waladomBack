@@ -91,7 +91,7 @@ public class PhoneVerificationService {
 
 
     // Helper method to send the SMS
-    private Map<String, Object> sendSMS(String phoneNumber, String code) {
+    public Map<String, Object> sendSMS(String phoneNumber, String code) {
         String messageText = "Please use the following code to verify your phone number: " + code;
 
 

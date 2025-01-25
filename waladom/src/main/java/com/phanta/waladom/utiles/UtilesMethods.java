@@ -15,6 +15,7 @@ import com.phanta.waladom.user.User;
 import com.phanta.waladom.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.Year;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -221,6 +222,59 @@ public class UtilesMethods {
         }
 
         return registrationRequest;
+    }
+
+
+
+        public static String decodeUserId(String userId) {
+            if (userId == null || !userId.startsWith("WLD_") || userId.length() != 15) {
+                return "Invalid ID format";
+            }
+
+            // Extract gender
+            char genderCode = userId.charAt(4);
+            String gender = switch (genderCode) {
+                case '1' -> "a male";
+                case '2' -> "a female";
+                default -> "other";
+            };
+
+            // Extract and format month
+            String birthMonth = userId.substring(5, 7);  // Already in 2-digit format (e.g., 05, 11)
+
+            // Extract year of birth and determine the century
+            int birthYear = Integer.parseInt(userId.substring(7, 9));
+            int currentYear = Year.now().getValue() % 100;
+            int fullBirthYear = (birthYear > currentYear) ? 1900 + birthYear : 2000 + birthYear;
+
+            // Extract country code
+            String countryCode = userId.substring(9, 12);
+
+            // Extract joining year and determine the full year
+            int joiningYear = Integer.parseInt(userId.substring(12, 14));
+            int fullJoiningYear = 2000 + joiningYear;
+
+            // Extract the two unique random numbers at the end
+            String uniqueNumbers = userId.substring(14, 16);
+
+            return String.format("%s, born in month - %s, year %d, from country code %s, joined in %d, unique numbers: %s.",
+                    gender, birthMonth, fullBirthYear, countryCode, fullJoiningYear, uniqueNumbers);
+        }
+
+
+    public static String getCountryCode(String countryAlpha2) {
+        switch (countryAlpha2) {
+            case "SUDAN": return "249";  // Sudan
+            case "US": return "840";  // United States
+            case "EG": return "818";  // Egypt
+            case "IN": return "356";  // India
+            case "FR": return "250";  // France
+            case "DE": return "276";  // Germany
+            case "UK": return "826";  // United Kingdom
+            // Add more country codes as needed
+            default:
+                throw new IllegalArgumentException("Unknown country code: " + countryAlpha2);
+        }
     }
 
 }
