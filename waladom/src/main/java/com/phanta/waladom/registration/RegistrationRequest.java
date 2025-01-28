@@ -7,6 +7,7 @@ import com.phanta.waladom.role.Role;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "registration_requests")
@@ -14,6 +15,10 @@ public class RegistrationRequest extends BaseUser {
 
     @Column(name = "VALIDATED", nullable = false)
     private Boolean validated = false; // Specific to registration requests
+
+    @Id
+    @Column(name = "ID", length = 50, nullable = false, unique = true)
+    private String id;
 
     //Relations
     @OneToOne(mappedBy = "registrationRequest", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,9 +32,32 @@ public class RegistrationRequest extends BaseUser {
     private Role role;
 
 
+    @PrePersist
+    public void generateId() {
+        if (this.id == null) {
+            this.id = getIdPrefix() + UUID.randomUUID();
+        }
+    }
+
     @Override
     protected String getIdPrefix() {
         return "RGST_";
+    }
+
+      public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ReqWaladomIdPhoto getReqWaladomIdPhoto() {
+        return reqWaladomIdPhoto;
+    }
+
+    public void setReqWaladomIdPhoto(ReqWaladomIdPhoto reqWaladomIdPhoto) {
+        this.reqWaladomIdPhoto = reqWaladomIdPhoto;
     }
 
     public Boolean getValidated() {

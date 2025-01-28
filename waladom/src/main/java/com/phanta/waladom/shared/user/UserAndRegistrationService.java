@@ -23,6 +23,7 @@ import com.phanta.waladom.user.User;
 import com.phanta.waladom.user.UserRepository;
 import com.phanta.waladom.user.UserRequestDTO;
 import com.phanta.waladom.user.UserResponseDTO;
+import com.phanta.waladom.utiles.CountryCodeUtil;
 import com.phanta.waladom.utiles.UtilesMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.phanta.waladom.utiles.UtilesMethods.BOOLEANS;
@@ -494,9 +493,48 @@ public class UserAndRegistrationService {
         }
     }
 
+
+    public static String generateUserId(String gender, LocalDate birthDate, String country) {
+        StringBuilder userId = new StringBuilder("WLD_");
+
+        // Gender: M -> 1, F -> 2, O -> 3
+        switch (gender.toUpperCase()) {
+            case "M" -> userId.append("1");
+            case "F" -> userId.append("2");
+            default -> userId.append("3");
+        }
+
+        // Extract birth month and year from birthDate
+        int birthMonth = birthDate.getMonthValue();  // Get birth month (1-12)
+        int birthYear = birthDate.getYear();        // Get birth year (e.g., 1996)
+
+        // Add birth month (two digits)
+        userId.append(String.format("%02d", birthMonth));
+
+        // Add last two digits of birth year
+        userId.append(String.format("%02d", birthYear % 100));
+
+        // Add country code
+        String countryCode = CountryCodeUtil.getCountryCode(country); // Assume this method returns a valid country code
+        userId.append(countryCode);
+
+        // Add last two digits of the current year (join year)
+        int currentYear = LocalDate.now().getYear(); // Get the current year
+        userId.append(String.format("%02d", currentYear % 100));
+
+        // Add two random digits
+        Random random = new Random();
+        userId.append(random.nextInt(10)).append(random.nextInt(10));
+
+        return userId.toString();
+    }
+
+
+
     private User saveUser(UserRequestDTO userRequest) {
         User newUser = new User();
         // Map User fields from DTO
+        newUser.setId(generateUserId(userRequest.getSex(), userRequest.getBirthDate(), userRequest.getBirthCountry()));
         newUser.setFirstName(userRequest.getFirstName());
         newUser.setLastName(userRequest.getLastName());
         newUser.setEmail(userRequest.getEmail());

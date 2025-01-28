@@ -1,17 +1,16 @@
 package com.phanta.waladom.base;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PreUpdate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseUser {
-    @Id
-    @Column(name = "ID", length = 50, nullable = false, unique = true)
-    private String id;
+
 
     @Column(name = "FIRST_NAME", length = 100, nullable = false)
     private String firstName;
@@ -109,12 +108,15 @@ public abstract class BaseUser {
         this.updatedAt = LocalDateTime.now();
     }
 
-    @PrePersist
-    public void generateId() {
-        if (this.id == null) {
-            this.id = getIdPrefix() + UUID.randomUUID().toString();
-        }
-    }
+//    @PrePersist
+//    public void generateId() {
+//        if (this.id == null) {
+//            this.id = getIdPrefix() + UUID.randomUUID().toString();
+//        }
+//    }
+//
+
+
 
     public String getConnectionMethod() {
         return connectionMethod;
@@ -126,13 +128,13 @@ public abstract class BaseUser {
 
     protected abstract String getIdPrefix();
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getFirstName() {
         return firstName;

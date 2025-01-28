@@ -650,6 +650,7 @@ public class UserService {
             response.put("valid", true);
             response.put("accessToken", accessToken);
             response.put("refreshToken", refreshToken);
+            response.put("user",UserResponseDTO.mapToUserResponseDTO(userOptional.get()) );
 
             return ResponseEntity.ok(response);
         } else {
