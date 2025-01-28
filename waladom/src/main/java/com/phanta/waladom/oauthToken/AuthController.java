@@ -2,6 +2,8 @@ package com.phanta.waladom.oauthToken;
 
 import com.phanta.waladom.user.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-public class  AuthController {
+public class AuthController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
@@ -31,85 +35,87 @@ public class  AuthController {
      */
     @GetMapping("/login")
     public ResponseEntity<Map<String, Object>> login(HttpServletRequest request) {
+        logger.info("Received login request.");
 
-        // Retrieve headers manually to avoid automatic binding issues
         String authorizationHeader = request.getHeader("Authorization");
         String connectionMethod = request.getHeader("Connection-Method");
 
         Map<String, Object> response = new HashMap<>();
 
-        // Check if 'Connection-Method' header is missing
         if (connectionMethod == null || connectionMethod.isEmpty()) {
+            logger.warn("Missing 'Connection-Method' header.");
             response.put("valid", false);
             response.put("message", "Missing required header: Connection-Method");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        // Check if 'Authorization' header is missing or invalid
         if (authorizationHeader == null || !authorizationHeader.startsWith("Basic ")) {
+            logger.warn("Invalid or missing 'Authorization' header.");
             response.put("valid", false);
             response.put("message", "Invalid or missing Authorization header");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
-        // Validate the connection method
         if (!"email".equalsIgnoreCase(connectionMethod) && !"phone".equalsIgnoreCase(connectionMethod)) {
+            logger.warn("Invalid connection method: {}", connectionMethod);
             response.put("valid", false);
             response.put("message", "Invalid connection method. Use 'email' or 'phone'.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-
-
-        // Extract credentials from Basic Auth
-        if (authorizationHeader != null && authorizationHeader.startsWith("Basic ")) {
-            // Decode Base64 encoded credentials
+        try {
             String base64Credentials = authorizationHeader.substring("Basic ".length());
             String credentials = new String(Base64.getDecoder().decode(base64Credentials));
             String[] values = credentials.split(":", 2);
 
-            // Ensure the format is correct (identifier:password)
             if (values.length == 2) {
-                String identifier = values[0]; // This could be email or phone
+                String identifier = values[0];
                 String password = values[1];
 
-                // Call the service to handle the authentication logic
+                logger.info("Attempting login for identifier: {} using connection method: {}", identifier, connectionMethod);
                 return userService.login(identifier, password, connectionMethod.toLowerCase());
+            } else {
+                logger.error("Invalid credentials format in 'Authorization' header.");
             }
+        } catch (IllegalArgumentException e) {
+            logger.error("Failed to decode credentials from 'Authorization' header: {}", e.getMessage());
         }
 
-        // If credentials are missing or invalid, return 401 Unauthorized
         response.put("valid", false);
         response.put("message", "Invalid or missing Authorization header");
+        logger.warn("Login request failed due to invalid credentials.");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
-
-    // Refresh Token Endpoint
-    // Refresh Token Endpoint
+    /**
+     * Refresh Token Endpoint to generate a new access token.
+     */
     @PostMapping("/refresh")
     public ResponseEntity<?> refresh(@RequestHeader("Authorization") String authorizationHeader) {
-        // Extract the token from the header
+        logger.info("Received token refresh request.");
+
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            logger.warn("Invalid or missing 'Authorization' header in refresh request.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Missing or invalid Authorization header");
         }
 
-        String refreshToken = authorizationHeader.substring(7); // Extract token after "Bearer "
+        String refreshToken = authorizationHeader.substring(7);
+        logger.info("Validating refresh token.");
 
-        // Validate the refresh token
         if (jwtTokenUtil.validateToken(refreshToken)) {
-            String email = jwtTokenUtil.extractEmail(refreshToken); // Extract the email (subject) from the token
-            String role = jwtTokenUtil.extractRole(refreshToken); // Optionally extract role if needed
+            logger.info("Refresh token is valid.");
 
-            // Generate a new access token
+            String email = jwtTokenUtil.extractEmail(refreshToken);
+            String role = jwtTokenUtil.extractRole(refreshToken);
+
+            logger.info("Generating new access token for email: {} and role: {}", email, role);
             String newAccessToken = jwtTokenUtil.generateAccessToken(email, role);
 
-            // Return the new access token
+            logger.info("Successfully generated new access token.");
             return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
         }
 
-        // Return 401 if the token is invalid
+        logger.warn("Invalid refresh token.");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid refresh token");
     }
-
 }

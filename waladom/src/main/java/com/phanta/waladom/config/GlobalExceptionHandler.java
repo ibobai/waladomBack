@@ -114,6 +114,8 @@ public class GlobalExceptionHandler {
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
         errorResponse.put("error", "Bad Request");
+        errorResponse.put("error trace", ex.getMessage());
+
         errorResponse.put("message", "Invalid parameter value provided. For boolean fields, only true or false are allowed. Strings like 'true' or 'false' are not accepted. " +
                 "For 'latitude' and 'longitude', values must be numbers (e.g., 2433.544). For 'taxPercentage', values must be a number or double.");
         errorResponse.put("path", request.getRequestURI());
