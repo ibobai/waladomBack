@@ -3,6 +3,7 @@ package com.phanta.waladom.report;
 
 import com.phanta.waladom.report.evidence.ReportEvidence;
 import com.phanta.waladom.user.User;
+import com.phanta.waladom.utiles.CountryCodeUtil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 @Entity
 @Table(name = "reports")
@@ -23,7 +24,7 @@ public class Report {
 
     @Id
     @Column(name = "id", length = 50, nullable = false, unique = true)
-    private String id = "RPT_" + UUID.randomUUID();
+    private String id;
 
     @Column(name = "type", length = 20, nullable = false)
     private String type;
@@ -38,7 +39,7 @@ public class Report {
     private String city;
 
     @Column(name = "actor", length = 100)
-    private String actor = "gov";
+    private String actor;
 
     @Column(name = "actor_name", length = 100)
     private String actorName;
@@ -50,7 +51,7 @@ public class Report {
     private String actorAccount;
 
     @Column(name = "victim", length = 10)
-    private String victim = "others";
+    private String victim ;
 
     @Column(name = "google_map_link", columnDefinition = "TEXT")
     private String googleMapLink;
@@ -82,6 +83,39 @@ public class Report {
     @PreUpdate
     public void updateTimestamp() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+
+
+    @PrePersist
+    public void generateId() {
+        // Generate the unique report ID based on the current year, country code, and random values.
+        int year = createdAt.getYear(); // Get the creation year
+        String countryCode = CountryCodeUtil.getCountryCode(country); // Get country code from your utility method
+        String randomDigits = generateRandomDigits(4); // Generate 3 random digits
+        String randomLetter = generateRandomCapitalLetters(); // Generate a random capital letter
+
+        // Combine everything into the ID
+        this.id = "RPT_" + year + "_" + countryCode + "_" + randomDigits + randomLetter;
+    }
+
+
+    // Helper method to generate 3 random digits
+    private String generateRandomDigits(int length) {
+        Random random = new Random();
+        StringBuilder digits = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            digits.append(random.nextInt(10)); // Append a random digit
+        }
+        return digits.toString();
+    }
+
+    // Helper method to generate a random capital letter
+    private String generateRandomCapitalLetters() {
+        Random random = new Random();
+        char firstLetter = (char) ('A' + random.nextInt(26)); // Generate the first random capital letter
+        char secondLetter = (char) ('A' + random.nextInt(26)); // Generate the second random capital letter
+        return "" + firstLetter + secondLetter; // Concatenate and return the two letters as a string
     }
 
     public String getId() {

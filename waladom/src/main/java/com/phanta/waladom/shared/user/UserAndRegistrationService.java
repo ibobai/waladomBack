@@ -176,77 +176,102 @@ public class UserAndRegistrationService {
         Optional<RegistrationRequest> existingRequestOpt = registrationRequestRepository.findById(id);
 
         if (existingRequestOpt.isEmpty()) {
+            logger.error("Registration request not found with ID: {}", id);
             throw new RuntimeException("Registration request not found with ID: " + id);
         }
 
         RegistrationRequest existingRequest = existingRequestOpt.get();
+        logger.info("Updating RegistrationRequest with ID: {}", id);
 
         // Track if the validated field was changed
         boolean wasValidatedBefore = existingRequest.getValidated() != null && existingRequest.getValidated();
         boolean isValidatedNow = registrationRequestDTO.getValidated() != null && registrationRequestDTO.getValidated();
-
-
+        if (wasValidatedBefore != isValidatedNow) {
+            logger.info("Validated field changed from {} to {}", wasValidatedBefore, isValidatedNow);
+        }
         // Update fields based on the values in the DTO if they are not null or blank
         if (registrationRequestDTO.getFirstName() != null && !registrationRequestDTO.getFirstName().isBlank()) {
+            logger.info("Updating first name to: {}", registrationRequestDTO.getFirstName());
             existingRequest.setFirstName(registrationRequestDTO.getFirstName());
         }
         if (registrationRequestDTO.getLastName() != null && !registrationRequestDTO.getLastName().isBlank()) {
+            logger.info("Updating last name to: {}", registrationRequestDTO.getLastName());
             existingRequest.setLastName(registrationRequestDTO.getLastName());
         }
         if (registrationRequestDTO.getPassword() != null && !registrationRequestDTO.getPassword().isBlank()) {
+            logger.info("Updating password.");
             existingRequest.setPassword(registrationRequestDTO.getPassword());
         }
         if (registrationRequestDTO.getEmail() != null && !registrationRequestDTO.getEmail().isBlank()
                 && !registrationRequestDTO.getEmail().equals(existingRequest.getEmail())) {
+            logger.info("Updating email: {}", registrationRequestDTO.getEmail());
+
             existingRequest.setEmail(registrationRequestDTO.getEmail());
         }
 
         if (registrationRequestDTO.getPhone() != null && !registrationRequestDTO.getPhone().isBlank()) {
+            logger.info("Updating phone: {}", registrationRequestDTO.getPhone());
+
             existingRequest.setPhone(registrationRequestDTO.getPhone());
         }
         if (registrationRequestDTO.getStatus() != null && !registrationRequestDTO.getStatus().isBlank()) {
+            logger.info("Updating status: {}", registrationRequestDTO.getStatus());
+
             existingRequest.setStatus(registrationRequestDTO.getStatus());
         }
         if (registrationRequestDTO.getCurrentCountry() != null && !registrationRequestDTO.getCurrentCountry().isBlank()) {
+            logger.info("Updating current country: {}", registrationRequestDTO.getCurrentCountry());
+
             existingRequest.setCurrentCountry(registrationRequestDTO.getCurrentCountry());
         }
         if (registrationRequestDTO.getCurrentCity() != null && !registrationRequestDTO.getCurrentCity().isBlank()) {
+            logger.info("Updating current city : {}", registrationRequestDTO.getCurrentCity());
+
             existingRequest.setCurrentCity(registrationRequestDTO.getCurrentCity());
         }
         if (registrationRequestDTO.getCurrentVillage() != null && !registrationRequestDTO.getCurrentVillage().isBlank()) {
+            logger.info("Updating current village: {}", registrationRequestDTO.getCurrentVillage());
+
             existingRequest.setCurrentVillage(registrationRequestDTO.getCurrentVillage());
         }
         if (registrationRequestDTO.getBirthDate() != null) {
+            logger.info("Updating birth date to: {}", registrationRequestDTO.getBirthDate());
             existingRequest.setBirthDate(registrationRequestDTO.getBirthDate());
         }
         if (registrationRequestDTO.getBirthCountry() != null && !registrationRequestDTO.getBirthCountry().isBlank()) {
+            logger.info("Updating birth country to: {}", registrationRequestDTO.getBirthCountry());
             existingRequest.setBirthCountry(registrationRequestDTO.getBirthCountry());
         }
         if (registrationRequestDTO.getBirthCity() != null && !registrationRequestDTO.getBirthCity().isBlank()) {
+            logger.info("Updating birth city to: {}", registrationRequestDTO.getBirthCity());
             existingRequest.setBirthCity(registrationRequestDTO.getBirthCity());
         }
         if (registrationRequestDTO.getBirthVillage() != null && !registrationRequestDTO.getBirthVillage().isBlank()) {
+            logger.info("Updating birth village to: {}", registrationRequestDTO.getBirthVillage());
             existingRequest.setBirthVillage(registrationRequestDTO.getBirthVillage());
         }
         if (registrationRequestDTO.getMaritalStatus() != null && !registrationRequestDTO.getMaritalStatus().isBlank()) {
+            logger.info("Updating marital status to: {}", registrationRequestDTO.getMaritalStatus());
             existingRequest.setMaritalStatus(registrationRequestDTO.getMaritalStatus());
         }
         if (registrationRequestDTO.getNumberOfKids() != null) {
+            logger.info("Updating number of kids to: {}", registrationRequestDTO.getNumberOfKids());
             existingRequest.setNumberOfKids(registrationRequestDTO.getNumberOfKids());
         }
         if (registrationRequestDTO.getOccupation() != null && !registrationRequestDTO.getOccupation().isBlank()) {
+            logger.info("Updating occupation to: {}", registrationRequestDTO.getOccupation());
             existingRequest.setOccupation(registrationRequestDTO.getOccupation());
         }
         if (registrationRequestDTO.getSex() != null && !registrationRequestDTO.getSex().isBlank()) {
+            logger.info("Updating sex to: {}", registrationRequestDTO.getSex());
             existingRequest.setSex(registrationRequestDTO.getSex());
         }
         if (registrationRequestDTO.getActive() != null && BOOLEANS.contains(registrationRequestDTO.getActive())) {
+            logger.info("Updating active status to: {}", registrationRequestDTO.getActive());
             existingRequest.setActive(registrationRequestDTO.getActive());
         }
 
-
         if (registrationRequestDTO.getRole() != null && !registrationRequestDTO.getRole().isBlank() && UtilesMethods.isRoleIdValid(registrationRequestDTO.getRole())) {
-
             // Fetch role by ID
             Optional<Role> optionalRole = roleRepository.findById(registrationRequestDTO.getRole());
 
@@ -254,36 +279,44 @@ public class UserAndRegistrationService {
             Role role = optionalRole.orElseThrow(() ->
                     new IllegalArgumentException("Role with ID " + registrationRequestDTO.getRole() + " not found"));
 
+            logger.info("Assigning role: {}", role.getName());
             existingRequest.setRole(role);
         }
 
-        // Handle additional field 'isValidated'
-        if (registrationRequestDTO.getValidated() != null && BOOLEANS.contains(registrationRequestDTO.getValidated()) ) {
+// Handle additional field 'isValidated'
+        if (registrationRequestDTO.getValidated() != null && BOOLEANS.contains(registrationRequestDTO.getValidated())) {
+            logger.info("Updating validated status to: {}", registrationRequestDTO.getValidated());
             existingRequest.setValidated(registrationRequestDTO.getValidated());
         }
 
-        // Handle mother's name fields
+// Handle mother's name fields
         if (registrationRequestDTO.getMothersFirstName() != null && !registrationRequestDTO.getMothersFirstName().isBlank()) {
+            logger.info("Updating mother's first name to: {}", registrationRequestDTO.getMothersFirstName());
             existingRequest.setMothersFirstName(registrationRequestDTO.getMothersFirstName());
         }
         if (registrationRequestDTO.getMothersLastName() != null && !registrationRequestDTO.getMothersLastName().isBlank()) {
+            logger.info("Updating mother's last name to: {}", registrationRequestDTO.getMothersLastName());
             existingRequest.setMothersLastName(registrationRequestDTO.getMothersLastName());
         }
 
         // Handle nationalities
         if (registrationRequestDTO.getNationalities() != null && !registrationRequestDTO.getNationalities().isEmpty()) {
+            logger.info("Updating nationalities to: {}", registrationRequestDTO.getNationalities());
             existingRequest.setNationalities(registrationRequestDTO.getNationalities());
         }
 
         // Handle comments
         if (registrationRequestDTO.getComments() != null && !registrationRequestDTO.getComments().isBlank()) {
+            logger.info("Updating comments to: {}", registrationRequestDTO.getComments());
             existingRequest.setComments(registrationRequestDTO.getComments());
         }
 
 
-        // Handle photos
 
+
+        // Handle photos with appropriate logging
         if (registrationRequestDTO.getIdProofPhotoFront() != null && !registrationRequestDTO.getIdProofPhotoFront().isBlank()) {
+            logger.debug("Updating front ID proof photo");
             ReqIdProof idPhotoFront = reqIdProofRepository.findByRegistrationRequestAndPhotoType(existingRequest, "front")
                     .orElse(new ReqIdProof());
             idPhotoFront.setRegistrationRequest(existingRequest);
@@ -294,6 +327,7 @@ public class UserAndRegistrationService {
             existingRequest.getReqIdProofPhotos().add(idPhotoFront); // Add directly to the existing collection
         }
         if (registrationRequestDTO.getIdProofPhotoBack() != null && !registrationRequestDTO.getIdProofPhotoBack().isBlank()) {
+            logger.debug("Updating back ID proof photo");
             ReqIdProof idPhotoBack = reqIdProofRepository.findByRegistrationRequestAndPhotoType(existingRequest, "back")
                     .orElse(new ReqIdProof());
             idPhotoBack.setRegistrationRequest(existingRequest);
@@ -304,8 +338,8 @@ public class UserAndRegistrationService {
             existingRequest.getReqIdProofPhotos().add(idPhotoBack); // Add directly to the existing collection
         }
 
-
         if (registrationRequestDTO.getWaladomCardPhoto() != null && !registrationRequestDTO.getWaladomCardPhoto().isBlank()) {
+            logger.debug("Updating Waladom card photo");
             ReqWaladomIdPhoto waladomCardPhoto = reqWaladomPhotoRepository.findByRegistrationRequest(existingRequest)
                     .orElse(new ReqWaladomIdPhoto());
             waladomCardPhoto.setRegistrationRequest(existingRequest);
@@ -313,16 +347,15 @@ public class UserAndRegistrationService {
             waladomCardPhoto.setUpdatedAt(LocalDateTime.now());
             reqWaladomPhotoRepository.save(waladomCardPhoto);
             existingRequest.setReqWaladomPhoto(waladomCardPhoto);
-
-
         }
 
         // Save and return the updated registration request
         RegistrationRequest savedRequest = userManagementService.save(existingRequest, registrationRequestRepository);
-
+        logger.info("Registration request updated successfully for ID: {}", id);
 
         // If the registration was not validated before but is now validated, create the user
         if (!wasValidatedBefore && isValidatedNow) {
+            logger.info("Creating user as the registration request has been validated");
             User newUser = saveUserFromRegisterationRequest(savedRequest);
 
             return ResponseEntity.ok()
@@ -332,13 +365,9 @@ public class UserAndRegistrationService {
                     ));
         }
 
+        logger.info("Returning updated registration request for ID: {}", id);
         return ResponseEntity.ok(UserResponseDTO.mapToRegistrationRequestResponseDTO(savedRequest));
-
-
-        //return UserResponseDTO.mapToRegistrationRequestResponseDTO(savedRequest);
     }
-
-
 
     @Transactional
     public List<UserResponseDTO> getAllRegistrationRequests() {
@@ -527,57 +556,79 @@ public class UserAndRegistrationService {
 
 
 
-
     public Object mapAndSaveUserWithAllDetails(UserRequestDTO userRequest, boolean isUser) {
+        logger.info("Mapping and saving user details. isUser: {}", isUser);
+
         if (isUser) {
+            logger.info("Saving User...");
+
             // Save User
             User savedUser = saveUser(userRequest);
+            logger.info("User saved with ID: {}", savedUser.getId());
 
             // Save Waladom ID Photo
             if (userRequest.getWaladomCardPhoto() != null && !userRequest.getWaladomCardPhoto().isBlank()) {
+                logger.info("Saving Waladom ID Photo for User...");
                 saveWaladomIdPhoto(savedUser, userRequest.getWaladomCardPhoto());
+                logger.info("Waladom ID Photo saved for User ID: {}", savedUser.getId());
             }
 
             ArrayList<IdProofPhoto> idProofPhotos = new ArrayList<>();
 
             // Save ID Proof Photos
             if (userRequest.getIdProofPhotoFront() != null && !userRequest.getIdProofPhotoFront().isBlank()) {
+                logger.info("Saving front ID Proof Photo for User...");
                 idProofPhotos.add(saveIdProofPhoto(savedUser, userRequest.getIdProofPhotoFront(), "front"));
+                logger.info("Front ID Proof Photo saved for User ID: {}", savedUser.getId());
             }
             if (userRequest.getIdProofPhotoBack() != null && !userRequest.getIdProofPhotoBack().isBlank()) {
+                logger.info("Saving back ID Proof Photo for User...");
                 idProofPhotos.add(saveIdProofPhoto(savedUser, userRequest.getIdProofPhotoBack(), "back"));
+                logger.info("Back ID Proof Photo saved for User ID: {}", savedUser.getId());
             }
             savedUser.setIdProofPhotos(idProofPhotos);
 
             // Return the saved User entity
+            logger.info("Returning saved User entity with ID: {}", savedUser.getId());
             return savedUser;
         } else {
+            logger.info("Saving RegistrationRequest...");
+
             // Save RegistrationRequest
             RegistrationRequest savedRegistrationRequest = saveRegistrationRequest(userRequest);
+            logger.info("RegistrationRequest saved with ID: {}", savedRegistrationRequest.getId());
 
             // Save Waladom ID Photo for RegistrationRequest
             if (userRequest.getWaladomCardPhoto() != null && !userRequest.getWaladomCardPhoto().isBlank()) {
+                logger.info("Saving Waladom ID Photo for RegistrationRequest...");
                 saveWaladomIdPhotoForRegistration(savedRegistrationRequest, userRequest.getWaladomCardPhoto());
+                logger.info("Waladom ID Photo saved for RegistrationRequest ID: {}", savedRegistrationRequest.getId());
             }
 
             ArrayList<ReqIdProof> idProofPhotos = new ArrayList<>();
 
             // Save ID Proof Photos for RegistrationRequest
             if (userRequest.getIdProofPhotoFront() != null && !userRequest.getIdProofPhotoFront().isBlank()) {
+                logger.info("Saving front ID Proof Photo for RegistrationRequest...");
                 idProofPhotos.add(saveIdProofPhotoForRegistration(savedRegistrationRequest, userRequest.getIdProofPhotoFront(), "front"));
+                logger.info("Front ID Proof Photo saved for RegistrationRequest ID: {}", savedRegistrationRequest.getId());
             }
             if (userRequest.getIdProofPhotoBack() != null && !userRequest.getIdProofPhotoBack().isBlank()) {
+                logger.info("Saving back ID Proof Photo for RegistrationRequest...");
                 idProofPhotos.add(saveIdProofPhotoForRegistration(savedRegistrationRequest, userRequest.getIdProofPhotoBack(), "back"));
+                logger.info("Back ID Proof Photo saved for RegistrationRequest ID: {}", savedRegistrationRequest.getId());
             }
             savedRegistrationRequest.setReqIdProofPhotos(idProofPhotos);
 
             // Return the saved RegistrationRequest entity
+            logger.info("Returning saved RegistrationRequest entity with ID: {}", savedRegistrationRequest.getId());
             return savedRegistrationRequest;
         }
     }
 
-
     public static String generateUserId(String gender, LocalDate birthDate, String country) {
+        logger.info("Entering the method generateUserId()");
+
         StringBuilder userId = new StringBuilder("WLD_");
 
         // Gender: M -> 1, F -> 2, O -> 3
@@ -608,6 +659,7 @@ public class UserAndRegistrationService {
         // Add two random digits
         Random random = new Random();
         userId.append(random.nextInt(10)).append(random.nextInt(10));
+        logger.info("User id generated : {}", userId);
 
         return userId.toString();
     }
@@ -615,6 +667,8 @@ public class UserAndRegistrationService {
 
 
     private User saveUser(UserRequestDTO userRequest) {
+        logger.info("Saving user in method saveUser()");
+
         User newUser = new User();
         // Map User fields from DTO
         newUser.setId(generateUserId(userRequest.getSex(), userRequest.getBirthDate(), userRequest.getBirthCountry()));
@@ -654,6 +708,8 @@ public class UserAndRegistrationService {
     }
 
     private RegistrationRequest saveRegistrationRequest(UserRequestDTO userRequest) {
+        logger.info("Saving registration request in method saveRegistrationRequest()");
+
         RegistrationRequest registrationRequest = new RegistrationRequest();
         // Map RegistrationRequest fields from DTO
         registrationRequest.setFirstName(userRequest.getFirstName());
@@ -693,6 +749,8 @@ public class UserAndRegistrationService {
     }
 
     private void saveWaladomIdPhoto(User user, String photoUrl) {
+        logger.info("Saving saveWaladomIdPhoto, method saveWaladomIdPhoto()");
+
         WaladomIdPhoto waladomIdPhoto = new WaladomIdPhoto();
         waladomIdPhoto.setUser(user);
         waladomIdPhoto.setPhotoUrl(photoUrl);
@@ -703,6 +761,7 @@ public class UserAndRegistrationService {
     }
 
     private void saveWaladomIdPhotoForRegistration(RegistrationRequest registrationRequest, String photoUrl) {
+        logger.info("Saving saveWaladomIdPhotoForRegistration, method saveWaladomIdPhotoForRegistration()");
         ReqWaladomIdPhoto reqWaladomIdPhoto = new ReqWaladomIdPhoto();
         reqWaladomIdPhoto.setRegistrationRequest(registrationRequest);
         reqWaladomIdPhoto.setPhotoUrl(photoUrl);
@@ -713,6 +772,8 @@ public class UserAndRegistrationService {
     }
 
     private IdProofPhoto saveIdProofPhoto(User user, String photoUrl, String photoType) {
+        logger.info("Saving saveIdProofPhoto, method saveIdProofPhoto()");
+
         IdProofPhoto idProofPhoto = new IdProofPhoto();
         idProofPhoto.setUser(user);
         idProofPhoto.setPhotoUrl(photoUrl);
@@ -724,6 +785,8 @@ public class UserAndRegistrationService {
     }
 
     private ReqIdProof saveIdProofPhotoForRegistration(RegistrationRequest registrationRequest, String photoUrl, String photoType) {
+        logger.info("Saving saveIdProofPhotoForRegistration, method saveIdProofPhotoForRegistration()");
+
         ReqIdProof reqIdProofPhoto = new ReqIdProof();
         reqIdProofPhoto.setRegistrationRequest(registrationRequest);
         reqIdProofPhoto.setPhotoUrl(photoUrl);
@@ -800,6 +863,8 @@ public class UserAndRegistrationService {
     }
 
     public User saveUserFromRegisterationRequest(RegistrationRequest registrationRequest) {
+        logger.info("Mapping user from registrationReqeust, method saveUserFromRegisterationRequest()");
+
         // Create a new User object
         User user = new User();
 
