@@ -1,8 +1,10 @@
 package com.phanta.waladom.report.evidence;
 
+import com.phanta.waladom.fileUpload.S3Service;
 import com.phanta.waladom.report.Report;
 import com.phanta.waladom.report.ReportRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,14 @@ public class ReportEvidenceService {
     private final ReportEvidenceRepository reportEvidenceRepository;
     private final ReportRepository reportRepository;
 
-    public ReportEvidenceService(ReportEvidenceRepository reportEvidenceRepository, ReportRepository reportRepository) {
+
+    @Autowired
+    private final S3Service s3Service;
+
+    public ReportEvidenceService(ReportEvidenceRepository reportEvidenceRepository, ReportRepository reportRepository, S3Service s3Service) {
         this.reportEvidenceRepository = reportEvidenceRepository;
         this.reportRepository = reportRepository;
+        this.s3Service = s3Service;
     }
 
     public ResponseEntity<?> getAllEvidenceByReport(String reportId) {
@@ -140,6 +147,9 @@ public class ReportEvidenceService {
             );
         }
         reportEvidenceRepository.delete(existingReportOpt.get());
+
+        ReportEvidence reportEvidence = existingReportOpt.get();
+        s3Service.deletePhotoOrFolderFromS3(reportEvidence.getFileUrl());
         return ResponseEntity.noContent().build();
     }
 }

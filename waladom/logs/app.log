@@ -1,0 +1,3327 @@
+2025-01-28 01:23:23,616 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 61412 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:23:23,622 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 01:23:23,622 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:23:24,462 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:23:24,541 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 71 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:23:25,174 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:23:25,186 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:23:25,187 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:23:25,233 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:23:25,234 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1554 ms
+2025-01-28 01:23:25,298 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 01:23:25,442 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:23:25,498 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:23:25,527 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:23:25,763 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:23:25,787 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:23:26,524 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b66ac74
+2025-01-28 01:23:26,526 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:23:26,762 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:23:27,870 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:23:29,718 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:23:30,076 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:23:31,922 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:23:31,974 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:23:32,676 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:23:32,686 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 9.51 seconds (process running for 10.156)
+2025-01-28 01:23:32,688 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:24:08,749 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 01:24:08,751 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 01:24:08,758 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:24:08,760 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 01:24:08,845 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 01:24:10,927 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 61557 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:24:10,929 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 01:24:10,930 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:24:11,777 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:24:11,852 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 67 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:24:12,502 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:24:12,523 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:24:12,524 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:24:12,587 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:24:12,588 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1593 ms
+2025-01-28 01:24:12,687 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 01:24:12,815 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:24:12,864 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:24:12,889 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:24:13,105 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:24:13,127 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:24:13,770 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@570ed9c
+2025-01-28 01:24:13,772 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:24:14,000 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:24:14,969 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:24:16,760 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:24:17,080 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:24:18,846 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:24:18,891 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:24:19,526 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:24:19,534 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 9.131 seconds (process running for 9.816)
+2025-01-28 01:24:19,537 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:28:53,281 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 01:28:53,283 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 01:28:53,289 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:28:53,292 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 01:28:53,374 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 01:28:55,313 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 61921 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:28:55,315 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 01:28:55,316 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:28:56,097 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:28:56,184 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 72 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:28:56,847 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:28:56,861 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:28:56,861 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:28:56,908 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:28:56,908 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1543 ms
+2025-01-28 01:28:56,976 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 01:28:57,102 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:28:57,160 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:28:57,185 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:28:57,413 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:28:57,445 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:28:58,163 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@74a5bef0
+2025-01-28 01:28:58,165 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:28:58,407 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:28:59,409 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:29:01,607 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:29:01,938 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:29:03,580 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:29:03,628 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:29:04,282 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:29:04,290 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 9.41 seconds (process running for 10.17)
+2025-01-28 01:29:04,293 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:30:52,150 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 01:30:52,153 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 01:30:52,159 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:30:52,161 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 01:30:52,246 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 01:30:54,137 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 62140 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:30:54,139 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:30:54,887 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:30:54,986 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 86 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:30:55,664 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:30:55,677 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:30:55,677 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:30:55,732 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:30:55,732 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1545 ms
+2025-01-28 01:30:55,907 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:30:55,962 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:30:55,987 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:30:56,210 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:30:56,232 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:30:56,967 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@570ed9c
+2025-01-28 01:30:56,969 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:30:57,213 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:30:58,345 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:31:00,398 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:31:00,755 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:31:02,480 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:31:02,522 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:31:03,198 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:31:03,206 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 9.475 seconds (process running for 10.219)
+2025-01-28 01:31:03,209 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:35:38,186 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 01:35:38,188 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 01:35:38,194 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:35:38,196 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 01:35:38,287 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 01:35:41,725 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 62621 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:35:41,728 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:35:42,603 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:35:42,694 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 82 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:35:43,423 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:35:43,459 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:35:43,460 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:35:43,578 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:35:43,578 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1778 ms
+2025-01-28 01:35:43,937 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:35:44,003 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:35:44,044 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:35:44,376 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:35:44,416 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:35:45,122 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@145fe8ab
+2025-01-28 01:35:45,123 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:35:45,369 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:35:46,384 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:35:48,145 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:35:48,439 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:35:50,354 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 01:35:50,430 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:35:50,486 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:35:51,273 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:35:51,281 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 9.991 seconds (process running for 10.665)
+2025-01-28 01:35:51,285 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:37:21,270 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-28 01:37:21,273 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-28 01:37:21,291 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 18 ms
+2025-01-28 01:45:04,465 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 01:45:04,500 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 01:45:04,531 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:45:04,560 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 01:45:04,684 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 01:45:07,487 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 63717 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 01:45:07,489 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 01:45:07,490 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 01:45:08,285 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 01:45:08,359 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 65 ms. Found 13 JPA repository interfaces.
+2025-01-28 01:45:09,017 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 01:45:09,030 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 01:45:09,031 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 01:45:09,082 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 01:45:09,083 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1528 ms
+2025-01-28 01:45:09,158 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 01:45:09,286 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 01:45:09,356 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 01:45:09,395 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 01:45:09,663 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 01:45:09,688 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 01:45:10,547 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6f655dbd
+2025-01-28 01:45:10,549 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 01:45:10,843 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 01:45:11,876 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 01:45:14,106 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 01:45:14,443 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 01:45:16,175 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 01:45:16,270 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 01:45:16,322 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 01:45:17,086 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 01:45:17,094 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 10.045 seconds (process running for 10.886)
+2025-01-28 01:45:17,098 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 01:45:37,486 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-28 01:45:37,487 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-28 01:45:37,489 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 2 ms
+2025-01-28 01:45:37,644 INFO c.p.w.u.UserController [http-nio-8083-exec-1] Creating new user with DTO: com.phanta.waladom.user.UserRequestDTO@3d68007e
+2025-01-28 01:45:37,785 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 01:45:37,880 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 01:45:37,984 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        USERS
+        (BIRTH_CITY, BIRTH_COUNTRY, BIRTH_DATE, BIRTH_VILLAGE, COMMENTS, CONNECTION_METHOD, CREATED_AT, CURRENT_CITY, CURRENT_COUNTRY, CURRENT_VILLAGE, EMAIL, FIRST_NAME, ID_CARD_ID, IS_ACTIVE, LAST_NAME, MARITAL_STATUS, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, NATIONALITIES, NUMBER_OF_KIDS, OCCUPATION, PASSWORD, PHONE, ROLE_ID, SEX, STATUS, TRIBE, UPDATED_AT, WALADOM_CARD_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-01-28 01:45:38,059 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        waladom_id_photos
+        (CREATED_AT, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?)
+2025-01-28 01:45:38,112 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 01:45:38,163 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 01:45:38,220 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 01:45:38,341 DEBUG c.p.w.u.UserController [http-nio-8083-exec-1] User creation response: <200 OK OK,com.phanta.waladom.user.UserResponseDTO@31eb7216,[]>
+2025-01-28 03:03:33,178 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 7271 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 03:03:33,180 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 03:03:33,181 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 03:03:34,188 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 03:03:34,313 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 111 ms. Found 13 JPA repository interfaces.
+2025-01-28 03:03:35,132 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 03:03:35,161 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 03:03:35,162 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 03:03:35,259 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 03:03:35,260 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2001 ms
+2025-01-28 03:03:35,347 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 03:03:35,651 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 03:03:35,740 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 03:03:35,779 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 03:03:36,074 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 03:03:36,106 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 03:03:37,099 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1dd64243
+2025-01-28 03:03:37,101 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 03:03:37,409 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 03:03:38,795 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 03:03:40,872 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:03:41,283 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 03:03:43,376 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 03:03:43,501 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 03:03:43,581 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 03:03:44,522 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 03:03:44,531 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 11.888 seconds (process running for 12.798)
+2025-01-28 03:03:44,535 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 03:04:25,733 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 03:04:25,738 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 03:04:25,750 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:04:25,754 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 03:04:25,856 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 03:04:29,731 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 7394 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 03:04:29,733 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 03:04:29,735 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 03:04:30,636 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 03:04:30,736 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 90 ms. Found 13 JPA repository interfaces.
+2025-01-28 03:04:31,478 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 03:04:31,494 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 03:04:31,495 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 03:04:31,556 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 03:04:31,556 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1736 ms
+2025-01-28 03:04:31,643 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 03:04:31,811 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 03:04:31,871 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 03:04:31,900 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 03:04:32,153 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 03:04:32,182 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 03:04:33,019 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6f655dbd
+2025-01-28 03:04:33,021 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 03:04:33,316 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 03:04:34,472 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 03:04:36,556 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:04:36,936 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 03:04:38,863 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 03:04:38,951 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 03:04:39,002 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 03:04:39,814 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 03:04:39,826 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 10.723 seconds (process running for 11.528)
+2025-01-28 03:04:39,829 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 03:06:33,670 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-28 03:06:33,670 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-28 03:06:33,673 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 2 ms
+2025-01-28 03:08:06,141 INFO c.p.w.u.UserController [http-nio-8083-exec-2] Creating new user with DTO: com.phanta.waladom.user.UserRequestDTO@70566c33
+2025-01-28 03:08:06,143 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-2] Starting validation for user request.
+2025-01-28 03:08:06,143 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-2] User request validation passed successfully.
+2025-01-28 03:08:06,310 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:08:06,430 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:08:06,592 DEBUG c.p.w.u.UserController [http-nio-8083-exec-2] User creation response: <400 BAD_REQUEST Bad Request,{status=400, path=/api/user/createDTO, error=User already exists, timestamp=2025-01-28T03:08:06.512304420, message=User already exists with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d},[]>
+2025-01-28 03:14:19,624 INFO c.p.w.u.UserController [http-nio-8083-exec-4] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:19,627 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Entering method isEmpty() for requestBody
+2025-01-28 03:14:19,627 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:19,694 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:14:19,748 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:14:19,848 INFO c.p.w.u.UserService [http-nio-8083-exec-4] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:19,848 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated firstName to: Ibrahim
+2025-01-28 03:14:19,848 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated lastName to: Ahmed
+2025-01-28 03:14:20,013 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated password.
+2025-01-28 03:14:20,013 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated phone to: +249123456789
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated isActive to: true
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated status to: Active
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated tribe to: Nomadic
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated currentCountry to: Sudan
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated currentCity to: Khartoum
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated currentVillage to: Al Salam Village
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated birthDate to: 1990-05-15
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated birthCountry to: Sudan
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated birthCity to: Omdurman
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated birthVillage to: Al Noor Village
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated maritalStatus to: Single
+2025-01-28 03:14:20,014 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated numberOfKids to: 0
+2025-01-28 03:14:20,015 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated occupation to: Engineer
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated sex to: m
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated mothersFirstName to: Fatima
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated mothersLastName to: Ali
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated nationalities to: [Sudanese, Egyptian]
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated comments to: New registration for Ibrahim
+2025-01-28 03:14:20,016 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updated connectionMethod to: phone
+2025-01-28 03:14:20,018 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Validating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:20,019 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:14:20,118 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:20,119 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Updating front ID proof photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:14:20,237 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=? 
+        and ipp1_0.PHOTO_TYPE=?
+2025-01-28 03:14:20,289 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.ID=?
+2025-01-28 03:14:20,354 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    update
+        id_proof_photos 
+    set
+        PHOTO_TYPE=?,
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:14:20,474 ERROR c.p.w.u.UserController [http-nio-8083-exec-4] Error updating user with ID WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d: failed to lazily initialize a collection of role: com.phanta.waladom.user.User.idProofPhotos: could not initialize proxy - no Session
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.phanta.waladom.user.User.idProofPhotos: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:219)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.write(AbstractPersistentCollection.java:444)
+	at org.hibernate.collection.spi.PersistentBag.add(PersistentBag.java:388)
+	at com.phanta.waladom.user.UserService.updateUser(UserService.java:430)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723)
+	at com.phanta.waladom.user.UserService$$SpringCGLIB$$0.updateUser(<generated>)
+	at com.phanta.waladom.user.UserController.updateUser(UserController.java:101)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.phanta.waladom.oauthToken.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:59)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-01-28 03:17:12,859 INFO c.p.w.u.UserController [http-nio-8083-exec-6] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:12,859 INFO c.p.w.u.UserService [http-nio-8083-exec-6] Entering method isEmpty() for requestBody
+2025-01-28 03:17:12,859 INFO c.p.w.u.UserService [http-nio-8083-exec-6] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:12,909 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:17:12,961 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:17:13,060 INFO c.p.w.u.UserService [http-nio-8083-exec-6] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:13,060 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated firstName to: Ibrahim
+2025-01-28 03:17:13,060 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated lastName to: Ahmed
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated password.
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated phone to: +249123456789
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated isActive to: true
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated status to: Active
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated tribe to: Nomadic
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated currentCountry to: Sudan
+2025-01-28 03:17:13,183 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated currentCity to: Khartoum
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated currentVillage to: Al Salam Village
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated birthDate to: 1990-05-15
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated birthCountry to: Sudan
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated birthCity to: Omdurman
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated birthVillage to: Al Noor Village
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated maritalStatus to: Single
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated numberOfKids to: 0
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated occupation to: Engineer
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated sex to: m
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated mothersFirstName to: Fatima
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated mothersLastName to: Ali
+2025-01-28 03:17:13,184 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated nationalities to: [Sudanese, Egyptian]
+2025-01-28 03:17:13,185 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated comments to: New registration for Ibrahim
+2025-01-28 03:17:13,185 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updated connectionMethod to: phone
+2025-01-28 03:17:13,185 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Validating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:13,185 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:17:13,283 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:13,283 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Updating Waladom card photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:13,286 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:17:13,338 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.ID=?
+2025-01-28 03:17:13,389 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    update
+        waladom_id_photos 
+    set
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:17:13,487 INFO c.p.w.u.UserService [http-nio-8083-exec-6] Saving updated user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:13,520 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID,
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID,
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        USERS u1_0 
+    left join
+        waladom_id_photos wip1_0 
+            on u1_0.ID=wip1_0.USER_ID 
+    left join
+        id_proof_photos ipp1_0 
+            on u1_0.ID=ipp1_0.USER_ID 
+    where
+        u1_0.ID=?
+2025-01-28 03:17:13,586 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    update
+        waladom_id_photos 
+    set
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:17:13,635 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 03:17:13,743 INFO c.p.w.u.UserService [http-nio-8083-exec-6] User with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d successfully updated.
+2025-01-28 03:17:13,747 ERROR c.p.w.u.UserController [http-nio-8083-exec-6] Error updating user with ID WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d: Could not initialize proxy [com.phanta.waladom.role.Role#ROLE_USER] - no session
+org.hibernate.LazyInitializationException: Could not initialize proxy [com.phanta.waladom.role.Role#ROLE_USER] - no session
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:174)
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:328)
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:44)
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:102)
+	at com.phanta.waladom.role.Role$HibernateProxy$vukp4dbv.getName(Unknown Source)
+	at com.phanta.waladom.user.UserResponseDTO.mapToUserResponseDTO(UserResponseDTO.java:359)
+	at com.phanta.waladom.user.UserService.updateUser(UserService.java:460)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723)
+	at com.phanta.waladom.user.UserService$$SpringCGLIB$$0.updateUser(<generated>)
+	at com.phanta.waladom.user.UserController.updateUser(UserController.java:101)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.phanta.waladom.oauthToken.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:59)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-01-28 03:17:33,792 INFO c.p.w.u.UserController [http-nio-8083-exec-7] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:33,793 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Entering method isEmpty() for requestBody
+2025-01-28 03:17:33,793 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:33,844 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:17:33,892 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:17:33,985 INFO c.p.w.u.UserService [http-nio-8083-exec-7] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:33,986 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated firstName to: Ibrahim
+2025-01-28 03:17:33,986 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated lastName to: Ahmed
+2025-01-28 03:17:34,113 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated password.
+2025-01-28 03:17:34,113 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated phone to: +249123456789
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated isActive to: true
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated status to: Active
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated tribe to: Nomadic
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated currentCountry to: Sudan
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated currentCity to: Khartoum
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated currentVillage to: Al Salam Village
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated birthDate to: 1990-05-15
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated birthCountry to: Sudan
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated birthCity to: Omdurman
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated birthVillage to: Al Noor Village
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated maritalStatus to: Single
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated numberOfKids to: 0
+2025-01-28 03:17:34,114 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Updated occupation to: Engineer
+2025-01-28 03:17:34,114 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Saving updated user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:17:34,115 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID,
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID,
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        USERS u1_0 
+    left join
+        waladom_id_photos wip1_0 
+            on u1_0.ID=wip1_0.USER_ID 
+    left join
+        id_proof_photos ipp1_0 
+            on u1_0.ID=ipp1_0.USER_ID 
+    where
+        u1_0.ID=?
+2025-01-28 03:17:34,171 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 03:17:34,270 INFO c.p.w.u.UserService [http-nio-8083-exec-7] User with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d successfully updated.
+2025-01-28 03:17:34,271 ERROR c.p.w.u.UserController [http-nio-8083-exec-7] Error updating user with ID WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d: Could not initialize proxy [com.phanta.waladom.role.Role#ROLE_USER] - no session
+org.hibernate.LazyInitializationException: Could not initialize proxy [com.phanta.waladom.role.Role#ROLE_USER] - no session
+	at org.hibernate.proxy.AbstractLazyInitializer.initialize(AbstractLazyInitializer.java:174)
+	at org.hibernate.proxy.AbstractLazyInitializer.getImplementation(AbstractLazyInitializer.java:328)
+	at org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor.intercept(ByteBuddyInterceptor.java:44)
+	at org.hibernate.proxy.ProxyConfiguration$InterceptorDispatcher.intercept(ProxyConfiguration.java:102)
+	at com.phanta.waladom.role.Role$HibernateProxy$vukp4dbv.getName(Unknown Source)
+	at com.phanta.waladom.user.UserResponseDTO.mapToUserResponseDTO(UserResponseDTO.java:359)
+	at com.phanta.waladom.user.UserService.updateUser(UserService.java:460)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723)
+	at com.phanta.waladom.user.UserService$$SpringCGLIB$$0.updateUser(<generated>)
+	at com.phanta.waladom.user.UserController.updateUser(UserController.java:101)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.phanta.waladom.oauthToken.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:59)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-01-28 03:18:01,812 INFO c.p.w.u.UserController [http-nio-8083-exec-8] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:01,812 INFO c.p.w.u.UserService [http-nio-8083-exec-8] Entering method isEmpty() for requestBody
+2025-01-28 03:18:01,813 INFO c.p.w.u.UserService [http-nio-8083-exec-8] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:01,861 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:18:01,910 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:18:02,012 INFO c.p.w.u.UserService [http-nio-8083-exec-8] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:02,013 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated firstName to: Ibrahim
+2025-01-28 03:18:02,013 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated lastName to: Ahmed
+2025-01-28 03:18:02,136 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated password.
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated phone to: +249123456789
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated isActive to: true
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated status to: Active
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated tribe to: Nomadic
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated currentCountry to: Sudan
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated currentCity to: Khartoum
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated currentVillage to: Al Salam Village
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated birthDate to: 1990-05-15
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated birthCountry to: Sudan
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated birthCity to: Omdurman
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated birthVillage to: Al Noor Village
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated maritalStatus to: Single
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated numberOfKids to: 0
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated occupation to: Engineer
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated sex to: m
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated mothersFirstName to: Fatima
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated mothersLastName to: Ali
+2025-01-28 03:18:02,137 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated nationalities to: [Sudanese, Egyptian]
+2025-01-28 03:18:02,138 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated comments to: New registration for Ibrahim
+2025-01-28 03:18:02,138 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updated connectionMethod to: phone
+2025-01-28 03:18:02,138 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Validating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:02,138 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:18:02,235 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:02,235 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Updating front ID proof photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:18:02,239 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=? 
+        and ipp1_0.PHOTO_TYPE=?
+2025-01-28 03:18:02,290 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.ID=?
+2025-01-28 03:18:02,341 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    update
+        id_proof_photos 
+    set
+        PHOTO_TYPE=?,
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:18:02,440 ERROR c.p.w.u.UserController [http-nio-8083-exec-8] Error updating user with ID WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d: failed to lazily initialize a collection of role: com.phanta.waladom.user.User.idProofPhotos: could not initialize proxy - no Session
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.phanta.waladom.user.User.idProofPhotos: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:219)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:614)
+	at org.hibernate.collection.spi.AbstractPersistentCollection.write(AbstractPersistentCollection.java:444)
+	at org.hibernate.collection.spi.PersistentBag.add(PersistentBag.java:388)
+	at com.phanta.waladom.user.UserService.updateUser(UserService.java:430)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:723)
+	at com.phanta.waladom.user.UserService$$SpringCGLIB$$0.updateUser(<generated>)
+	at com.phanta.waladom.user.UserController.updateUser(UserController.java:101)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:257)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:190)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.phanta.waladom.oauthToken.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:59)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-01-28 03:19:58,993 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 03:19:59,002 INFO o.s.b.w.e.t.GracefulShutdown [tomcat-shutdown] Graceful shutdown complete
+2025-01-28 03:19:59,016 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:19:59,023 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-01-28 03:19:59,123 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2025-01-28 03:20:04,192 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 9228 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 03:20:04,193 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 03:20:04,195 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 03:20:05,254 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 03:20:05,368 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 102 ms. Found 13 JPA repository interfaces.
+2025-01-28 03:20:06,302 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 03:20:06,322 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 03:20:06,322 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 03:20:06,390 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 03:20:06,390 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2105 ms
+2025-01-28 03:20:06,473 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 03:20:06,651 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 03:20:06,723 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 03:20:06,767 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 03:20:07,178 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 03:20:07,217 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 03:20:08,078 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7cbe3a05
+2025-01-28 03:20:08,080 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 03:20:08,370 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 03:20:09,667 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 03:20:11,741 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:20:12,217 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 03:20:14,490 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 03:20:14,604 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 03:20:14,671 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 03:20:15,619 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 03:20:15,629 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 11.934 seconds (process running for 13.988)
+2025-01-28 03:20:15,633 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 03:20:31,711 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-28 03:20:31,712 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-28 03:20:31,716 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 3 ms
+2025-01-28 03:20:31,917 INFO c.p.w.u.UserController [http-nio-8083-exec-1] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:20:31,917 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Entering method isEmpty() for requestBody
+2025-01-28 03:20:31,918 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:20:40,109 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:20:40,373 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:23:42,505 WARN c.z.h.p.HikariPool [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m2s728ms72µs813ns).
+2025-01-28 03:23:42,512 INFO c.p.w.u.UserService [http-nio-8083-exec-1] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:23:42,514 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated firstName to: Ibrahim
+2025-01-28 03:23:42,516 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated lastName to: Ahmed
+2025-01-28 03:23:42,560 INFO o.s.b.w.e.t.GracefulShutdown [SpringApplicationShutdownHook] Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-28 03:23:43,636 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated password.
+2025-01-28 03:23:43,637 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated phone to: +249123456789
+2025-01-28 03:23:43,638 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated isActive to: true
+2025-01-28 03:23:43,638 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated status to: Active
+2025-01-28 03:23:43,638 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated tribe to: Nomadic
+2025-01-28 03:23:43,638 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentCountry to: Sudan
+2025-01-28 03:23:43,639 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentCity to: Khartoum
+2025-01-28 03:23:43,639 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentVillage to: Al Salam Village
+2025-01-28 03:23:43,639 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthDate to: 1990-05-15
+2025-01-28 03:23:43,640 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthCountry to: Sudan
+2025-01-28 03:23:43,640 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthCity to: Omdurman
+2025-01-28 03:23:43,640 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthVillage to: Al Noor Village
+2025-01-28 03:23:43,640 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated maritalStatus to: Single
+2025-01-28 03:23:43,641 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated numberOfKids to: 0
+2025-01-28 03:23:43,641 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated occupation to: Engineer
+2025-01-28 03:23:43,641 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated sex to: m
+2025-01-28 03:23:43,642 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated mothersFirstName to: Fatima
+2025-01-28 03:23:43,642 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated mothersLastName to: Ali
+2025-01-28 03:23:43,642 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated nationalities to: [Sudanese, Egyptian]
+2025-01-28 03:23:43,642 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated comments to: New registration for Ibrahim
+2025-01-28 03:23:43,643 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated connectionMethod to: phone
+2025-01-28 03:23:43,647 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Validating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:23:43,708 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:23:43,821 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:23:43,822 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating front ID proof photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:23:44,850 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=? 
+        and ipp1_0.PHOTO_TYPE=?
+2025-01-28 03:23:45,031 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.ID=?
+2025-01-28 03:25:06,717 INFO c.p.w.WaladomApplication [main] Starting WaladomApplication using Java 23.0.1 with PID 9611 (/home/ibo/projects/waladom/backend/waladomBackEnd/waladom/target/classes started by ibo in /home/ibo/projects/waladom/backend/waladomBackEnd/waladom)
+2025-01-28 03:25:06,719 DEBUG c.p.w.WaladomApplication [main] Running with Spring Boot v3.4.1, Spring v6.2.1
+2025-01-28 03:25:06,721 INFO c.p.w.WaladomApplication [main] No active profile set, falling back to 1 default profile: "default"
+2025-01-28 03:25:07,728 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-28 03:25:07,829 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 90 ms. Found 13 JPA repository interfaces.
+2025-01-28 03:25:08,718 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8083 (http)
+2025-01-28 03:25:08,739 INFO o.a.c.c.StandardService [main] Starting service [Tomcat]
+2025-01-28 03:25:08,739 INFO o.a.c.c.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-28 03:25:08,811 INFO o.a.c.c.C.[.[.[/] [main] Initializing Spring embedded WebApplicationContext
+2025-01-28 03:25:08,812 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2023 ms
+2025-01-28 03:25:08,900 DEBUG c.p.w.o.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+2025-01-28 03:25:09,057 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-28 03:25:09,125 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-28 03:25:09,162 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2025-01-28 03:25:09,450 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-28 03:25:09,483 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2025-01-28 03:25:10,319 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f166d61
+2025-01-28 03:25:10,321 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2025-01-28 03:25:10,632 INFO o.h.o.c.pooling [main] HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-28 03:25:11,781 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-28 03:25:13,897 INFO o.s.o.j.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-28 03:25:14,388 INFO o.s.d.j.r.q.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-28 03:25:16,234 INFO c.p.w.u.UserController [main] UserController initialized with UserService, UserAndRegistrationService, and ObjectMapper.
+2025-01-28 03:25:16,290 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-28 03:25:16,347 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer [main] Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-01-28 03:25:16,431 WARN o.s.s.c.a.w.c.AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry [main] One of the patterns in [/api/auth/login, /api/auth/refresh, /api/user/createDTO, api/verification/**, /public/**, /api/user/password/**, /api/user/register/create] is missing a leading slash. This is discouraged; please include the leading slash in all your request matcher patterns. In future versions of Spring Security, leaving out the leading slash will result in an exception.
+2025-01-28 03:25:17,249 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8083 (http) with context path '/'
+2025-01-28 03:25:17,260 INFO c.p.w.WaladomApplication [main] Started WaladomApplication in 11.081 seconds (process running for 12.125)
+2025-01-28 03:25:17,264 INFO c.p.w.WaladomApplication [main] Waladom application is running....
+2025-01-28 03:25:33,133 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-28 03:25:33,133 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-28 03:25:33,135 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 2 ms
+2025-01-28 03:25:33,291 INFO c.p.w.u.UserController [http-nio-8083-exec-1] Updating user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,292 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Entering method isEmpty() for requestBody
+2025-01-28 03:25:33,292 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Starting updateUser method for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,398 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:25:33,505 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:25:33,632 INFO c.p.w.u.UserService [http-nio-8083-exec-1] User found. Proceeding with updates for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,633 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated firstName to: Ibrahim
+2025-01-28 03:25:33,633 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated lastName to: Ahmed
+2025-01-28 03:25:33,789 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated password.
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated phone to: +249123456789
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated isActive to: true
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated status to: Active
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated tribe to: Nomadic
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentCountry to: Sudan
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentCity to: Khartoum
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated currentVillage to: Al Salam Village
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthDate to: 1990-05-15
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthCountry to: Sudan
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthCity to: Omdurman
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated birthVillage to: Al Noor Village
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated maritalStatus to: Single
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated numberOfKids to: 0
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated occupation to: Engineer
+2025-01-28 03:25:33,790 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated sex to: m
+2025-01-28 03:25:33,791 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated mothersFirstName to: Fatima
+2025-01-28 03:25:33,791 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated mothersLastName to: Ali
+2025-01-28 03:25:33,791 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated nationalities to: [Sudanese, Egyptian]
+2025-01-28 03:25:33,791 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated comments to: New registration for Ibrahim
+2025-01-28 03:25:33,791 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updated connectionMethod to: phone
+2025-01-28 03:25:33,792 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Validating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,793 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:25:33,896 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating role for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,897 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating front ID proof photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:33,982 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=? 
+        and ipp1_0.PHOTO_TYPE=?
+2025-01-28 03:25:34,063 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 03:25:34,134 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        id_proof_photos 
+    set
+        PHOTO_TYPE=?,
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:25:34,239 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating back ID proof photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:34,242 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT,
+        ipp1_0.USER_ID 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=? 
+        and ipp1_0.PHOTO_TYPE=?
+2025-01-28 03:25:34,297 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        id_proof_photos 
+    set
+        PHOTO_TYPE=?,
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:25:34,399 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Updating Waladom card photo for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:34,402 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:25:34,453 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        waladom_id_photos 
+    set
+        PHOTO_URL=?,
+        UPDATED_AT=?,
+        USER_ID=? 
+    where
+        ID=?
+2025-01-28 03:25:34,551 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Saving updated user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:25:34,554 INFO c.p.w.u.UserService [http-nio-8083-exec-1] User with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d successfully updated.
+2025-01-28 03:25:34,558 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:25:34,613 DEBUG c.p.w.u.UserController [http-nio-8083-exec-1] User updated successfully: com.phanta.waladom.user.UserResponseDTO@65bd6f53
+2025-01-28 03:27:22,375 INFO c.p.w.u.UserService [http-nio-8083-exec-3] Login attempt with identifier: jamaStop@example.com and connection method: phone
+2025-01-28 03:27:22,375 DEBUG c.p.w.u.UserService [http-nio-8083-exec-3] Searching user by phone: jamaStop@example.com
+2025-01-28 03:27:22,379 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:27:22,479 WARN c.p.w.u.UserService [http-nio-8083-exec-3] User not found for identifier: jamaStop@example.com
+2025-01-28 03:28:01,122 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Login attempt with identifier: ibrahim.ahmed@example.com and connection method: phone
+2025-01-28 03:28:01,123 DEBUG c.p.w.u.UserService [http-nio-8083-exec-4] Searching user by phone: ibrahim.ahmed@example.com
+2025-01-28 03:28:01,126 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:28:01,224 WARN c.p.w.u.UserService [http-nio-8083-exec-4] User not found for identifier: ibrahim.ahmed@example.com
+2025-01-28 03:28:23,832 INFO c.p.w.u.UserService [http-nio-8083-exec-5] Login attempt with identifier: ibrahim.ahmed@example.com and connection method: phone
+2025-01-28 03:28:23,832 DEBUG c.p.w.u.UserService [http-nio-8083-exec-5] Searching user by phone: ibrahim.ahmed@example.com
+2025-01-28 03:28:23,836 DEBUG o.h.SQL [http-nio-8083-exec-5] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:28:23,933 WARN c.p.w.u.UserService [http-nio-8083-exec-5] User not found for identifier: ibrahim.ahmed@example.com
+2025-01-28 03:28:34,129 INFO c.p.w.u.UserService [http-nio-8083-exec-6] Login attempt with identifier: ibrahim.ahmed@example.com and connection method: email
+2025-01-28 03:28:34,130 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Searching user by email: ibrahim.ahmed@example.com
+2025-01-28 03:28:34,133 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:28:34,231 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:28:34,283 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] User found: ibrahim.ahmed@example.com
+2025-01-28 03:28:34,433 WARN c.p.w.u.UserService [http-nio-8083-exec-6] Connection method mismatch for user: ibrahim.ahmed@example.com
+2025-01-28 03:29:23,492 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Login attempt with identifier: +249123456789 and connection method: email
+2025-01-28 03:29:23,493 DEBUG c.p.w.u.UserService [http-nio-8083-exec-7] Searching user by email: +249123456789
+2025-01-28 03:29:23,497 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:29:23,595 WARN c.p.w.u.UserService [http-nio-8083-exec-7] User not found for identifier: +249123456789
+2025-01-28 03:29:43,015 INFO c.p.w.u.UserService [http-nio-8083-exec-8] Login attempt with identifier: +249123456789 and connection method: phone
+2025-01-28 03:29:43,015 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Searching user by phone: +249123456789
+2025-01-28 03:29:43,017 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:29:43,113 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:29:43,166 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] User found: ibrahim.ahmed@example.com
+2025-01-28 03:29:43,285 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:29:43,347 INFO c.p.w.u.UserService [http-nio-8083-exec-8] Login successful for user: +249123456789
+2025-01-28 03:31:03,697 INFO c.p.w.u.UserController [http-nio-8083-exec-1] Creating new user with DTO: com.phanta.waladom.user.UserRequestDTO@4a21b619
+2025-01-28 03:31:03,699 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-1] Starting validation for user request.
+2025-01-28 03:31:03,699 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-1] User request validation passed successfully.
+2025-01-28 03:31:03,753 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:31:03,923 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:31:03,994 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        USERS
+        (BIRTH_CITY, BIRTH_COUNTRY, BIRTH_DATE, BIRTH_VILLAGE, COMMENTS, CONNECTION_METHOD, CREATED_AT, CURRENT_CITY, CURRENT_COUNTRY, CURRENT_VILLAGE, EMAIL, FIRST_NAME, ID_CARD_ID, IS_ACTIVE, LAST_NAME, MARITAL_STATUS, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, NATIONALITIES, NUMBER_OF_KIDS, OCCUPATION, PASSWORD, PHONE, ROLE_ID, SEX, STATUS, TRIBE, UPDATED_AT, WALADOM_CARD_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-01-28 03:31:04,052 WARN o.h.e.j.s.SqlExceptionHelper [http-nio-8083-exec-1] SQL Error: 0, SQLState: 23505
+2025-01-28 03:31:04,053 ERROR o.h.e.j.s.SqlExceptionHelper [http-nio-8083-exec-1] ERROR: duplicate key value violates unique constraint "users_phone_key"
+  Detail: Key (phone)=(+249123456789) already exists.
+2025-01-28 03:31:20,550 INFO c.p.w.u.UserController [http-nio-8083-exec-2] Creating new user with DTO: com.phanta.waladom.user.UserRequestDTO@1ab69867
+2025-01-28 03:31:20,551 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-2] Starting validation for user request.
+2025-01-28 03:31:20,551 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-2] User request validation passed successfully.
+2025-01-28 03:31:20,604 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:31:20,776 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:31:20,835 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    insert 
+    into
+        USERS
+        (BIRTH_CITY, BIRTH_COUNTRY, BIRTH_DATE, BIRTH_VILLAGE, COMMENTS, CONNECTION_METHOD, CREATED_AT, CURRENT_CITY, CURRENT_COUNTRY, CURRENT_VILLAGE, EMAIL, FIRST_NAME, ID_CARD_ID, IS_ACTIVE, LAST_NAME, MARITAL_STATUS, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, NATIONALITIES, NUMBER_OF_KIDS, OCCUPATION, PASSWORD, PHONE, ROLE_ID, SEX, STATUS, TRIBE, UPDATED_AT, WALADOM_CARD_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-01-28 03:31:20,886 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    insert 
+    into
+        waladom_id_photos
+        (CREATED_AT, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?)
+2025-01-28 03:31:20,937 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 03:31:20,989 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 03:31:21,042 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 03:31:21,148 DEBUG c.p.w.u.UserController [http-nio-8083-exec-2] User creation response: <200 OK OK,com.phanta.waladom.user.UserResponseDTO@7156b1bc,[]>
+2025-01-28 03:32:33,793 INFO c.p.w.u.UserController [http-nio-8083-exec-4] Deleting user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:33,794 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Initiating deletion process for user with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:33,844 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:32:33,893 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:32:33,996 INFO c.p.w.u.UserService [http-nio-8083-exec-4] User found. Deleting user record with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:34,005 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:32:34,061 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    delete 
+    from
+        id_proof_photos 
+    where
+        ID=?
+2025-01-28 03:32:34,111 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    delete 
+    from
+        id_proof_photos 
+    where
+        ID=?
+2025-01-28 03:32:34,162 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    delete 
+    from
+        waladom_id_photos 
+    where
+        ID=?
+2025-01-28 03:32:34,210 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    delete 
+    from
+        USERS 
+    where
+        ID=?
+2025-01-28 03:32:34,309 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Deleting Waladom ID photo from S3 for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:34,310 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Deleting first ID proof photo from S3 for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:34,311 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Deleting second ID proof photo from S3 for user ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d
+2025-01-28 03:32:34,311 INFO c.p.w.u.UserService [http-nio-8083-exec-4] User with ID: WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d and associated resources successfully deleted.
+2025-01-28 03:32:34,311 DEBUG c.p.w.u.UserController [http-nio-8083-exec-4] User with ID WLD_fb9f238c-6188-448f-9e6c-eeeb1b1a3c2d deleted successfully.
+2025-01-28 03:34:17,483 INFO c.p.w.u.UserController [http-nio-8083-exec-6] Fetching user with ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:17,534 INFO c.p.w.u.UserService [http-nio-8083-exec-6] Fetching user by ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:17,535 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:34:17,589 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:34:17,643 DEBUG c.p.w.u.UserService [http-nio-8083-exec-6] Mapping user data for user ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:17,645 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:34:17,697 DEBUG o.h.SQL [http-nio-8083-exec-6] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:34:17,799 DEBUG c.p.w.u.UserController [http-nio-8083-exec-6] User found: com.phanta.waladom.user.UserResponseDTO@65e7f224
+2025-01-28 03:34:38,831 INFO c.p.w.u.UserController [http-nio-8083-exec-7] Fetching user with ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907h
+2025-01-28 03:34:38,881 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Fetching user by ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907h
+2025-01-28 03:34:38,882 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:34:38,980 WARN c.p.w.u.UserController [http-nio-8083-exec-7] User with ID WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907h not found.
+2025-01-28 03:34:47,706 INFO c.p.w.u.UserController [http-nio-8083-exec-8] Fetching user with ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:47,756 INFO c.p.w.u.UserService [http-nio-8083-exec-8] Fetching user by ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:47,757 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-28 03:34:47,809 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:34:47,862 DEBUG c.p.w.u.UserService [http-nio-8083-exec-8] Mapping user data for user ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:34:47,862 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:34:47,914 DEBUG o.h.SQL [http-nio-8083-exec-8] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:34:48,016 DEBUG c.p.w.u.UserController [http-nio-8083-exec-8] User found: com.phanta.waladom.user.UserResponseDTO@7179ba23
+2025-01-28 03:35:13,992 INFO c.p.w.u.UserController [http-nio-8083-exec-9] Fetching all users.
+2025-01-28 03:35:14,043 INFO c.p.w.u.UserService [http-nio-8083-exec-9] Fetching all users from the database.
+2025-01-28 03:35:14,049 DEBUG o.h.SQL [http-nio-8083-exec-9] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0
+2025-01-28 03:35:14,101 DEBUG o.h.SQL [http-nio-8083-exec-9] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:35:14,155 DEBUG c.p.w.u.UserService [http-nio-8083-exec-9] Found 1 users in the database.
+2025-01-28 03:35:14,156 DEBUG c.p.w.u.UserService [http-nio-8083-exec-9] Mapping user data for user ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:35:14,156 DEBUG o.h.SQL [http-nio-8083-exec-9] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:35:14,207 DEBUG o.h.SQL [http-nio-8083-exec-9] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:35:14,309 DEBUG c.p.w.u.UserController [http-nio-8083-exec-9] Retrieved 1 users.
+2025-01-28 03:35:28,252 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] [http-nio-8083-exec-10] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+org.springframework.security.authentication.AuthenticationServiceException: Authentication failed: Invalid token
+	at com.phanta.waladom.oauthToken.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:53)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-01-28 03:35:34,288 INFO c.p.w.u.UserController [http-nio-8083-exec-1] Fetching all users.
+2025-01-28 03:35:34,343 INFO c.p.w.u.UserService [http-nio-8083-exec-1] Fetching all users from the database.
+2025-01-28 03:35:34,346 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0
+2025-01-28 03:35:34,397 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:35:34,448 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Found 1 users in the database.
+2025-01-28 03:35:34,449 DEBUG c.p.w.u.UserService [http-nio-8083-exec-1] Mapping user data for user ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:35:34,449 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        ipp1_0.USER_ID,
+        ipp1_0.ID,
+        ipp1_0.CREATED_AT,
+        ipp1_0.PHOTO_TYPE,
+        ipp1_0.PHOTO_URL,
+        ipp1_0.UPDATED_AT 
+    from
+        id_proof_photos ipp1_0 
+    where
+        ipp1_0.USER_ID=?
+2025-01-28 03:35:34,501 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:35:34,599 DEBUG c.p.w.u.UserController [http-nio-8083-exec-1] Retrieved 1 users.
+2025-01-28 03:37:12,177 INFO c.p.w.u.UserController [http-nio-8083-exec-3] Creating new user with DTO: com.phanta.waladom.user.UserRequestDTO@65030b74
+2025-01-28 03:37:12,177 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-3] Starting validation for user request.
+2025-01-28 03:37:12,177 INFO c.p.w.u.UserRequestValidator [http-nio-8083-exec-3] User request validation passed successfully.
+2025-01-28 03:37:12,228 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:37:12,394 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    select
+        r1_0.ID,
+        r1_0.COLOR,
+        r1_0.CREATED_AT,
+        r1_0.DESCRIPTION,
+        r1_0.NAME,
+        r1_0.UPDATED_AT 
+    from
+        ROLES r1_0 
+    where
+        r1_0.ID=?
+2025-01-28 03:37:12,449 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    insert 
+    into
+        USERS
+        (BIRTH_CITY, BIRTH_COUNTRY, BIRTH_DATE, BIRTH_VILLAGE, COMMENTS, CONNECTION_METHOD, CREATED_AT, CURRENT_CITY, CURRENT_COUNTRY, CURRENT_VILLAGE, EMAIL, FIRST_NAME, ID_CARD_ID, IS_ACTIVE, LAST_NAME, MARITAL_STATUS, MOTHERS_FIRST_NAME, MOTHERS_LAST_NAME, NATIONALITIES, NUMBER_OF_KIDS, OCCUPATION, PASSWORD, PHONE, ROLE_ID, SEX, STATUS, TRIBE, UPDATED_AT, WALADOM_CARD_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-01-28 03:37:12,502 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    insert 
+    into
+        waladom_id_photos
+        (CREATED_AT, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?)
+2025-01-28 03:37:12,552 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 03:37:12,600 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    insert 
+    into
+        id_proof_photos
+        (CREATED_AT, PHOTO_TYPE, PHOTO_URL, UPDATED_AT, USER_ID, ID) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-01-28 03:37:12,653 DEBUG o.h.SQL [http-nio-8083-exec-3] 
+    update
+        USERS 
+    set
+        BIRTH_CITY=?,
+        BIRTH_COUNTRY=?,
+        BIRTH_DATE=?,
+        BIRTH_VILLAGE=?,
+        COMMENTS=?,
+        CONNECTION_METHOD=?,
+        CURRENT_CITY=?,
+        CURRENT_COUNTRY=?,
+        CURRENT_VILLAGE=?,
+        EMAIL=?,
+        FIRST_NAME=?,
+        ID_CARD_ID=?,
+        IS_ACTIVE=?,
+        LAST_NAME=?,
+        MARITAL_STATUS=?,
+        MOTHERS_FIRST_NAME=?,
+        MOTHERS_LAST_NAME=?,
+        NATIONALITIES=?,
+        NUMBER_OF_KIDS=?,
+        OCCUPATION=?,
+        PASSWORD=?,
+        PHONE=?,
+        ROLE_ID=?,
+        SEX=?,
+        STATUS=?,
+        TRIBE=?,
+        UPDATED_AT=?,
+        WALADOM_CARD_ID=? 
+    where
+        ID=?
+2025-01-28 03:37:12,752 DEBUG c.p.w.u.UserController [http-nio-8083-exec-3] User creation response: <200 OK OK,com.phanta.waladom.user.UserResponseDTO@6022c4b5,[]>
+2025-01-28 03:37:58,948 INFO c.p.w.u.UserController [http-nio-8083-exec-4] Validating email address.
+2025-01-28 03:37:58,958 INFO c.p.w.u.UserService [http-nio-8083-exec-4] Starting email validation for email: isaslk@gmail.com
+2025-01-28 03:37:58,961 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:37:59,060 DEBUG o.h.SQL [http-nio-8083-exec-4] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:37:59,113 WARN c.p.w.u.UserService [http-nio-8083-exec-4] Email validation failed. Email isaslk@gmail.com is already taken by user ID: WLD_31baacdd-5d38-4e5b-9829-048a0f445cff
+2025-01-28 03:37:59,114 DEBUG c.p.w.u.UserController [http-nio-8083-exec-4] Email validation response: <200 OK OK,{valid=false, status=400, message=The email is already taken, error=User already exists, path=/api/user/email/validate, timestamp=2025-01-28T03:37:59.113720265},[]>
+2025-01-28 03:40:59,452 INFO c.p.w.u.UserController [http-nio-8083-exec-7] Validating email address.
+2025-01-28 03:40:59,452 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Starting email validation for email: khj@gmail.com
+2025-01-28 03:40:59,454 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:40:59,553 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Performing basic validation for email: khj@gmail.com
+2025-01-28 03:40:59,556 DEBUG o.h.SQL [http-nio-8083-exec-7] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.EMAIL=?
+2025-01-28 03:40:59,605 INFO c.p.w.u.UserService [http-nio-8083-exec-7] Email validation result for khj@gmail.com: Valid
+2025-01-28 03:40:59,606 DEBUG c.p.w.u.UserController [http-nio-8083-exec-7] Email validation response: <200 OK OK,{valid=true, message=Email is valid},[]>
+2025-01-28 03:42:17,960 INFO c.p.w.u.UserController [http-nio-8083-exec-9] Validating phone number.
+2025-01-28 03:42:17,961 INFO c.p.w.u.UserService [http-nio-8083-exec-9] Starting phone number validation for: khj@gmail.com
+2025-01-28 03:42:17,966 DEBUG o.h.SQL [http-nio-8083-exec-9] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:42:18,065 INFO c.p.w.u.UserService [http-nio-8083-exec-9] Performing basic validation for phone number: khj@gmail.com
+2025-01-28 03:42:18,066 WARN c.p.w.u.UserService [http-nio-8083-exec-9] Phone validation failed. Invalid format for phone number: khj@gmail.com
+2025-01-28 03:42:18,066 DEBUG c.p.w.u.UserController [http-nio-8083-exec-9] Phone validation response: <200 OK OK,{valid=false, message=Invalid phone number format},[]>
+2025-01-28 03:42:54,549 INFO c.p.w.u.UserController [http-nio-8083-exec-10] Validating phone number.
+2025-01-28 03:42:54,550 INFO c.p.w.u.UserService [http-nio-8083-exec-10] Starting phone number validation for: +49123456789
+2025-01-28 03:42:54,552 DEBUG o.h.SQL [http-nio-8083-exec-10] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:42:54,650 DEBUG o.h.SQL [http-nio-8083-exec-10] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-28 03:42:54,702 WARN c.p.w.u.UserService [http-nio-8083-exec-10] Phone validation failed. Phone number +49123456789 is already taken by user ID: WLD_1cf2c9ae-7e04-4122-bba0-64bebf409907
+2025-01-28 03:42:54,703 DEBUG c.p.w.u.UserController [http-nio-8083-exec-10] Phone validation response: <200 OK OK,{valid=false, status=400, message=The phone number is already taken, error=User already exists, path=/api/user/phone/validate, timestamp=2025-01-28T03:42:54.703012504},[]>
+2025-01-28 03:45:53,190 INFO c.p.w.u.UserController [http-nio-8083-exec-2] Validating phone number.
+2025-01-28 03:45:53,190 INFO c.p.w.u.UserService [http-nio-8083-exec-2] Starting phone number validation for: +491234156789
+2025-01-28 03:45:53,194 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:45:53,290 INFO c.p.w.u.UserService [http-nio-8083-exec-2] Performing basic validation for phone number: +491234156789
+2025-01-28 03:45:53,293 DEBUG o.h.SQL [http-nio-8083-exec-2] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.PHONE=?
+2025-01-28 03:45:53,342 INFO c.p.w.u.UserService [http-nio-8083-exec-2] Phone validation result for +491234156789: Valid
+2025-01-28 03:45:53,342 DEBUG c.p.w.u.UserController [http-nio-8083-exec-2] Phone validation response: <200 OK OK,{valid=true, message=Phone number is valid},[]>

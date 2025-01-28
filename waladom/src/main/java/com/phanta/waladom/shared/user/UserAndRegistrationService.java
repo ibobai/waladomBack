@@ -1,5 +1,7 @@
 package com.phanta.waladom.shared.user;
 
+import com.phanta.waladom.fileUpload.S3Service;
+import com.phanta.waladom.forgotPassword.PasswordService;
 import com.phanta.waladom.idPhoto.WaladomIdPhoto;
 import com.phanta.waladom.idPhoto.WaladomPhotoDTO;
 import com.phanta.waladom.idPhoto.WaladomPhotoRepository;
@@ -56,12 +58,18 @@ public class UserAndRegistrationService {
     private final PhotoManagementService photoManagementService;
 
     @Autowired
+    private final S3Service s3Service;
+
+    @Autowired
     private final ReqWaladomPhotoRepository reqWaladomPhotoRepository;
     @Autowired
     private final ReqIdProofRepository reqIdProofRepository;
 
     @Autowired
-    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService,  ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository) {
+    private final PasswordService passwordService;
+
+    @Autowired
+    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService, S3Service s3Service, ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository, PasswordService passwordService) {
         this.userManagementService = userManagementService;
         this.userRepository = userRepository;
         this.registrationRequestRepository = registrationRequestRepository;
@@ -69,8 +77,10 @@ public class UserAndRegistrationService {
         this.waladomPhotoRepository = waladomPhotoRepository;
         this.roleRepository = roleRepository;
         this.photoManagementService = photoManagementService;
+        this.s3Service = s3Service;
         this.reqWaladomPhotoRepository = reqWaladomPhotoRepository;
         this.reqIdProofRepository = reqIdProofRepository;
+        this.passwordService = passwordService;
     }
 
     public User saveUser(User user) {
@@ -91,7 +101,14 @@ public class UserAndRegistrationService {
     }
 
     public void deleteRegistrationRequest(String requestId) {
+        Optional<RegistrationRequest> existingUserOpt = registrationRequestRepository.findById(requestId);
         userManagementService.delete(requestId, registrationRequestRepository);
+
+        RegistrationRequest registrationRequest = existingUserOpt.get();
+        s3Service.deletePhotoOrFolderFromS3(registrationRequest.getReqWaladomPhoto().getPhotoUrl());
+        s3Service.deletePhotoOrFolderFromS3(registrationRequest.getReqIdProofPhotos().get(0).getPhotoUrl());
+        s3Service.deletePhotoOrFolderFromS3(registrationRequest.getReqIdProofPhotos().get(1).getPhotoUrl());
+
     }
 
     public boolean isVaildatedEmpty(UserRequestDTO userRequestDTO  ){
@@ -483,7 +500,7 @@ public class UserAndRegistrationService {
         newUser.setFirstName(userRequest.getFirstName());
         newUser.setLastName(userRequest.getLastName());
         newUser.setEmail(userRequest.getEmail());
-        newUser.setPassword(userRequest.getPassword()); // Ensure hashing is done here if needed
+        newUser.setPassword(passwordService.hashPassword(userRequest.getPassword())); // Ensure hashing is done here if needed
         newUser.setPhone(userRequest.getPhone());
         newUser.setActive(userRequest.getIsActive());
         newUser.setStatus(userRequest.getStatus());

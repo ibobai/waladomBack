@@ -265,13 +265,7 @@ public class UtilesMethods {
     public static String getCountryCode(String countryAlpha2) {
         switch (countryAlpha2) {
             case "SUDAN": return "249";  // Sudan
-            case "US": return "840";  // United States
-            case "EG": return "818";  // Egypt
-            case "IN": return "356";  // India
-            case "FR": return "250";  // France
-            case "DE": return "276";  // Germany
-            case "UK": return "826";  // United Kingdom
-            // Add more country codes as needed
+
             default:
                 throw new IllegalArgumentException("Unknown country code: " + countryAlpha2);
         }

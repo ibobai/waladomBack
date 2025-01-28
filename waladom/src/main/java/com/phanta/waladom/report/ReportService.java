@@ -1,6 +1,7 @@
 package com.phanta.waladom.report;
 
 
+import com.phanta.waladom.fileUpload.S3Service;
 import com.phanta.waladom.report.evidence.ReportEvidence;
 import com.phanta.waladom.report.evidence.ReportEvidenceDTO;
 import com.phanta.waladom.report.evidence.ReportEvidenceRepository;
@@ -29,11 +30,14 @@ public class ReportService {
     @Autowired
     private final ReportEvidenceRepository reportEvidenceRepository;
 
+    @Autowired
+    private final S3Service s3Service;
 
-    public ReportService(ReportRepository reportRepository, UserRepository userRepository, ReportEvidenceRepository reportEvidenceRepository) {
+    public ReportService(ReportRepository reportRepository, UserRepository userRepository, ReportEvidenceRepository reportEvidenceRepository, S3Service s3Service) {
         this.reportRepository = reportRepository;
         this.userRepository = userRepository;
         this.reportEvidenceRepository = reportEvidenceRepository;
+        this.s3Service = s3Service;
     }
 
     public ResponseEntity<?> getAllReports() {
@@ -261,6 +265,12 @@ public class ReportService {
             );
         }
         reportRepository.deleteById(reportId);
+
+        Report report = reportFound.get();
+        for (ReportEvidence reportEvidence : report.getEvidenceList()){
+            s3Service.deletePhotoOrFolderFromS3(reportEvidence.getFileUrl());
+        }
+
         return ResponseEntity.noContent().build();
     }
 
