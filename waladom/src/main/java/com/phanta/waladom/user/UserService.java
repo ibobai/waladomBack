@@ -16,6 +16,7 @@ import com.phanta.waladom.role.RoleRepository;
 import com.phanta.waladom.shared.user.UserAndRegistrationService;
 import com.phanta.waladom.shared.user.UserManagementService;
 import com.phanta.waladom.utiles.UtilesMethods;
+import com.phanta.waladom.verification.email.EmailService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class UserService {
     private final UserAndRegistrationService userAndRegistrationService;
 
     @Autowired
+    private final EmailService   emailService;
+    @Autowired
     private final PasswordService passwordService;
 
 
@@ -56,7 +59,7 @@ public class UserService {
     private final S3Service s3Service;
 
     @Autowired
-    public UserService(UserRepository userRepository, ObjectMapper objectMapper, JwtTokenUtil jwtTokenUtil, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, UserManagementService userManagementService, UserAndRegistrationService userAndRegistrationService, PasswordService passwordService, S3Service s3Service) {
+    public UserService(UserRepository userRepository, ObjectMapper objectMapper, JwtTokenUtil jwtTokenUtil, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, UserManagementService userManagementService, UserAndRegistrationService userAndRegistrationService, EmailService emailService, PasswordService passwordService, S3Service s3Service) {
         this.userRepository = userRepository;
         this.objectMapper = objectMapper;
         this.jwtTokenUtil = jwtTokenUtil;
@@ -65,6 +68,7 @@ public class UserService {
         this.roleRepository = roleRepository;
         this.userManagementService = userManagementService;
         this.userAndRegistrationService = userAndRegistrationService;
+        this.emailService = emailService;
         this.passwordService = passwordService;
         this.s3Service = s3Service;
     }
@@ -305,6 +309,8 @@ public class UserService {
             throw new RuntimeException("User not found with ID: " + id);
         }
 
+        Boolean passwordUpdate = false;
+
         User existingUser = existingUserOpt.get();
         logger.info("User found. Proceeding with updates for user ID: {}", id);
 
@@ -324,6 +330,7 @@ public class UserService {
         }
         if (userRequestDTO.getPassword() != null && !userRequestDTO.getPassword().isBlank()) {
             existingUser.setPassword(passwordService.hashPassword(userRequestDTO.getPassword()));
+            passwordUpdate = true;
             logger.debug("Updated password.");
         }
         if (userRequestDTO.getPhone() != null && !userRequestDTO.getPhone().isBlank()) {
@@ -456,6 +463,10 @@ public class UserService {
         logger.info("Saving updated user with ID: {}", id);
         User savedUser = userManagementService.save(existingUser, userRepository);
 
+        if(passwordUpdate){
+            emailService.sendPasswordUpdateEmail(existingUser.getEmail().toLowerCase());
+
+        }
         logger.info("User with ID: {} successfully updated.", id);
         return UserResponseDTO.mapToUserResponseDTO(savedUser);
     }

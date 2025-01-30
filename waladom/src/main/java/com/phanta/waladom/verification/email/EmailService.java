@@ -346,4 +346,80 @@ public class EmailService {
             return Map.of("send", false, "message", "Error sending account validation email: " + e.getMessage());
         }
     }
+
+    public Map<String, Object> sendPasswordUpdateEmail(String toEmail) {
+        logger.info("Preparing to send password update email to {}", toEmail);
+
+        String subject = "Password Updated - تم تحديث كلمة المرور - Mot de passe mis à jour";
+        String currentYear = String.valueOf(LocalDate.now().getYear());  // Dynamic year
+
+        String messageText = "<html>" +
+                "<head>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; color: #333; background-color: #ffffff; text-align: center; padding: 20px; }" +
+                "h1 { color: #4CAF50; font-size: 36px; }" +
+                ".content { background-color: #f4f4f4; padding: 30px; border-radius: 10px; margin-top: 20px; }" +
+                ".alert { color: red; font-weight: bold; }" +
+                ".footer { margin-top: 30px; font-size: 14px; color: #777; }" +
+                ".footer a { color: #4CAF50; text-decoration: none; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<h1> Waladom - ولاضم</h1>" +  // Organization Name in Arabic and English
+                "<div class='content'>" +
+                "<h2>Password Successfully Updated</h2>" +
+                "<p>Your account password has been successfully updated.</p>" +
+                "<p>تم تحديث كلمة مرور حسابك بنجاح.</p>" +
+                "<p>Le mot de passe de votre compte a été mis à jour avec succès.</p>" +
+                "<p class='alert'>If you did not make this change, please contact us immediately!</p>" +
+                "<p class='alert'>إذا لم تقم بإجراء هذا التغيير، يرجى الاتصال بنا على الفور!</p>" +
+                "<p class='alert'>Si vous n'avez pas effectué ce changement, veuillez nous contacter immédiatement!</p>" +
+                "</div>" +
+                "<div class='footer'>" +
+                "<p>For more information, contact us at: <a href='mailto:contact@waladom.org'>contact@waladom.org</a></p>" +
+                "<p>&copy; " + currentYear + " Waladom. All rights reserved.</p>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
+
+        Map<String, Object> emailPayload = Map.of(
+                "from", "contact@waladom.org",
+                "to", toEmail,
+                "subject", subject,
+                "html", messageText
+        );
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+        String resendApiUrl = "https://api.resend.com/emails";
+
+        try {
+            logger.debug("Sending request to email API: {}", resendApiUrl);
+            logger.debug("Request payload: {}", emailPayload);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    resendApiUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                logger.info("Password update email sent successfully to {}", toEmail);
+                return Map.of("send", true, "message", "Password update email sent successfully");
+            } else {
+                logger.error("Failed to send password update email: {}", response.getBody());
+                return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+            }
+        } catch (Exception e) {
+            logger.error("Error sending password update email to {}: {}", toEmail, e.getMessage(), e);
+            return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+        }
+
+}
+
+
 }
