@@ -1,5 +1,7 @@
 package com.phanta.waladom.fileUpload;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,20 @@ import java.util.UUID;
 @RequestMapping("/api/upload")
 public class FileUploadController {
 
+    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+
     @Value("${aws.base.dir}")
     private String basedir;
 
     @Autowired
     private FileUploadService fileUploadService;
 
+    @Autowired
+    private S3Service s3Service;
+
     @PostMapping("/files")
     public ResponseEntity<Map<String, Object>> uploadFiles(@RequestParam Map<String, MultipartFile> files) {
-        System.out.println("Received files: " + files.size());
+        logger.info("Received request to upload {} files", files.size());
         Map<String, Object> response = new HashMap<>();
         String uniqueId = generateUniqueId();
 
@@ -31,11 +38,14 @@ public class FileUploadController {
             for (Map.Entry<String, MultipartFile> entry : files.entrySet()) {
                 String key = entry.getKey();
                 MultipartFile file = entry.getValue();
-                String folder = basedir + "/" + determineFolder(key)+uniqueId+"/";
+                String folder = basedir + "/" + determineFolder(key) + uniqueId + "/";
+                logger.info("Processing file: {} - Folder: {}", key, folder);
                 String savedFilePath = fileUploadService.storeFile(file, folder, key, uniqueId);
                 response.put(key, savedFilePath);
+                logger.info("File uploaded successfully: {} -> {}", key, savedFilePath);
             }
         } catch (Exception ex) {
+            logger.error("Error uploading files: {}", ex.getMessage(), ex);
             response.put("error", ex.getMessage());
             response.put("errorCode", 500);
             return ResponseEntity.internalServerError().body(response);
@@ -43,40 +53,37 @@ public class FileUploadController {
         return ResponseEntity.ok(response);
     }
 
-
-    @Autowired
-    private S3Service s3Service;
-
-    // Get signed URLs for multiple photos of a single user
     @PostMapping("/signephoto")
     public Map<String, String> getSignedUrls(@RequestBody List<String> fileKeys) {
+        logger.info("Generating signed URLs for {} files", fileKeys.size());
         Map<String, String> signedUrls = new HashMap<>();
 
         for (String fileKey : fileKeys) {
             signedUrls.put(fileKey, s3Service.generatePresignedUrl(fileKey));
+            logger.info("Generated signed URL for file: {}", fileKey);
         }
 
-        return signedUrls;  // Return key-value pairs (file key -> signed URL)
+        return signedUrls;
     }
 
-    // Get signed URLs for multiple users and their respective photo lists
     @PostMapping("/signephotos")
     public Map<String, Map<String, String>> getBatchSignedUrls(@RequestBody Map<String, List<String>> userPhotos) {
+        logger.info("Generating batch signed URLs for {} users", userPhotos.size());
         Map<String, Map<String, String>> result = new HashMap<>();
 
         for (Map.Entry<String, List<String>> entry : userPhotos.entrySet()) {
             String userId = entry.getKey();
             List<String> fileKeys = entry.getValue();
+            logger.info("Processing user: {} with {} files", userId, fileKeys.size());
 
             Map<String, String> signedUrls = new HashMap<>();
             for (String fileKey : fileKeys) {
                 signedUrls.put(fileKey, s3Service.generatePresignedUrl(fileKey));
+                logger.info("Generated signed URL for user: {}, file: {}", userId, fileKey);
             }
-
             result.put(userId, signedUrls);
         }
-
-        return result;  // Returns { userId: { fileKey1: signedUrl1, fileKey2: signedUrl2 } }
+        return result;
     }
 
     private String determineFolder(String key) {
@@ -90,38 +97,29 @@ public class FileUploadController {
                 "waladom", "waladom/logo/"
         );
 
-        // Check for exact matches first
-        for (Map.Entry<String, String> entry : folderMapping.entrySet()) {
-            if (key.equals(entry.getKey())) {
-                return entry.getValue();
-            }
+        if (folderMapping.containsKey(key)) {
+            return folderMapping.get(key);
         }
 
-        // Check for keys that start with specific prefixes
-        if (key.startsWith("event")) {
-            return "event/";
-        }
-        if (key.startsWith("report")) {
-            return "report/proofs/";
-        }
-        if (key.startsWith("file")) {
-            return "waladom/others/";
-        }
+        if (key.startsWith("event")) return "event/";
+        if (key.startsWith("report")) return "report/proofs/";
+        if (key.startsWith("file")) return "waladom/others/";
 
-        // Default fallback folder
+        logger.warn("Unrecognized key: {}, using default folder", key);
         return "waladom/others/";
     }
 
-
     private String generateUniqueId() {
-        return UUID.randomUUID().toString().substring(0, 7) + getRandomLetters();
+        String uniqueId = UUID.randomUUID().toString().substring(0, 7) + getRandomLetters();
+        logger.debug("Generated unique ID: {}", uniqueId);
+        return uniqueId;
     }
 
     private String getRandomLetters() {
         char letter1 = (char) ('A' + Math.random() * 26);
         char letter2 = (char) ('A' + Math.random() * 26);
-        return "" + letter1 + letter2;
+        String randomLetters = "" + letter1 + letter2;
+        logger.debug("Generated random letters: {}", randomLetters);
+        return randomLetters;
     }
-
-
 }

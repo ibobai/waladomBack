@@ -1,5 +1,7 @@
 package com.phanta.waladom.fileUpload;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,10 @@ import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 import java.io.IOException;
 
-
 @Service
 class FileUploadService {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileUploadService.class);
 
     @Value("${aws.bucket.name}")
     private String BUCKET_NAME;
@@ -26,17 +29,19 @@ class FileUploadService {
     }
 
     public String storeFile(MultipartFile file, String folder, String prefix, String uniqueId) {
+        logger.info("Starting file upload for file: {} in folder: {}", file.getOriginalFilename(), folder);
         try {
             String extension = getFileExtension(file.getOriginalFilename());
             String filename = folder + prefix + "-" + uniqueId + extension;
 
             // Determine ACL based on folder type
             String aclPermission = determineAclPermission(folder);
+            logger.info("Determined ACL permission: {} for folder: {}", aclPermission, folder);
 
             // Upload to S3
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                     .bucket(BUCKET_NAME)
-                    .key(filename)  // The folder structure is included here
+                    .key(filename)
                     .contentType(file.getContentType())
                     .acl(aclPermission)
                     .build();
@@ -45,12 +50,16 @@ class FileUploadService {
                     RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
 
             if (response.sdkHttpResponse().isSuccessful()) {
-                return "https://" + BUCKET_NAME + ".s3.amazonaws.com/" + filename;
+                String fileUrl = "https://" + BUCKET_NAME + ".s3.amazonaws.com/" + filename;
+                logger.info("File uploaded successfully: {}", fileUrl);
+                return fileUrl;
             } else {
+                logger.error("File upload failed with status: {}", response.sdkHttpResponse().statusCode());
                 throw new RuntimeException("File upload failed with status: " + response.sdkHttpResponse().statusCode());
             }
 
         } catch (IOException e) {
+            logger.error("File upload failed due to IOException: {}", e.getMessage());
             throw new RuntimeException("File upload failed", e);
         }
     }
@@ -66,32 +75,11 @@ class FileUploadService {
         }
     }
 
-
     private String getFileExtension(String filename) {
+        if (filename == null || !filename.contains(".")) {
+            logger.warn("Filename does not contain an extension: {}", filename);
+            return ""; // Return empty extension if not found
+        }
         return filename.substring(filename.lastIndexOf("."));
     }
-
-
-//
-//    public String saveToSpecificFolder(MultipartFile file, String targetFolder, String prefix, String uniqueId) {
-//        try {
-//            String extension = getFileExtension(file.getOriginalFilename());
-//            String filename = prefix + "-" + uniqueId + extension;
-//
-//            Path dirPath = Paths.get(BASE_DIR + targetFolder);
-//            Files.createDirectories(dirPath);
-//
-//            Path filePath = dirPath.resolve(filename);
-//            file.transferTo(filePath.toFile());
-//
-//            return filePath.toString();
-//        } catch (IOException e) {
-//            throw new RuntimeException("File upload failed", e);
-//        }
-//    }
-
-
-
-
-
 }

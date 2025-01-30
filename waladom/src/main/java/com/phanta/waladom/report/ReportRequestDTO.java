@@ -26,7 +26,6 @@ public class ReportRequestDTO {
     private String status;
     private String verifierComment;
     private Boolean verified;
-
     private List<ReportEvidenceDTO> evidenceList;
 
     public ReportRequestDTO() {

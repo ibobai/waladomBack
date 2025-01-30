@@ -101,7 +101,7 @@ public class UserService {
                     dto.setId(user.getId());
                     dto.setFirstName(user.getFirstName());
                     dto.setLastName(user.getLastName());
-                    dto.setEmail(user.getEmail());
+                    dto.setEmail(user.getEmail().toLowerCase());
                     dto.setPhone(user.getPhone());
                     dto.setActive(user.getActive());
                     dto.setStatus(user.getStatus());
@@ -319,7 +319,7 @@ public class UserService {
         }
         if (userRequestDTO.getEmail() != null && !userRequestDTO.getEmail().isBlank()
                 && !userRequestDTO.getEmail().equalsIgnoreCase(existingUser.getEmail())) {
-            existingUser.setEmail(userRequestDTO.getEmail());
+            existingUser.setEmail(userRequestDTO.getEmail().toLowerCase());
             logger.debug("Updated email to: {}", userRequestDTO.getEmail());
         }
         if (userRequestDTO.getPassword() != null && !userRequestDTO.getPassword().isBlank()) {
@@ -593,7 +593,7 @@ public class UserService {
 
         if ("email".equalsIgnoreCase(connectionMethod)) {
             logger.debug("Searching user by email: {}", identifier);
-            userOptional = userRepository.findByEmail(identifier);
+            userOptional = userRepository.findByEmail(identifier.toLowerCase());
         } else if ("phone".equalsIgnoreCase(connectionMethod)) {
             logger.debug("Searching user by phone: {}", identifier);
             userOptional = userRepository.findByPhone(identifier);

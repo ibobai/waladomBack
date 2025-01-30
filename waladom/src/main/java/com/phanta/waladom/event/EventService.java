@@ -3,6 +3,8 @@ package com.phanta.waladom.event;
 import com.phanta.waladom.user.User;
 import com.phanta.waladom.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +32,18 @@ public class EventService {
         this.userRepository = userRepository;
     }
 
+    private static final Logger log = LoggerFactory.getLogger(EventController.class);
+
+
     @Transactional
     public ResponseEntity<?> createEvent(EventRequestDTO eventRequestDTO) {
+        log.info("Starting event creation process for title: {}", eventRequestDTO.getTitle());
+
         // Map DTO to Entity
         Event event = new Event();
         Optional<User> existingUser = userRepository.findById(eventRequestDTO.getCreatedBy());
         if (existingUser.isEmpty()) {
-            // Return a bad request response with the existing user's ID
+            log.warn("User not found with ID: {}", eventRequestDTO.getCreatedBy());
             return ResponseEntity.badRequest().body(
                     Map.of(
                             "timestamp", LocalDateTime.now(),
@@ -47,6 +54,7 @@ public class EventService {
                     )
             );
         }
+
         event.setTitle(eventRequestDTO.getTitle());
         event.setDescription(eventRequestDTO.getDescription());
         event.setDate(eventRequestDTO.getDate());
@@ -67,7 +75,7 @@ public class EventService {
 
         // Save to database
         Event savedEvent = eventRepository.save(event);
-
+        log.info("Event created successfully with ID: {}", savedEvent.getId());
 
         // Prepare response DTO and set values manually
         EventResponseDTO responseDTO = new EventResponseDTO();
@@ -90,16 +98,19 @@ public class EventService {
         responseDTO.setCreatedBy(savedEvent.getCreatedBy().getId());
         responseDTO.setOrganiserWebsite(savedEvent.getOrganiserWebsite());
 
+        log.info("Event creation process completed successfully for event ID: {}", savedEvent.getId());
         return ResponseEntity.ok().body(responseDTO);
     }
 
 
+
     @Transactional
     public ResponseEntity<?> updateEvent(String eventId, EventRequestDTO eventRequestDTO) {
-        Optional<Event> existingEventOpt = eventRepository.findById(eventId);
+        log.info("Starting event update process for event ID: {}", eventId);
 
+        Optional<Event> existingEventOpt = eventRepository.findById(eventId);
         if (existingEventOpt.isEmpty()) {
-            // Return a response if the event is not found
+            log.warn("Event not found with ID: {}", eventId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     Map.of(
                             "timestamp", LocalDateTime.now(),
@@ -112,6 +123,7 @@ public class EventService {
         }
 
         Event event = existingEventOpt.get();
+        log.info("Updating event with ID: {}", eventId);
 
         // Update fields only if they are not null
         if (eventRequestDTO.getTitle() != null) event.setTitle(eventRequestDTO.getTitle());
@@ -124,7 +136,7 @@ public class EventService {
         if (eventRequestDTO.getOrganiserEmail() != null) event.setOrganiserEmail(eventRequestDTO.getOrganiserEmail());
         if (eventRequestDTO.getPersonToContact() != null) event.setPersonToContact(eventRequestDTO.getPersonToContact());
         if (eventRequestDTO.getEventLocation() != null) event.setEventLocation(eventRequestDTO.getEventLocation());
-        if ((eventRequestDTO.getCapacity() > 0) ) event.setCapacity(eventRequestDTO.getCapacity());
+        if (eventRequestDTO.getCapacity() > 0) event.setCapacity(eventRequestDTO.getCapacity());
         if (eventRequestDTO.getPrice() != null) event.setPrice(eventRequestDTO.getPrice());
         if (eventRequestDTO.getStatus() != null) event.setStatus(eventRequestDTO.getStatus());
         if (eventRequestDTO.getEventType() != null) event.setEventType(eventRequestDTO.getEventType());
@@ -133,6 +145,7 @@ public class EventService {
 
         // Save updated event
         Event updatedEvent = eventRepository.save(event);
+        log.info("Event updated successfully with ID: {}", updatedEvent.getId());
 
         // Prepare response DTO and set values manually
         EventResponseDTO responseDTO = new EventResponseDTO();
@@ -155,12 +168,18 @@ public class EventService {
         responseDTO.setOrganiserWebsite(updatedEvent.getOrganiserWebsite());
         responseDTO.setCreatedBy(updatedEvent.getCreatedBy().getId());
 
+        log.info("Event update process completed for event ID: {}", updatedEvent.getId());
         return ResponseEntity.ok(responseDTO);
     }
 
 
+
     public ResponseEntity<?> getAllEvents() {
+        log.info("Fetching all events...");
+
         List<Event> events = eventRepository.findAll();
+        log.info("Retrieved {} events from the database.", events.size());
+
         List<EventResponseDTO> eventResponseDTOs = events.stream().map(event -> {
             EventResponseDTO responseDTO = new EventResponseDTO();
             responseDTO.setId(event.getId());
@@ -181,17 +200,20 @@ public class EventService {
             responseDTO.setImageUrl(event.getImageUrl());
             responseDTO.setOrganiserWebsite(event.getOrganiserWebsite());
             responseDTO.setCreatedBy(event.getCreatedBy().getId());
-            responseDTO.setOrganiserWebsite(event.getOrganiserWebsite());
             return responseDTO;
         }).collect(Collectors.toList());
+
+        log.info("Successfully mapped {} events to DTOs.", eventResponseDTOs.size());
         return ResponseEntity.ok(eventResponseDTOs);
     }
 
-
     public ResponseEntity<?> getEventById(String eventId) {
+        log.info("Attempting to retrieve event with ID: {}", eventId);
+
         Optional<Event> eventOpt = eventRepository.findById(eventId);
 
         if (eventOpt.isEmpty()) {
+            log.warn("Event with ID: {} not found.", eventId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     Map.of(
                             "timestamp", LocalDateTime.now(),
@@ -225,15 +247,19 @@ public class EventService {
         responseDTO.setOrganiserWebsite(event.getOrganiserWebsite());
         responseDTO.setCreatedBy(event.getCreatedBy().getId());
 
+        log.info("Successfully retrieved event with ID: {}", eventId);
+
         return ResponseEntity.ok(responseDTO);
     }
 
-
     @Transactional
     public ResponseEntity<?> deleteEventById(String eventId) {
+        log.info("Attempting to delete event with ID: {}", eventId);
+
         Optional<Event> eventOpt = eventRepository.findById(eventId);
 
         if (eventOpt.isEmpty()) {
+            log.warn("Event with ID: {} not found for deletion.", eventId);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     Map.of(
                             "timestamp", LocalDateTime.now(),
@@ -246,8 +272,11 @@ public class EventService {
         }
 
         eventRepository.deleteById(eventId);
+        log.info("Event with ID: {} deleted successfully.", eventId);
+
         return ResponseEntity.noContent().build();
     }
+
 
 
 }

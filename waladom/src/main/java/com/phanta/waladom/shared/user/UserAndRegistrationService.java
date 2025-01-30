@@ -26,11 +26,11 @@ import com.phanta.waladom.user.UserRequestDTO;
 import com.phanta.waladom.user.UserResponseDTO;
 import com.phanta.waladom.utiles.CountryCodeUtil;
 import com.phanta.waladom.utiles.UtilesMethods;
+import com.phanta.waladom.verification.email.EmailService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +63,8 @@ public class UserAndRegistrationService {
     private final S3Service s3Service;
 
     @Autowired
+    private final EmailService emailService;
+    @Autowired
     private final ReqWaladomPhotoRepository reqWaladomPhotoRepository;
     @Autowired
     private final ReqIdProofRepository reqIdProofRepository;
@@ -73,7 +75,7 @@ public class UserAndRegistrationService {
     private static final Logger logger = LogManager.getLogger(RegistrationRequestController.class);
 
     @Autowired
-    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService, S3Service s3Service, ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository, PasswordService passwordService) {
+    public UserAndRegistrationService(UserManagementService userManagementService, UserRepository userRepository, RegistrationRequestRepository registrationRequestRepository, IdPhotoProofRepository idPhotoProofRepository, WaladomPhotoRepository waladomPhotoRepository, RoleRepository roleRepository, PhotosService photosService, PhotoManagementService photoManagementService, S3Service s3Service, EmailService emailService, ReqWaladomPhotoRepository reqWaladomPhotoRepository, ReqIdProofRepository reqIdProofRepository, PasswordService passwordService) {
         this.userManagementService = userManagementService;
         this.userRepository = userRepository;
         this.registrationRequestRepository = registrationRequestRepository;
@@ -82,6 +84,7 @@ public class UserAndRegistrationService {
         this.roleRepository = roleRepository;
         this.photoManagementService = photoManagementService;
         this.s3Service = s3Service;
+        this.emailService = emailService;
         this.reqWaladomPhotoRepository = reqWaladomPhotoRepository;
         this.reqIdProofRepository = reqIdProofRepository;
         this.passwordService = passwordService;
@@ -206,7 +209,7 @@ public class UserAndRegistrationService {
                 && !registrationRequestDTO.getEmail().equals(existingRequest.getEmail())) {
             logger.info("Updating email: {}", registrationRequestDTO.getEmail());
 
-            existingRequest.setEmail(registrationRequestDTO.getEmail());
+            existingRequest.setEmail(registrationRequestDTO.getEmail().toLowerCase());
         }
 
         if (registrationRequestDTO.getPhone() != null && !registrationRequestDTO.getPhone().isBlank()) {
@@ -358,6 +361,9 @@ public class UserAndRegistrationService {
             logger.info("Creating user as the registration request has been validated");
             User newUser = saveUserFromRegisterationRequest(savedRequest);
 
+            //informing user that their account has been validated and now they can login !
+            emailService.sendAccountValidationEmail(newUser.getEmail());
+
             return ResponseEntity.ok()
                     .body(Map.of(
                             "message", "User successfully created",
@@ -368,6 +374,7 @@ public class UserAndRegistrationService {
         logger.info("Returning updated registration request for ID: {}", id);
         return ResponseEntity.ok(UserResponseDTO.mapToRegistrationRequestResponseDTO(savedRequest));
     }
+
 
     @Transactional
     public List<UserResponseDTO> getAllRegistrationRequests() {
@@ -674,7 +681,7 @@ public class UserAndRegistrationService {
         newUser.setId(generateUserId(userRequest.getSex(), userRequest.getBirthDate(), userRequest.getBirthCountry()));
         newUser.setFirstName(userRequest.getFirstName());
         newUser.setLastName(userRequest.getLastName());
-        newUser.setEmail(userRequest.getEmail());
+        newUser.setEmail(userRequest.getEmail().toLowerCase());
         newUser.setPassword(passwordService.hashPassword(userRequest.getPassword())); // Ensure hashing is done here if needed
         newUser.setPhone(userRequest.getPhone());
         newUser.setActive(userRequest.getIsActive());

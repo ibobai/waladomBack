@@ -1,5 +1,7 @@
 package com.phanta.waladom.verification.email;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -8,12 +10,15 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Random;
 
 @Service
 public class EmailService {
 
+
+    private static final Logger logger = LogManager.getLogger(EmailService.class);
 
 
     @Autowired
@@ -37,20 +42,28 @@ public class EmailService {
     }
 
     // Method to generate a 6-digit random code
-    public  String generateCode() {
+    // Method to generate a 6-digit random code
+    public String generateCode() {
         Random random = new Random();
         int code = 100000 + random.nextInt(900000); // Generate 6-digit number
+        logger.debug("Generated verification code: {}", code);
         return String.valueOf(code);
     }
+
     public Map<String, Object> sendVerificationCode(String toEmail) {
+        logger.info("Initiating verification code process for email: {}", toEmail);
+
         // Check if the email already exists in the database
         EmailVerificationCode existingRecord = verificationCodeRepository.findByEmail(toEmail);
 
         if (existingRecord != null) {
+            logger.info("Existing record found for email: {}", toEmail);
             if (existingRecord.isVerified()) {
+                logger.info("Email is already verified. No need to send another code.");
                 return Map.of("send", false, "message", "Email is already verified. No need to send another code.");
             } else {
                 // If the email exists but is not verified, update the verification code and expiration
+                logger.info("Email not verified. Generating a new verification code.");
                 String newCode = generateCode();
                 Instant now = Instant.now();
                 Instant expiresAt = now.plusMillis(CODE_EXPIRY_TIME);
@@ -60,12 +73,14 @@ public class EmailService {
                 existingRecord.setExpiresAt(expiresAt);
 
                 verificationCodeRepository.save(existingRecord);
+                logger.info("Updated verification code for email: {}", toEmail);
 
                 return sendEmail(toEmail, newCode);
             }
         }
 
         // Generate a new 6-digit code for a new email
+        logger.info("No existing record found. Generating a new verification code for email: {}", toEmail);
         String code = generateCode();
         Instant now = Instant.now();
         Instant expiresAt = now.plusMillis(CODE_EXPIRY_TIME);
@@ -78,46 +93,82 @@ public class EmailService {
         verificationCode.setVerified(false);
 
         verificationCodeRepository.save(verificationCode);
+        logger.info("New verification code saved for email: {}", toEmail);
 
         return sendEmail(toEmail, code);
     }
 
-    // Helper method to send the email
-    public Map<String, Object> sendEmail(String toEmail, String code) {
-        String subject = "Email Verification Code";
-        String messageText = "Please use the following code to verify your email: " + code;
 
-        Map<String, Object> emailPayload = Map.of(
-                "from", "contact@waladom.org",
-                "to", toEmail,
-                "subject", subject,
-                "text", messageText
-        );
+        public Map<String, Object> sendEmail(String toEmail, String code) {
+            String subject = "Email Verification Code";
+            String currentYear = String.valueOf(LocalDate.now().getYear());  // Dynamic year
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setBearerAuth(apiKey);
+            String messageText = "<html>" +
+                    "<head>" +
+                    "<style>" +
+                    "body { font-family: Arial, sans-serif; color: #333; background-color: #ffffff; text-align: center; padding: 20px; }" +
+                    "h1 { color: #4CAF50; font-size: 36px; }" +
+                    ".content { background-color: #f4f4f4; padding: 30px; border-radius: 10px; margin-top: 20px; }" +
+                    ".code-box { display: inline-block; background-color: #4CAF50; color: white; font-weight: bold; padding: 15px 30px; font-size: 20px; margin-top: 20px; border-radius: 10px; }" +
+                    ".footer { margin-top: 30px; font-size: 14px; color: #777; }" +
+                    ".footer a { color: #4CAF50; text-decoration: none; }" +
+                    "</style>" +
+                    "</head>" +
+                    "<body>" +
+                    "<h1> Waladom - ولاضم</h1>" +  // Organization Name in Arabic and English
+                    "<div class='content'>" +
+                    "<h2>Verification Code</h2>" +
+                    "<p>Please use this code to verify your email address.</p>" +
+                    "<p>يرجى استخدام الرمز التالي للتحقق من بريدك الإلكتروني.</p>" +
+                    "<p>Veuillez utiliser le code suivant pour vérifier votre adresse e-mail.</p>" +
+                    "<div class='code-box'>" + code + "</div>" +
+                    "<p>If you did not request this verification, please ignore this email.</p>" +
+                    "<p>إذا لم تطلب هذا التحقق، يرجى تجاهل هذا البريد الإلكتروني.</p>" +
+                    "<p>Si vous n'avez pas demandé cette vérification, veuillez ignorer cet e-mail.</p>" +
+                    "</div>" +
+                    "<div class='footer'>" +
+                    "<p>For more information, contact us at: <a href='mailto:contact@waladom.org'>contact@waladom.org</a></p>" +
+                    "<p>&copy; " + currentYear + " Waladom. All rights reserved.</p>" +
+                    "</div>" +
+                    "</body>" +
+                    "</html>";
 
-        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
-        String resendApiUrl = "https://api.resend.com/emails";
-
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(
-                    resendApiUrl,
-                    HttpMethod.POST,
-                    requestEntity,
-                    String.class
+            Map<String, Object> emailPayload = Map.of(
+                    "from", "contact@waladom.org",
+                    "to", toEmail,
+                    "subject", subject,
+                    "html", messageText
             );
 
-            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
-                return Map.of("send", true, "message", "Verification code sent successfully");
-            } else {
-                return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
+
+            HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+            String resendApiUrl = "https://api.resend.com/emails";
+
+            try {
+                logger.info("Sending email to: {}", toEmail);
+                ResponseEntity<String> response = restTemplate.exchange(
+                        resendApiUrl,
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                );
+
+                if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                    logger.info("Verification email sent successfully to: {}", toEmail);
+                    return Map.of("send", true, "message", "Verification code sent successfully");
+                } else {
+                    logger.error("Failed to send email: {}", response.getBody());
+                    return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+                }
+            } catch (Exception e) {
+                logger.error("Error sending email to {}: {}", toEmail, e.getMessage(), e);
+                return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
             }
-        } catch (Exception e) {
-            return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
         }
-    }
+
 
     public Map<String, Object> verifyCode(String code, String email) {
         // Find the verification code record in the database
@@ -148,21 +199,123 @@ public class EmailService {
 
 
 
-    public Map<String, Object> sendContactMessage(String email, String phoneNumber, String firstName, String lastName, String subject, String message) {
-        String formattedMessage = String.format(
-                "New contact request:\n\n" +
-                        "Name: %s %s\n" +
-                        "Email: %s\n" +
-                        "Phone: %s\n\n" +
-                        "Message:\n%s",
-                firstName, lastName, email, phoneNumber, message
-        );
+        // Method to send the contact message
+        public Map<String, Object> sendContactMessage(String email, String phoneNumber, String firstName, String lastName, String subject, String message) {
+            String currentYear = String.valueOf(LocalDate.now().getYear());  // Dynamic year
+
+            // HTML message body
+            String messageText = "<html>" +
+                    "<head>" +
+                    "<style>" +
+                    "body { font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 20px; }" +
+                    ".container { background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }" +
+                    ".header { color: #4CAF50; font-size: 24px; margin-bottom: 20px; }" +
+                    ".info { margin-bottom: 15px; font-size: 16px; color: #555; }" +
+                    ".info span { font-weight: bold; }" +
+                    ".message { font-size: 16px; color: #555; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; background-color: #f4f4f4; }" +
+                    "</style>" +
+                    "</head>" +
+                    "<body>" +
+                    "<div class='container'>" +
+                    "<h2 class='header'>New Contact Request</h2>" +
+                    "<div class='info'><span>Name:</span> " + firstName + " " + lastName + "</div>" +
+                    "<div class='info'><span>Email:</span> " + email + "</div>" +
+                    "<div class='info'><span>Phone:</span> " + phoneNumber + "</div>" +
+                    "<div class='info'><span>Subject:</span> " + subject + "</div>" +
+                    "<div class='message'><span>Message:</span><br>" + message + "</div>" +
+                    "</div>" +
+                    "</body>" +
+                    "</html>";
+
+            // Email payload
+            Map<String, Object> emailPayload = Map.of(
+                    "from", contactEmail,
+                    "to", contactEmail,  // Sending to our own email
+                    "subject", subject,
+                    "html", messageText
+            );
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
+
+            HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+
+            try {
+                logger.info("Attempting to send contact message from: {}", email);
+
+                // Send the email using the Resend API
+                ResponseEntity<String> response = restTemplate.exchange(
+                        resendApiUrl,
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                );
+
+                if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                    logger.info("Contact message successfully sent to: {}", contactEmail);
+                    return Map.of("send", true, "message", "Your message has been sent successfully.");
+                } else {
+                    // Log failure with response details
+                    logger.error("Failed to send contact message. Response: {}", response.getBody());
+                    return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+                }
+            } catch (Exception e) {
+                // Log error with exception details
+                logger.error("Error sending contact message. Exception: {}", e.getMessage(), e);
+                return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+            }
+        }
+
+    public boolean isValidRequest(Map<String, String> request) {
+        logger.error("Entering method isValidRequest()");
+
+        return request.containsKey("email") && StringUtils.hasText(request.get("email")) &&
+                request.containsKey("phoneNumber") && StringUtils.hasText(request.get("phoneNumber")) &&
+                request.containsKey("firstName") && StringUtils.hasText(request.get("firstName")) &&
+                request.containsKey("lastName") && StringUtils.hasText(request.get("lastName")) &&
+                request.containsKey("subject") && StringUtils.hasText(request.get("subject")) &&
+                request.containsKey("message") && StringUtils.hasText(request.get("message"));
+    }
+
+
+    public Map<String, Object> sendAccountValidationEmail(String toEmail) {
+        String subject = "Account Validation - حساب التحقق - Validation du compte";
+        String currentYear = String.valueOf(LocalDate.now().getYear());  // Dynamic year
+
+        String messageText = "<html>" +
+                "<head>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; color: #333; background-color: #ffffff; text-align: center; padding: 20px; }" +
+                "h1 { color: #4CAF50; font-size: 36px; }" +
+                ".content { background-color: #f4f4f4; padding: 30px; border-radius: 10px; margin-top: 20px; }" +
+                ".footer { margin-top: 30px; font-size: 14px; color: #777; }" +
+                ".footer a { color: #4CAF50; text-decoration: none; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<h1> Waladom - ولاضم</h1>" +  // Organization Name in Arabic and English
+                "<div class='content'>" +
+                "<h2>Account Successfully Validated</h2>" +
+                "<p>Your account has been successfully validated, now you can login!.</p>" +
+                "<p>تم التحقق من حسابك بنجاح! يمكنك تسجيل الدخول إلى حسابك.</p>" +
+                "<p>Votre compte a été validé avec succès, vous pouvez vous connecter sur votre compte maintenant!.</p>" +
+                "<p>If you did not initiate this action, please contact us immediately.</p>" +
+                "<p>إذا لم تقم بإجراء هذه العملية، يرجى الاتصال بنا على الفور.</p>" +
+                "<p>Si vous n'avez pas initié cette action, veuillez nous contacter immédiatement.</p>" +
+                "</div>" +
+                "<div class='footer'>" +
+                "<p>For more information, contact us at: <a href='mailto:contact@waladom.org'>contact@waladom.org</a></p>" +
+                "<p>&copy; " + currentYear + " Waladom. All rights reserved.</p>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
 
         Map<String, Object> emailPayload = Map.of(
-                "from", contactEmail,
-                "to", contactEmail,  // Sending to our own email
+                "from", "contact@waladom.org",
+                "to", toEmail,
                 "subject", subject,
-                "text", formattedMessage
+                "html", messageText
         );
 
         HttpHeaders headers = new HttpHeaders();
@@ -170,8 +323,10 @@ public class EmailService {
         headers.setBearerAuth(apiKey);
 
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+        String resendApiUrl = "https://api.resend.com/emails";
 
         try {
+            logger.info("Sending account validation email to: {}", toEmail);
             ResponseEntity<String> response = restTemplate.exchange(
                     resendApiUrl,
                     HttpMethod.POST,
@@ -180,21 +335,15 @@ public class EmailService {
             );
 
             if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
-                return Map.of("send", true, "message", "Your message has been sent successfully.");
+                logger.info("Account validation email sent successfully to: {}", toEmail);
+                return Map.of("send", true, "message", "Account validation email sent successfully");
             } else {
-                return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+                logger.error("Failed to send account validation email: {}", response.getBody());
+                return Map.of("send", false, "message", "Failed to send account validation email: " + response.getBody());
             }
         } catch (Exception e) {
-            return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+            logger.error("Error sending account validation email to {}: {}", toEmail, e.getMessage(), e);
+            return Map.of("send", false, "message", "Error sending account validation email: " + e.getMessage());
         }
-    }
-
-    public boolean isValidRequest(Map<String, String> request) {
-        return request.containsKey("email") && StringUtils.hasText(request.get("email")) &&
-                request.containsKey("phoneNumber") && StringUtils.hasText(request.get("phoneNumber")) &&
-                request.containsKey("firstName") && StringUtils.hasText(request.get("firstName")) &&
-                request.containsKey("lastName") && StringUtils.hasText(request.get("lastName")) &&
-                request.containsKey("subject") && StringUtils.hasText(request.get("subject")) &&
-                request.containsKey("message") && StringUtils.hasText(request.get("message"));
     }
 }

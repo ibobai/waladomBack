@@ -31,7 +31,7 @@ public class ReportController {
         logger.info("Request received to fetch report with ID: {}", id);
         try {
             ResponseEntity<?> response = reportService.getReportById(id);
-            logger.info("Successfully fetched report with ID: {}", id);
+            logger.info("Report id : {}", id);
             return response;
         } catch (Exception e) {
             logger.error("Error occurred while fetching report with ID: {}", id, e);
