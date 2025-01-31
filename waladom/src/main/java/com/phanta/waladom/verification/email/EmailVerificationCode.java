@@ -13,7 +13,6 @@ import java.util.UUID;
 @Table(name = "email_verification_codes") // Specify the table name here
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class EmailVerificationCode {
 
 

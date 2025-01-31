@@ -14,7 +14,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/report")
-@RequiredArgsConstructor
 public class ReportController {
 
     private static final Logger logger = LoggerFactory.getLogger(ReportController.class);

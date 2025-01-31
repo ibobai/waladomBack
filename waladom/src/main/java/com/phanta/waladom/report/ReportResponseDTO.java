@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class ReportResponseDTO {
     private String id;
     private String userId;

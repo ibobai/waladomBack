@@ -12,7 +12,6 @@ import java.util.UUID;
 @Table(name = "phone_verification_codes") // Specify the table name here
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class PhoneVerificationCode {
 
     @Id
@@ -33,15 +32,6 @@ public class PhoneVerificationCode {
 
     @Column(name = "is_verified", nullable = false) // Column name for isVerified
     private boolean isVerified;
-
-    // Constructors
-    public PhoneVerificationCode(String phoneNumber, String verificationCode, Instant createdAt, Instant expiresAt, boolean isVerified) {
-        this.phoneNumber = phoneNumber;
-        this.verificationCode = verificationCode;
-        this.createdAt = createdAt;
-        this.expiresAt = expiresAt;
-        this.isVerified = isVerified;
-    }
 
     public PhoneVerificationCode(){
 

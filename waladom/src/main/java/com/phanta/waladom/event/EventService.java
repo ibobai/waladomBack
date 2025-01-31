@@ -19,20 +19,19 @@ import java.util.stream.Collectors;
 
 
 @Service
-@RequiredArgsConstructor
 public class EventService {
 
-    @Autowired
     private final EventRepository eventRepository;
-    @Autowired
     private final UserRepository userRepository;
+
+
+
+    private static final Logger log = LoggerFactory.getLogger(EventService.class);
 
     public EventService(EventRepository eventRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
     }
-
-    private static final Logger log = LoggerFactory.getLogger(EventController.class);
 
 
     @Transactional

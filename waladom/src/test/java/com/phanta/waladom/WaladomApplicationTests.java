@@ -9,25 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WaladomApplicationTests {
 
-	@Autowired
-	private final RegistrationRequestRepository registrationRequestRepository;
-
-	@Autowired
-	private final UserRepository userRepository;
-
-	@Autowired
-    WaladomApplicationTests(RegistrationRequestRepository registrationRequestRepository, UserRepository userRepository) {
-        this.registrationRequestRepository = registrationRequestRepository;
-        this.userRepository = userRepository;
-    }
-
-    @Test
-	void contextLoads() {
-	}
-
-
-
-
 
 
 }

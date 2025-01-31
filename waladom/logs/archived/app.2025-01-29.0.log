@@ -1,0 +1,92 @@
+2025-01-29 00:00:49,446 INFO o.a.c.c.C.[.[.[/] [http-nio-8083-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-29 00:00:49,455 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Initializing Servlet 'dispatcherServlet'
+2025-01-29 00:00:49,457 INFO o.s.w.s.DispatcherServlet [http-nio-8083-exec-1] Completed initialization in 2 ms
+2025-01-29 00:00:49,491 INFO c.p.w.o.JwtAuthenticationFilter [http-nio-8083-exec-1] Processing request URI: /api/report/create
+2025-01-29 00:00:49,491 DEBUG c.p.w.o.JwtAuthenticationFilter [http-nio-8083-exec-1] Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqYW1hU3RvcEBleGFtcGxlLmNvbSIsImlhdCI6MTczNzc0MTM5MSwiZXhwIjoxNzM4MzQ2MTkxfQ.6FkPJgTNV_h_5KsQVYvnqnfix3Y5qq24jGRYuBM4u94
+2025-01-29 00:00:49,491 INFO c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Validating token
+2025-01-29 00:00:49,520 DEBUG c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Token validation successful
+2025-01-29 00:00:49,521 INFO c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Extracting email from token
+2025-01-29 00:00:49,521 DEBUG c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Extracted email: jamaStop@example.com
+2025-01-29 00:00:49,521 INFO c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Extracting role from token
+2025-01-29 00:00:49,521 DEBUG c.p.w.o.JwtTokenUtil [http-nio-8083-exec-1] Extracted role: null
+2025-01-29 00:00:49,521 INFO c.p.w.o.JwtAuthenticationFilter [http-nio-8083-exec-1] Token is valid. Email: jamaStop@example.com, Role: null
+2025-01-29 00:00:49,523 INFO c.p.w.o.JwtAuthenticationFilter [http-nio-8083-exec-1] User 'jamaStop@example.com' authenticated successfully with role: ROLE_null
+2025-01-29 00:00:49,523 DEBUG c.p.w.o.JwtAuthenticationFilter [http-nio-8083-exec-1] Proceeding with the filter chain for request: /api/report/create
+2025-01-29 00:00:49,606 INFO c.p.w.r.ReportController [http-nio-8083-exec-1] Request received to create a new report.
+2025-01-29 00:00:49,708 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        u1_0.ID,
+        u1_0.BIRTH_CITY,
+        u1_0.BIRTH_COUNTRY,
+        u1_0.BIRTH_DATE,
+        u1_0.BIRTH_VILLAGE,
+        u1_0.COMMENTS,
+        u1_0.CONNECTION_METHOD,
+        u1_0.CREATED_AT,
+        u1_0.CURRENT_CITY,
+        u1_0.CURRENT_COUNTRY,
+        u1_0.CURRENT_VILLAGE,
+        u1_0.EMAIL,
+        u1_0.FIRST_NAME,
+        u1_0.ID_CARD_ID,
+        u1_0.IS_ACTIVE,
+        u1_0.LAST_NAME,
+        u1_0.MARITAL_STATUS,
+        u1_0.MOTHERS_FIRST_NAME,
+        u1_0.MOTHERS_LAST_NAME,
+        u1_0.NAME,
+        u1_0.NATIONALITIES,
+        u1_0.NUMBER_OF_KIDS,
+        u1_0.OCCUPATION,
+        u1_0.PASSWORD,
+        u1_0.PHONE,
+        u1_0.ROLE_ID,
+        u1_0.SEX,
+        u1_0.STATUS,
+        u1_0.TRIBE,
+        u1_0.UPDATED_AT,
+        u1_0.WALADOM_CARD_ID 
+    from
+        USERS u1_0 
+    where
+        u1_0.ID=?
+2025-01-29 00:00:49,807 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    select
+        wip1_0.ID,
+        wip1_0.CREATED_AT,
+        wip1_0.PHOTO_URL,
+        wip1_0.UPDATED_AT,
+        wip1_0.USER_ID 
+    from
+        waladom_id_photos wip1_0 
+    where
+        wip1_0.USER_ID=?
+2025-01-29 00:00:49,909 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    insert 
+    into
+        reports
+        (actor, actor_account, actor_desc, actor_name, city, country, created_at, description, google_map_link, status, type, updated_at, user_id, verified, verifier_comment, victim, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-01-29 00:00:49,968 DEBUG o.h.SQL [http-nio-8083-exec-1] 
+    update
+        reports 
+    set
+        actor=?,
+        actor_account=?,
+        actor_desc=?,
+        actor_name=?,
+        city=?,
+        country=?,
+        description=?,
+        google_map_link=?,
+        status=?,
+        type=?,
+        updated_at=?,
+        user_id=?,
+        verified=?,
+        verifier_comment=?,
+        victim=? 
+    where
+        id=?
+2025-01-29 00:00:50,076 INFO c.p.w.r.ReportController [http-nio-8083-exec-1] Successfully created report.

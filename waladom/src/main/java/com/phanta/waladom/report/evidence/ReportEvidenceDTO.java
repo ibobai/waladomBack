@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class ReportEvidenceDTO {
     private String id;
     private String evidenceType;
