@@ -43,7 +43,7 @@ class FileUploadService {
                     .bucket(BUCKET_NAME)
                     .key(filename)
                     .contentType(file.getContentType())
-                    .acl(aclPermission)
+                    //.acl(aclPermission)
                     .build();
 
             PutObjectResponse response = s3Client.putObject(putObjectRequest,
