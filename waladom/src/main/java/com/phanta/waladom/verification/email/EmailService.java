@@ -60,7 +60,7 @@ public class EmailService {
             logger.info("Existing record found for email: {}", toEmail);
             if (existingRecord.isVerified()) {
                 logger.info("Email is already verified. No need to send another code.");
-                return Map.of("send", false, "message", "Email is already verified. No need to send another code.");
+                return Map.of("send", false, "message", "Email is already verified. No need to send another code.", "messageNumber", 1);
             } else {
                 // If the email exists but is not verified, update the verification code and expiration
                 logger.info("Email not verified. Generating a new verification code.");
@@ -158,14 +158,14 @@ public class EmailService {
 
                 if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
                     logger.info("Verification email sent successfully to: {}", toEmail);
-                    return Map.of("send", true, "message", "Verification code sent successfully");
+                    return Map.of("send", true, "message", "Verification code sent successfully", "messageNumber", 2);
                 } else {
                     logger.error("Failed to send email: {}", response.getBody());
-                    return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+                    return Map.of("send", false, "message", "Failed to send email: " + response.getBody(), "messageNumber", 3);
                 }
             } catch (Exception e) {
                 logger.error("Error sending email to {}: {}", toEmail, e.getMessage(), e);
-                return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+                return Map.of("send", false, "message", "Error sending email: " + e.getMessage(), "messageNumber", 4);
             }
         }
 
@@ -178,23 +178,23 @@ public class EmailService {
             Instant now = Instant.now();
 
             if (verificationCode.isVerified()) {
-                return Map.of("verified", false, "message", "Email is already verified.");
+                return Map.of("verified", false, "message", "Email is already verified.", "messageNumber", 1);
             }
 
             if (verificationCode.getExpiresAt().isBefore(now) && verificationCode.getVerificationCode().equals(code)) {
-                return Map.of("verified", false, "message", "Code has expired.");
+                return Map.of("verified", false, "message", "Code has expired.", "messageNumber", 2);
             }
 
             if (verificationCode.getVerificationCode().equals(code)) {
                 verificationCode.setVerified(true);
                 verificationCodeRepository.save(verificationCode);
-                return Map.of("verified", true, "message", "Email verified successfully!");
+                return Map.of("verified", true, "message", "Email verified successfully!",  "messageNumber", 3);
             }
 
-            return Map.of("verified", false, "message", "Invalid code.");
+            return Map.of("verified", false, "message", "Invalid code.", "messageNumber", 4);
         }
 
-        return Map.of("verified", false, "message", "No verification request found for this email.");
+        return Map.of("verified", false, "message", "No verification request found for this email.", "messageNumber", 5);
     }
 
 
@@ -420,6 +420,86 @@ public class EmailService {
         }
 
 }
+    public Map<String, Object> sendRegistrationConfirmationEmail(String toEmail, String registrationRequestId) {
+        logger.info("Preparing to send registration confirmation email to {}", toEmail);
+
+        String subject = "Registration Request Received - تم استلام طلب التسجيل - Demande d'inscription reçue";
+        String currentYear = String.valueOf(LocalDate.now().getYear());
+
+        String messageText = "<html>" +
+                "<head>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; color: #333; background-color: #ffffff; text-align: center; padding: 20px; }" +
+                "h1 { color: #4CAF50; font-size: 36px; }" +
+                ".content { background-color: #f4f4f4; padding: 30px; border-radius: 10px; margin-top: 20px; }" +
+                ".footer { margin-top: 30px; font-size: 14px; color: #777; }" +
+                ".footer a { color: #4CAF50; text-decoration: none; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<h1> Waladom - ولاضم</h1>" +
+                "<div class='content'>" +
+                "<h2>Registration Request Received</h2>" +
+                "<p>Dear user,</p>" +
+                "<p>We have received your registration request. Your request is under review.</p>" +
+                "<p>Your Registration Request ID: <strong>" + registrationRequestId + "</strong></p>" +
+                "<p>You will be notified once your request is approved.</p>" +
+                "<hr>" +
+                "<p>عزيزي المستخدم،</p>" +
+                "<p>لقد استلمنا طلب تسجيلك، وهو الآن قيد المراجعة.</p>" +
+                "<p>رقم طلب التسجيل الخاص بك: <strong>" + registrationRequestId + "</strong></p>" +
+                "<p>سيتم إشعارك بمجرد الموافقة على طلبك.</p>" +
+                "<hr>" +
+                "<p>Cher utilisateur,</p>" +
+                "<p>Nous avons bien reçu votre demande d'inscription. Votre demande est en cours d'examen.</p>" +
+                "<p>ID de votre demande d'inscription : <strong>" + registrationRequestId + "</strong></p>" +
+                "<p>Vous serez notifié une fois votre demande acceptée.</p>" +
+                "</div>" +
+                "<div class='footer'>" +
+                "<p>For more information, contact us at: <a href='mailto:contact@waladom.org'>contact@waladom.org</a></p>" +
+                "<p>&copy; " + currentYear + " Waladom. All rights reserved.</p>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
+
+        Map<String, Object> emailPayload = Map.of(
+                "from", "contact@waladom.org",
+                "to", toEmail,
+                "subject", subject,
+                "html", messageText
+        );
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+        String resendApiUrl = "https://api.resend.com/emails";
+
+        try {
+            logger.debug("Sending request to email API: {}", resendApiUrl);
+            logger.debug("Request payload: {}", emailPayload);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    resendApiUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                logger.info("Registration confirmation email sent successfully to {}", toEmail);
+                return Map.of("send", true, "message", "Registration confirmation email sent successfully");
+            } else {
+                logger.error("Failed to send registration confirmation email: {}", response.getBody());
+                return Map.of("send", false, "message", "Failed to send email: " + response.getBody());
+            }
+        } catch (Exception e) {
+            logger.error("Error sending registration confirmation email to {}: {}", toEmail, e.getMessage(), e);
+            return Map.of("send", false, "message", "Error sending email: " + e.getMessage());
+        }
+    }
+
 
 
 }

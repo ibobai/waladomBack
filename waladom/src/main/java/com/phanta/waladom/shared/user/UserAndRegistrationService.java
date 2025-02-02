@@ -852,8 +852,10 @@ public class UserAndRegistrationService {
                 logger.info("User created successfully for email: {}. Returning UserResponseDTO.", userRequest.getEmail());
                 return ResponseEntity.ok(UserResponseDTO.mapToUserResponseDTO((User) savedEntity));
             } else {
+                RegistrationRequest newUser = (RegistrationRequest) savedEntity;
+                emailService.sendRegistrationConfirmationEmail(newUser.getEmail(), newUser.getId() );
                 logger.info("Registration request created successfully for email: {}. Returning RegistrationRequestResponseDTO.", userRequest.getEmail());
-                return ResponseEntity.ok(UserResponseDTO.mapToRegistrationRequestResponseDTO((RegistrationRequest) savedEntity));
+                return ResponseEntity.ok(UserResponseDTO.mapToRegistrationRequestResponseDTO(newUser));
             }
         } catch (Exception ex) {
             logger.error("Error occurred while creating user or registration request for email: {}. Error: {}", userRequest.getEmail(), ex.getMessage(), ex);
