@@ -24,7 +24,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomAuthenticationEntryPoint customEntryPoint) throws Exception {
         http
-
                 .csrf(csrf -> csrf.disable()) // Disable CSRF as we're using JWT (stateless authentication)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/login", "/api/auth/refresh", "/api/user/createDTO","/api/report/get/all"
