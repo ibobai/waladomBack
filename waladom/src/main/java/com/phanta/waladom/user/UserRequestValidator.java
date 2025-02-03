@@ -18,7 +18,8 @@ public class UserRequestValidator {
     private static final Logger LOGGER = Logger.getLogger(UserRequestValidator.class.getName());
 
     private static final List<Boolean> ACTIVE_CONDITIONS = Arrays.asList(true, false);
-    private static final List<String> ALLOWED_ROLES = Arrays.asList("ROLE_USER", "ROLE_ADMIN", "ROLE_EDITOR");
+    private static final List<String> ALLOWED_ROLES = Arrays.asList("ROLE_USER", "ROLE_ADMIN",
+            "ROLE_EDITOR", "ROLE_CONTENT_MANAGER", "ROLE_MODERATOR");
     private static final List<String> CORRECT_SEX = Arrays.asList("f", "F", "m", "M");
 
     /**

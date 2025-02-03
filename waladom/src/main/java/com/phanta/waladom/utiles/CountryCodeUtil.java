@@ -9,7 +9,7 @@ public class CountryCodeUtil {
     static {
         Map<String, String> codes = new HashMap<>();
         codes.put("Afghanistan", "93");
-        codes.put("Åland islands", "358");
+        codes.put("Aland islands", "358");
         codes.put("Albania", "355");
         codes.put("Algeria", "213");
         codes.put("American samoa", "1-684");
@@ -261,7 +261,11 @@ public class CountryCodeUtil {
         String toLower = countryName.toLowerCase();
         String code = COUNTRY_CODES.get(toLower.substring(0, 1).toUpperCase() + toLower.substring(1).toLowerCase());
         if (code == null) {
-            throw new IllegalArgumentException("This is un Unknown country: " + countryName);
+            //throw new IllegalArgumentException("This is un Unknown country: " + countryName);
+             code = "000";
+
+
+
         }
         return code;
     }
