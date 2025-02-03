@@ -18,7 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
                 registry.addMapping("/**")
                         .allowedOrigins("https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3--5173--d20a0a75.local-credentialless.webcontainer-api.io","http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
+                        .allowedHeaders("Authorization", "Content-Type") // Allow Authorization header
+                        .exposedHeaders("Authorization") // Ensure the frontend can read it
                         .allowCredentials(true);
             }
         };
