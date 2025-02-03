@@ -258,8 +258,8 @@ public class ReportService {
             logger.info("Report updated successfully with evidence list.");
 
             ReportResponseDTO reportResponseDTO = new ReportResponseDTO();
-            reportResponseDTO.setUserId(report.getId());
-            reportResponseDTO.setId(report.getUser().getId());
+            reportResponseDTO.setUserId(report.getUser().getId());
+            reportResponseDTO.setId(report.getId());
             reportResponseDTO.setType(report.getType());
             reportResponseDTO.setDescription(report.getDescription());
             reportResponseDTO.setCountry(report.getCountry());
