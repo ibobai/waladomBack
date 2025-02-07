@@ -31,7 +31,7 @@ public class PasswordResetController {
         if (!connectionMethod.equalsIgnoreCase("email") && !connectionMethod.equalsIgnoreCase("phone")) {
             logger.warn("Invalid connection method provided: {}", connectionMethod);
             return ResponseEntity.badRequest().body(Map.of(
-                    "sent", false,
+                    "send", false,
                     "message", "Unknown connection method"
             ));
         }
@@ -55,7 +55,7 @@ public class PasswordResetController {
         if (!connectionMethod.equalsIgnoreCase("email") && !connectionMethod.equalsIgnoreCase("phone")) {
             logger.warn("Invalid connection method provided: {}", connectionMethod);
             return ResponseEntity.badRequest().body(Map.of(
-                    "sent", false,
+                    "verified", false,
                     "message", "Unknown connection method"
             ));
         }

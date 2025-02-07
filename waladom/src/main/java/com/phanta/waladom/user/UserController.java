@@ -189,4 +189,9 @@ public class UserController {
             );
         }
     }
+
+    @PostMapping("/get/by5")
+    public  void getUserByFirstNameOrlastNameOrIdOrEmailOrPhone(){
+
+    }
 }
