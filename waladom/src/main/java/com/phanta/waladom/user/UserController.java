@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -190,8 +191,56 @@ public class UserController {
         }
     }
 
-    @PostMapping("/get/by5")
-    public  void getUserByFirstNameOrlastNameOrIdOrEmailOrPhone(){
+
+
+    @PostMapping("/search")
+    public ResponseEntity<List<UserResponseDTO>> searchUsers(@RequestBody UserSearchRequest searchRequest) {
+
+        // Log the incoming request
+        logger.info("Received search request with parameters - " +
+                        "firstName: {}, lastName: {}, id: {}, email: {}, phone: {}",
+                searchRequest.getFirstName(), searchRequest.getLastName(),
+                searchRequest.getId(), searchRequest.getEmail(), searchRequest.getPhone());
+
+        List<UserResponseDTO> users = userService.getUserByFirstNameOrLastNameOrIdOrEmailOrPhone(
+                searchRequest.getFirstName(), searchRequest.getLastName(),
+                searchRequest.getId(), searchRequest.getEmail(), searchRequest.getPhone());
+
+        // Log the search result
+        if (users.isEmpty()) {
+            logger.warn("No users found for the given search criteria.");
+        } else {
+            logger.info("Found {} users matching the search criteria.", users.size());
+        }
+
+        return ResponseEntity.ok(users);
+    }
+
+
+    @PostMapping("/validate/password")
+    public ResponseEntity<?> validatePasswordWithId(@RequestBody Object requestBody){
+        try {
+            Map<String, Object> requestMap = objectMapper.convertValue(requestBody, Map.class);
+            if(requestMap.get("id") == null ||   requestMap.get("password") == null){
+                logger.error("User with ID: {} not found. Cannot proceed with deletion.", requestMap.get("id").toString());
+                Map<String, Object> response = new HashMap<>();
+                response.put("valid", false);
+                response.put("message", "Missing id or password");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+            return userService.validatePasswordWithId(requestMap);
+        } catch (Exception e){
+            logger.error("Error validating user: {}", e.getMessage(), e);
+            return ResponseEntity.internalServerError().body(
+                    Map.of("status", "500",
+                            "message", "internal error",
+                            "path", "/api/user/validate/password",
+                            "valid", false,
+                            "error", e.getMessage()
+                    )
+            );
+        }
 
     }
+
 }

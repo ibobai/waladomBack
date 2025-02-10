@@ -25,4 +25,20 @@ public interface UserRepository extends JpaRepository<User, String> {
 
       @Query("SELECT rr FROM User rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
       List<User> findAllWithAssociations();
+
+    @Query("SELECT u FROM User u WHERE " +
+            "(:id IS NULL OR u.id = :id) AND " +
+            "(:firstName IS NULL OR u.firstName LIKE %:firstName%) AND " +
+            "(:lastName IS NULL OR u.lastName LIKE %:lastName%) AND " +
+            "(:email IS NULL OR u.email LIKE %:email%) AND " +
+            "(:phone IS NULL OR u.phone LIKE %:phone%)")
+    List<User> searchUsers(
+            @Param("firstName") String firstName,
+            @Param("lastName") String lastName,
+            @Param("id") String id,
+            @Param("email") String email,
+            @Param("phone") String phone
+    );
+
+
 }

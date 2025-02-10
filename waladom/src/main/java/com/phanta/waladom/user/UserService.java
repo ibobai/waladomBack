@@ -734,6 +734,120 @@ public class UserService {
         }
     }
 
+    public List<UserResponseDTO> getUserByFirstNameOrLastNameOrIdOrEmailOrPhone(
+            String firstName, String lastName, String id, String email, String phone) {
+
+        // Log input parameters
+        logger.info("Searching users by - firstName: {}, lastName: {}, id: {}, email: {}, phone: {}",
+                firstName, lastName, id, email, phone);
+
+        List<User> users = userRepository.searchUsers(firstName, lastName, id, email, phone);
+
+        // Log results
+        if (users.isEmpty()) {
+            logger.warn("No users found for the given search criteria.");
+        } else {
+            logger.info("Found {} users matching the search criteria.", users.size());
+        }
+
+        return users.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+    private UserResponseDTO mapToDTO(User user) {
+        UserResponseDTO dto = new UserResponseDTO();
+
+        // Basic user details
+        dto.setId(user.getId());
+        dto.setFirstName(user.getFirstName());
+        dto.setLastName(user.getLastName());
+        dto.setEmail(user.getEmail());
+        dto.setPhone(user.getPhone());
+        dto.setActive(user.getActive());
+        dto.setStatus(user.getStatus());
+        dto.setTribe(user.getTribe());
+        dto.setCurrentCountry(user.getCurrentCountry());
+        dto.setCurrentCity(user.getCurrentCity());
+        dto.setCurrentVillage(user.getCurrentVillage());
+        dto.setBirthDate(user.getBirthDate());
+        dto.setBirthCountry(user.getBirthCountry());
+        dto.setBirthCity(user.getBirthCity());
+        dto.setBirthVillage(user.getBirthVillage());
+        dto.setMaritalStatus(user.getMaritalStatus());
+        dto.setNumberOfKids(user.getNumberOfKids());
+        dto.setOccupation(user.getOccupation());
+        dto.setSex(user.getSex());
+        dto.setMothersFirstName(user.getMothersFirstName());
+        dto.setMothersLastName(user.getMothersLastName());
+        dto.setNationalities(user.getNationalities());
+        dto.setComments(user.getComments());
+        dto.setCreatedAt(user.getCreatedAt());
+        dto.setUpdatedAt(user.getUpdatedAt());
+        dto.setConnectionMethod(user.getConnectionMethod());
+        dto.setRecommendedBy(user.getRecommendedBy());
+        dto.setApproverComment(user.getApproverComment());
+
+        // Map WaladomCardPhoto
+        if (user.getWaladomIdPhoto() != null) {
+            WaladomPhotoDTO waladomCardPhotoDTO = new WaladomPhotoDTO();
+            waladomCardPhotoDTO.setId(user.getWaladomIdPhoto().getId());
+            waladomCardPhotoDTO.setPhotoUrl(user.getWaladomIdPhoto().getPhotoUrl());
+            waladomCardPhotoDTO.setCreatedAt(user.getWaladomIdPhoto().getCreatedAt());
+            waladomCardPhotoDTO.setUpdatedAt(user.getWaladomIdPhoto().getUpdatedAt());
+            dto.setWaladomCardPhoto(waladomCardPhotoDTO);
+        }
+
+        // Map IdProofPhotos
+        List<IdProofPhotoDTO> idProofPhotoDTOs = user.getIdProofPhotos().stream()
+                .map(idProof -> {
+                    IdProofPhotoDTO proofDTO = new IdProofPhotoDTO();
+                    proofDTO.setId(idProof.getId());
+                    proofDTO.setPhotoUrl(idProof.getPhotoUrl());
+                    proofDTO.setPhotoType(idProof.getPhotoType());
+                    proofDTO.setCreatedAt(idProof.getCreatedAt());
+                    proofDTO.setUpdatedAt(idProof.getUpdatedAt());
+                    return proofDTO;
+                }).collect(Collectors.toList());
+        dto.setIdProofPhotos(idProofPhotoDTOs);
+
+        // Map Role
+        if (user.getRole() != null) {
+            RoleDTO roleDTO = new RoleDTO();
+            roleDTO.setId(user.getRole().getId());
+            roleDTO.setName(user.getRole().getName());
+            roleDTO.setDescription(user.getRole().getDescription());
+            roleDTO.setColor(user.getRole().getColor());
+            roleDTO.setCreatedAt(user.getRole().getCreatedAt());
+            roleDTO.setUpdatedAt(user.getRole().getUpdatedAt());
+            dto.setRole(roleDTO);
+        }
+
+        return dto;
+    }
+
+    public ResponseEntity<?> validatePasswordWithId(Map<String, Object> requestBody){
+        Optional<User> existingUserOpt = userRepository.findById(requestBody.get("id").toString());
+        if (existingUserOpt.isEmpty()) {
+            logger.error("User with ID: {} not found. Cannot proceed with deletion.", requestBody.get("id").toString());
+            Map<String, Object> response = new HashMap<>();
+            response.put("valid", false);
+            response.put("message", "Invalid password");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        if( passwordService.verifyPassword(requestBody.get("password").toString(), existingUserOpt.get().getPassword())){
+            logger.error("User with ID: {}  found. Valid password.", requestBody.get("id").toString());
+            Map<String, Object> response = new HashMap<>();
+            response.put("valid", true);
+            response.put("message", "password valid");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }else{
+            logger.error("User with ID: {} invalid password.", requestBody.get("id").toString());
+            Map<String, Object> response = new HashMap<>();
+            response.put("valid", false);
+            response.put("message", "Invalid password");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 
     public User mapAndSaveUserWithAllDetails(UserRequestDTO userRequest) {
         // Save User
