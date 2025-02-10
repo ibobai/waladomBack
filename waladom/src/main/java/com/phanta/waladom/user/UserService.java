@@ -127,6 +127,9 @@ public class UserService {
                     dto.setComments(user.getComments());
                     dto.setConnectionMethod(user.getConnectionMethod());
 
+                    dto.setApproverComment(user.getApproverComment());
+                    dto.setRecommendedBy(user.getRecommendedBy());
+
                     // Map WaladomCardPhoto
                     WaladomIdPhoto waladomCard = user.getWaladomIdPhoto();
                     if (waladomCard != null) {
@@ -172,7 +175,8 @@ public class UserService {
     public List<UserResponseDTO> getAllUsers() {
         logger.info("Fetching all users from the database.");
 
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAllWithAssociations();
+
         logger.debug("Found {} users in the database.", users.size());
 
         return users.stream()
@@ -207,6 +211,9 @@ public class UserService {
                     dto.setCreatedAt(user.getCreatedAt());
                     dto.setUpdatedAt(user.getUpdatedAt());
                     dto.setConnectionMethod(user.getConnectionMethod());
+
+                    dto.setRecommendedBy(user.getRecommendedBy());
+                    dto.setApproverComment(user.getApproverComment());
 
                     // Map WaladomCardPhoto
                     WaladomIdPhoto waladomCard = user.getWaladomIdPhoto();
@@ -413,7 +420,16 @@ public class UserService {
             existingUser.setCurrentCity(userRequestDTO.getConnectionMethod());
             logger.debug("Updated connectionMethod to: {}", userRequestDTO.getConnectionMethod());
         }
+        if(userRequestDTO.getRecommendedBy() != null && !userRequestDTO.getRecommendedBy().isBlank()){
+            existingUser.setRecommendedBy(userRequestDTO.getRecommendedBy());
+            logger.debug("Updated recommended by  to: {}", userRequestDTO.getRecommendedBy());
+        }
 
+        if(userRequestDTO.getApproverComment() != null && !userRequestDTO.getApproverComment().isBlank()){
+            existingUser.setApproverComment(userRequestDTO.getApproverComment());
+            logger.debug("Updated approver comment to: {}", userRequestDTO.getApproverComment());
+
+        }
         if (userRequestDTO.getRole() != null && !userRequestDTO.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequestDTO.getRole())) {
             logger.debug("Validating role for user with ID: {}", id);
             Optional<Role> optionalRole = roleRepository.findById(userRequestDTO.getRole());

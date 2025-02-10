@@ -501,5 +501,97 @@ public class EmailService {
     }
 
 
+    public Map<String, Object> sendAccountRejectionEmail(String toEmail, String customMessage) {
+        String subject = "Account Rejected - تم رفض طلب التسجيل - Compte refusé";
+        String currentYear = String.valueOf(LocalDate.now().getYear());
+
+        String messageText = "<html>" +
+                "<head>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; color: #333; background-color: #ffffff; text-align: center; padding: 20px; }" +
+                "h1 { color: #D32F2F; font-size: 36px; }" +
+                ".content { background-color: #f4f4f4; padding: 30px; border-radius: 10px; margin-top: 20px; }" +
+                ".footer { margin-top: 30px; font-size: 14px; color: #777; }" +
+                ".footer a { color: #D32F2F; text-decoration: none; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<h1> Waladom - ولاضم</h1>" +
+                "<div class='content'>" +
+                "<h2>Account Registration Rejected</h2>" +
+                "<p>Your registration request has been rejected due to missing or invalid information.</p>" +
+                "<p>تم رفض طلب التسجيل الخاص بك بسبب معلومات ناقصة أو غير صحيحة.</p>" +
+                "<p>Votre demande d'inscription a été refusée en raison d'informations manquantes ou invalides.</p>" +
+
+                "<h3>Reasons for Rejection:</h3>" +
+                "<ul>" +
+                "<li>Missing or invalid ID proofs.</li>" +
+                "<li>Incomplete personal details.</li>" +
+                "<li>Failure to meet community eligibility requirements.</li>" +
+                "</ul>" +
+
+                "<ul dir='rtl'>" +
+                "<li>عدم تقديم أو تقديم مستندات هوية غير صالحة.</li>" +
+                "<li>تفاصيل شخصية غير مكتملة.</li>" +
+                "<li>عدم تحقيق متطلبات الأهلية للانضمام للمجتمع.</li>" +
+                "</ul>" +
+
+                "<ul>" +
+                "<li>Documents d'identité manquants ou invalides.</li>" +
+                "<li>Informations personnelles incomplètes.</li>" +
+                "<li>Non-respect des critères d'éligibilité de la communauté.</li>" +
+                "</ul>" +
+
+                "<h3>Other Messages:</h3>" +
+                "<p>" + customMessage + "</p>" +
+
+                "<p>If you believe this was a mistake, please contact us with your registration request ID.</p>" +
+                "<p>إذا كنت تعتقد أن هذا كان خطأ، يرجى الاتصال بنا باستخدام رقم طلب التسجيل الخاص بك.</p>" +
+                "<p>Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter avec l'identifiant de votre demande d'inscription.</p>" +
+
+                "</div>" +
+                "<div class='footer'>" +
+                "<p>For more information, contact us at: <a href='mailto:contact@waladom.org'>contact@waladom.org</a></p>" +
+                "<p>&copy; " + currentYear + " Waladom. All rights reserved.</p>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
+
+        Map<String, Object> emailPayload = Map.of(
+                "from", "contact@waladom.org",
+                "to", toEmail,
+                "subject", subject,
+                "html", messageText
+        );
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(emailPayload, headers);
+        String resendApiUrl = "https://api.resend.com/emails";
+
+        try {
+            logger.info("Sending account rejection email to: {}", toEmail);
+            ResponseEntity<String> response = restTemplate.exchange(
+                    resendApiUrl,
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+
+            if (response.getStatusCode() == HttpStatus.OK || response.getStatusCode() == HttpStatus.ACCEPTED) {
+                logger.info("Account rejection email sent successfully to: {}", toEmail);
+                return Map.of("send", true, "message", "Account rejection email sent successfully");
+            } else {
+                logger.error("Failed to send account rejection email: {}", response.getBody());
+                return Map.of("send", false, "message", "Failed to send account rejection email: " + response.getBody());
+            }
+        } catch (Exception e) {
+            logger.error("Error sending account rejection email to {}: {}", toEmail, e.getMessage(), e);
+            return Map.of("send", false, "message", "Error sending account rejection email: " + e.getMessage());
+        }
+    }
+
 
 }

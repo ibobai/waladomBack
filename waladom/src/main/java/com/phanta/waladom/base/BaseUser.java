@@ -102,6 +102,11 @@ public abstract class BaseUser {
     @Column(name = "NUMBER_OF_KIDS")
     private Integer numberOfKids;
 
+    @Column(name = "APPROVER_COMMENT")
+    private String approverComment;
+
+    @Column(name = "RECOMMENDED_BY", length = 20)
+    private String recommendedBy;
 
     @PreUpdate
     public void updateTimestamp() {
@@ -358,5 +363,21 @@ public abstract class BaseUser {
 
     public void setNumberOfKids(Integer numberOfKids) {
         this.numberOfKids = numberOfKids;
+    }
+
+    public String getRecommendedBy() {
+        return recommendedBy;
+    }
+
+    public void setRecommendedBy(String recommendedBy) {
+        this.recommendedBy = recommendedBy;
+    }
+
+    public String getApproverComment() {
+        return approverComment;
+    }
+
+    public void setApproverComment(String approverComment) {
+        this.approverComment = approverComment;
     }
 }

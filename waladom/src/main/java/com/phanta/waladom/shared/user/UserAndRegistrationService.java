@@ -221,6 +221,11 @@ public class UserAndRegistrationService {
             logger.info("Updating status: {}", registrationRequestDTO.getStatus());
 
             existingRequest.setStatus(registrationRequestDTO.getStatus());
+            if(registrationRequestDTO.getStatus().equalsIgnoreCase("rejected") ||
+                    registrationRequestDTO.getStatus().equalsIgnoreCase("blocked")
+            ){
+                emailService.sendAccountRejectionEmail(existingRequest.getEmail(),"");
+            }
         }
         if (registrationRequestDTO.getCurrentCountry() != null && !registrationRequestDTO.getCurrentCountry().isBlank()) {
             logger.info("Updating current country: {}", registrationRequestDTO.getCurrentCountry());
@@ -314,7 +319,15 @@ public class UserAndRegistrationService {
             existingRequest.setComments(registrationRequestDTO.getComments());
         }
 
+        if(registrationRequestDTO.getApproverComment() != null && !registrationRequestDTO.getApproverComment().isBlank()){
+            logger.info("Updating approver to: {}", registrationRequestDTO.getApproverComment());
+            existingRequest.setApproverComment(registrationRequestDTO.getApproverComment());
+        }
 
+        if(registrationRequestDTO.getRecommendedBy() != null && !registrationRequestDTO.getRecommendedBy().isBlank()){
+            logger.info("Updating recommended by to: {}", registrationRequestDTO.getRecommendedBy());
+            existingRequest.setRecommendedBy(registrationRequestDTO.getRecommendedBy());
+        }
 
 
         // Handle photos with appropriate logging
@@ -420,6 +433,9 @@ public class UserAndRegistrationService {
                         dto.setUpdatedAt(user.getUpdatedAt());
                         dto.setConnectionMethod(user.getConnectionMethod());
 
+                        dto.setApproverComment(user.getApproverComment());
+                        dto.setRecommendedBy(user.getRecommendedBy());
+
                         // Map WaladomCardPhoto
                         ReqWaladomIdPhoto waladomCard = user.getReqWaladomPhoto();
                         if (waladomCard != null) {
@@ -510,6 +526,10 @@ public class UserAndRegistrationService {
                         dto.setCreatedAt(user.getCreatedAt());
                         dto.setUpdatedAt(user.getUpdatedAt());
                         dto.setConnectionMethod(user.getConnectionMethod());
+
+                        dto.setApproverComment(user.getApproverComment());
+                        dto.setRecommendedBy(user.getRecommendedBy());
+
                         logger.debug("Basic user details mapped for ID: {}", id);
 
                         // Map WaladomCardPhoto
@@ -703,6 +723,10 @@ public class UserAndRegistrationService {
         newUser.setNationalities(userRequest.getNationalities());
         newUser.setComments(userRequest.getComments());
         newUser.setConnectionMethod(userRequest.getConnectionMethod());
+
+        newUser.setApproverComment(userRequest.getApproverComment());
+        newUser.setRecommendedBy(userRequest.getRecommendedBy());
+
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
             Optional<Role> optionalRole = roleRepository.findById(userRequest.getRole());
             Role role = optionalRole.orElseThrow(() ->
@@ -903,6 +927,9 @@ public class UserAndRegistrationService {
         user.setNationalities(registrationRequest.getNationalities());
         user.setComments(registrationRequest.getComments());
         user.setConnectionMethod(registrationRequest.getConnectionMethod());
+
+        user.setApproverComment(registrationRequest.getApproverComment());
+        user.setRecommendedBy(registrationRequest.getRecommendedBy());
 
         if (registrationRequest.getRole() != null && !registrationRequest.getRole().getId().isBlank() && UtilesMethods.isRoleIdValid(registrationRequest.getRole().getId())) {
 

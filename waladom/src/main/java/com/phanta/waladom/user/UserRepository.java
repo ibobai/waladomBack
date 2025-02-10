@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,6 +23,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByEmailOrPhoneAndIdentifier(@Param("identifier") String identifier, @Param("connectionMethod") String connectionMethod);
 
 
-    //  @Query("SELECT rr FROM RegistrationRequest rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
-  //  List<User> findAllWithAssociations();
+      @Query("SELECT rr FROM User rr LEFT JOIN FETCH rr.waladomIdPhoto LEFT JOIN FETCH rr.idProofPhotos LEFT JOIN FETCH rr.role")
+      List<User> findAllWithAssociations();
 }

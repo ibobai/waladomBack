@@ -44,6 +44,10 @@ public class UserResponseDTO {
     private String connectionMethod;
     private Boolean validated;
 
+    private String approverComment;
+    private String recommendedBy;
+
+
     // Photo details
     private WaladomPhotoDTO waladomCardPhoto;
     private List<IdProofPhotoDTO> idProofPhotos;
@@ -293,6 +297,23 @@ public class UserResponseDTO {
         this.role = role;
     }
 
+
+    public String getApproverComment() {
+        return approverComment;
+    }
+
+    public void setApproverComment(String approverComment) {
+        this.approverComment = approverComment;
+    }
+
+    public String getRecommendedBy() {
+        return recommendedBy;
+    }
+
+    public void setRecommendedBy(String recommendedBy) {
+        this.recommendedBy = recommendedBy;
+    }
+
     public static UserResponseDTO mapToUserResponseDTO(User user) {
         UserResponseDTO responseDTO = new UserResponseDTO();
 
@@ -323,6 +344,8 @@ public class UserResponseDTO {
         responseDTO.setCreatedAt(user.getCreatedAt());
         responseDTO.setConnectionMethod(user.getConnectionMethod());
 
+        responseDTO.setRecommendedBy(user.getRecommendedBy());
+        responseDTO.setApproverComment(user.getApproverComment());
 
 
         // Map Waladom photo

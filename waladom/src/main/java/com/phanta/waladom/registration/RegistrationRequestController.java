@@ -73,7 +73,7 @@ public class RegistrationRequestController {
                     "No fields to update or all fields are empty",
                     HttpStatus.BAD_REQUEST.value(),
                     LocalDateTime.now(),
-                    "/api/user/registration/update/" + id
+                    "/api/user/register/update/" + id
             ));
         }
 

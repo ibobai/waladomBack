@@ -35,6 +35,10 @@ public class UserRequestDTO {
     private String connectionMethod;
     private Boolean validated;
 
+    private String approverComment;
+    private String recommendedBy;
+
+
     public UserRequestDTO() {
     }
 
@@ -277,5 +281,22 @@ public class UserRequestDTO {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+
+    public String getApproverComment() {
+        return approverComment;
+    }
+
+    public void setApproverComment(String approverComment) {
+        this.approverComment = approverComment;
+    }
+
+    public String getRecommendedBy() {
+        return recommendedBy;
+    }
+
+    public void setRecommendedBy(String recommendedBy) {
+        this.recommendedBy = recommendedBy;
     }
 }

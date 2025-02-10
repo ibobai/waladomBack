@@ -53,8 +53,8 @@ public class ReportService {
             logger.info("Fetching all reports...");
 
             // Fetch all reports from the repository
-            List<Report> reports = reportRepository.findAll();
-
+            //List<Report> reports = reportRepository.findAll();
+            List<Report> reports = reportRepository.getAllReportsWithEvidence();
             // Log the number of reports found
             logger.debug("Number of reports found: {}", reports.size());
 
