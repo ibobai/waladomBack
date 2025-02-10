@@ -146,6 +146,7 @@ public class UserAndRegistrationService {
             logger.info("Successfully deleted second ID proof photo from S3 with URL: {}", secondIdPhotoUrl);
 
             logger.info("Deletion process completed successfully for registration request with ID: {}", requestId);
+            emailService.sendAccountRejectionEmail(registrationRequest.getEmail(), "");
         } catch (Exception ex) {
             logger.error("An error occurred while deleting registration request with ID: {}. Error: {}", requestId, ex.getMessage(), ex);
             throw ex; // Optionally rethrow the exception if necessary
