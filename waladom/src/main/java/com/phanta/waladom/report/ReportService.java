@@ -403,8 +403,11 @@ public class ReportService {
             }
 
             // Replace the existing list with the updated list
-            existingEvidenceList.clear();
-            existingEvidenceList.addAll(updatedEvidenceList);
+            if (request.getEvidenceList() != null && !request.getEvidenceList().isEmpty()) {
+                existingEvidenceList.clear();
+                existingEvidenceList.addAll(updatedEvidenceList);
+            }
+
 
             logger.debug("Saving updated report with ID: {}", reportId);
             reportRepository.save(report);

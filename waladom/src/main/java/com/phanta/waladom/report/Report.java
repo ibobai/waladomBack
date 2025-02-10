@@ -44,13 +44,13 @@ public class Report {
     @Column(name = "actor_name", length = 100)
     private String actorName;
 
-    @Column(name = "actor_desc", length = 100)
+    @Column(name = "actor_desc", columnDefinition = "TEXT")
     private String actorDesc;
 
     @Column(name = "actor_account", length = 250)
     private String actorAccount;
 
-    @Column(name = "victim", length = 10)
+    @Column(name = "victim", length = 200)
     private String victim ;
 
     @Column(name = "google_map_link", columnDefinition = "TEXT")
