@@ -102,6 +102,9 @@ public class UtilesMethods {
         user.setConnectionMethod(registrationRequest.getConnectionMethod());
         user.setId(registrationRequest.getId());
 
+        user.setApproverComment(registrationRequest.getApproverComment());
+        user.setRecommendedBy(registrationRequest.getRecommendedBy());
+
         if (registrationRequest.getReqIdProofPhotos() != null) {
             List<IdProofPhoto> idProofPhotos = registrationRequest.getReqIdProofPhotos().stream()
                     .map(photoDTO -> {
