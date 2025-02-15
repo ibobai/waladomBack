@@ -768,6 +768,10 @@ public class UserAndRegistrationService {
         registrationRequest.setNationalities(userRequest.getNationalities());
         registrationRequest.setConnectionMethod(userRequest.getConnectionMethod());
         registrationRequest.setComments(userRequest.getComments());
+
+        registrationRequest.setRecommendedBy(userRequest.getRecommendedBy());
+        registrationRequest.setApproverComment(userRequest.getApproverComment());
+
         if (userRequest.getRole() != null && !userRequest.getRole().isBlank() && UtilesMethods.isRoleIdValid(userRequest.getRole())) {
             Optional<Role> optionalRole = roleRepository.findById(userRequest.getRole());
             Role role = optionalRole.orElseThrow(() ->
