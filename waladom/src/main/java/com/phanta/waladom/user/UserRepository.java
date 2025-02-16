@@ -27,11 +27,11 @@ public interface UserRepository extends JpaRepository<User, String> {
       List<User> findAllWithAssociations();
 
     @Query("SELECT u FROM User u WHERE " +
-            "(:id IS NULL OR u.id = :id) AND " +
-            "(:firstName IS NULL OR u.firstName LIKE %:firstName%) AND " +
-            "(:lastName IS NULL OR u.lastName LIKE %:lastName%) AND " +
-            "(:email IS NULL OR u.email LIKE %:email%) AND " +
-            "(:phone IS NULL OR u.phone LIKE %:phone%)")
+            "(:id IS NULL OR LOWER(u.id) LIKE LOWER(CONCAT('%', :id, '%'))) AND " +
+            "(:firstName IS NULL OR LOWER(u.firstName) LIKE LOWER(CONCAT('%', :firstName, '%'))) AND " +
+            "(:lastName IS NULL OR LOWER(u.lastName) LIKE LOWER(CONCAT('%', :lastName, '%'))) AND " +
+            "(:email IS NULL OR LOWER(u.email) LIKE LOWER(CONCAT('%', :email, '%'))) AND " +
+            "(:phone IS NULL OR LOWER(u.phone) LIKE LOWER(CONCAT('%', :phone, '%')))")
     List<User> searchUsers(
             @Param("firstName") String firstName,
             @Param("lastName") String lastName,
@@ -39,6 +39,7 @@ public interface UserRepository extends JpaRepository<User, String> {
             @Param("email") String email,
             @Param("phone") String phone
     );
+
 
 
 }
