@@ -741,7 +741,7 @@ public class UserService {
         logger.info("Searching users by - firstName: {}, lastName: {}, id: {}, email: {}, phone: {}",
                 firstName, lastName, id, email, phone);
 
-        List<User> users = userRepository.searchUsers(firstName, lastName, id, email, phone);
+        List<User> users = userRepository.searchUsers(firstName.trim(), lastName.trim(), id.trim(), email.trim(), phone.trim());
 
         // Log results
         if (users.isEmpty()) {

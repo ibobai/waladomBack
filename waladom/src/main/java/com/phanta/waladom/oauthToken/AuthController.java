@@ -90,7 +90,7 @@ public class AuthController {
     /**
      * Refresh Token Endpoint to generate a new access token.
      */
-    @PostMapping("/refresh")
+    @GetMapping("/refresh")
     public ResponseEntity<?> refresh(@RequestHeader("Authorization") String authorizationHeader) {
         logger.info("Received token refresh request.");
 
