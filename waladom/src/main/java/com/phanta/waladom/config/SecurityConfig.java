@@ -117,7 +117,8 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
                 "https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3--5173--d20a0a75.local-credentialless.webcontainer-api.io",
                 "http://localhost:5173",
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "https://waladom.org"
         )); // Add your frontend URLs here
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
