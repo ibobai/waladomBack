@@ -48,7 +48,8 @@ public class PasswordResetService {
         Optional<PasswordReset> alreadyExist = passwordResetRepository.findByIdentifier(identifier);
         if (alreadyExist.isPresent()) {
             logger.warn("Password reset already requested for identifier: {}", identifier);
-            return Map.of("sent", false, "message", "There is already a password reset request for this identifier!.");
+            passwordResetRepository.delete(alreadyExist.get());
+            logger.warn("Password reset request deleted to send a new one: {}", identifier);
         }
 
         String code = emailService.generateCode();
@@ -101,9 +102,14 @@ public class PasswordResetService {
                     logger.warn("Expired reset code used for identifier: {}", identifier);
                     return Map.of("verified", false, "message", "Code has expired.");
                 }
+                Optional<User> user = userRepository.findByEmailOrPhoneAndIdentifier(identifier, connectionMethod);
+                if (user.isEmpty()) {
+                    logger.warn("No user found with identifier: {} using method: {}", identifier, connectionMethod);
+                    return Map.of("verified", false, "message", "Verification Not OK!. " + connectionMethod);
+                }
                 passwordResetRepository.delete(passwordReset.get());
                 logger.info("Successfully validated reset code for identifier: {}", identifier);
-                return Map.of("verified", true, "message", "Verification OK!.");
+                return Map.of("verified", true, "message", "Verification is OK!.", "userId", user.get().getId());
             }
         }
 
