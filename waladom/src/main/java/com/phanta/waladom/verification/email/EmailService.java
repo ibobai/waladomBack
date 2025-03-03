@@ -59,8 +59,9 @@ public class EmailService {
         if (existingRecord != null) {
             logger.info("Existing record found for email: {}", toEmail);
             if (existingRecord.isVerified()) {
-                logger.info("Email is already verified. No need to send another code.");
-                return Map.of("send", false, "message", "Email is already verified. No need to send another code.", "messageNumber", 1);
+                verificationCodeRepository.delete(existingRecord);
+                logger.info("Email is already verified. deleting the record to send a new one");
+                //return Map.of("send", false, "message", "Email is already verified. No need to send another code.", "messageNumber", 1);
             } else {
                 // If the email exists but is not verified, update the verification code and expiration
                 logger.info("Email not verified. Generating a new verification code.");

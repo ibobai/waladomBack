@@ -71,9 +71,9 @@ public class PasswordResetController {
     }
 
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update/{userId}")
     public ResponseEntity<Map<String, Object>> updatePassword(
-            @PathVariable("id") String userId,
+            @PathVariable("userId") String userId,
             @RequestBody Map<String, String> requestBody) {
 
         logger.info("Received password update request for user ID: {}", userId);
